@@ -1,0 +1,67 @@
+const e=`<div class="page">
+  <div class="page-header">
+    <h1>Side Navigation</h1>
+    <p class="page-desc">A navegação lateral permite que os usuários naveguem pelo conteúdo de um produto ou seção. Ele pode ser usado para um único nível ou uma navegação de vários níveis.</p>
+  </div>
+
+  <!-- Item States -->
+  <section class="demo-section">
+    <h2 class="demo-title">Estados do Item</h2>
+    <div class="demo-row">
+      <div id="item-default"></div>
+      <div id="item-hover"></div>
+      <div id="item-active"></div>
+      <div id="item-disabled"></div>
+      <div id="item-expandable"></div>
+    </div>
+  </section>
+
+  <!-- Simple Menu -->
+  <section class="demo-section">
+    <h2 class="demo-title">Menu Simples</h2>
+    <div class="demo-box" style="max-width: 250px;">
+      <div id="menu-simple"></div>
+    </div>
+  </section>
+
+  <!-- With Submenus -->
+  <section class="demo-section">
+    <h2 class="demo-title">Com Submenus</h2>
+    <div class="demo-row demo-row--top">
+      <div class="demo-box" style="max-width: 280px; height: 400px;">
+        <div id="sidenav-submenus"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Full Navigation -->
+  <section class="demo-section">
+    <h2 class="demo-title">Navegação Completa</h2>
+    <div class="demo-row demo-row--top">
+      <div class="demo-box demo-box--flush" style="max-width: 280px; height: 500px;">
+        <div id="sidenav-full"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dark Mode -->
+  <section class="demo-section">
+    <h2 class="demo-title">Dark Mode</h2>
+    <div class="demo-row demo-row--top">
+      <div class="demo-box demo-box--dark demo-box--flush" style="max-width: 280px; height: 450px;">
+        <div id="sidenav-dark"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Item States Dark -->
+  <section class="demo-section">
+    <h2 class="demo-title">Estados Dark Mode</h2>
+    <div class="demo-row">
+      <div id="item-dark-default"></div>
+      <div id="item-dark-active"></div>
+      <div id="item-dark-disabled"></div>
+    </div>
+  </section>
+</div>
+`;export{e as default};
