@@ -1,0 +1,246 @@
+﻿/* Chart Component */
+.chart {
+  position: absolute;
+  width: 100%;
+}
+
+.chart svg {
+  width: 100%;
+  display: block;
+}
+
+/* Line Chart */
+.chart--line {
+  position: relative;
+}
+
+/* Linha do gráfico - ajustada para Figma */
+.chart-line {
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* Pontos do gráfico - preenchidos com borda branca */
+.chart-point {
+  fill: currentColor;
+  stroke: var(--color-surface-primary);
+  stroke-width: 1.8;
+  cursor: pointer;
+  transition: transform 0.15s ease, filter 0.15s ease;
+  transform-origin: center;
+}
+
+.chart-point:hover {
+  transform: scale(1.3);
+}
+
+.chart-point.is-active {
+  transform: scale(1.35);
+  filter: drop-shadow(0 0 2px rgba(246, 192, 60, 0.6));
+}
+
+/* Bar Chart */
+.chart-bar {
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+.chart-bar-segment {
+  transition: opacity 0.2s ease;
+  cursor: pointer;
+}
+
+/* Grid - linhas tracejadas suaves */
+.chart-grid-line {
+  stroke: var(--color-border-secondary);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.28;
+}
+
+.chart-axis-line {
+  stroke: var(--color-border-primary);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.7;
+}
+
+.chart-axis-tick {
+  stroke: var(--color-border-primary);
+  stroke-width: 1;
+  vector-effect: non-scaling-stroke;
+  opacity: 0.7;
+}
+
+/* Linha vertical do tooltip - amarela e pontilhada */
+.chart-tooltip-line {
+  stroke: #F6C03C;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+  vector-effect: non-scaling-stroke;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+  opacity: 0;
+}
+
+
+/* Labels */
+.chart-label {
+  fill: #898F8F;
+  font-family: 'Archivo', var(--font-family-body);
+  font-size: 5px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.12px;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.chart-label--x-active {
+  fill: var(--color-content-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.chart-label--y {
+  fill: #898F8F;
+  font-family: 'Archivo', var(--font-family-body);
+  font-size: 3px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: -0.12px;
+  text-anchor: end;
+}
+
+.chart-value {
+  fill: var(--color-content-primary);
+  font-family: var(--font-family-body);
+  font-size: 11px;
+  font-weight: var(--font-weight-semibold);
+  text-anchor: middle;
+  dominant-baseline: baseline;
+}
+
+/* Tooltip - fiel ao cálculo do JS (relativo ao chart) */
+.chart-tooltip {
+  position: absolute;
+  transform: translate(-50%, -100%);
+  padding: 0;
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-secondary);
+  border-radius: var(--radius-xs);
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  z-index: 20;
+  white-space: normal;
+  font-size: var(--font-size-xs);
+  min-width: 240px;
+}
+
+
+.chart-tooltip.is-visible {
+  opacity: 1;
+}
+
+.chart-tooltip-date {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-secondary);
+  margin: 0;
+  line-height: var(--line-height-ratio-normal);
+}
+
+.chart-tooltip-value {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-content-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.chart-tooltip-change {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-ratio-normal);
+}
+
+.chart-tooltip-change--positive {
+  color: var(--color-success);
+}
+
+.chart-tooltip-change--negative {
+  color: var(--color-danger);
+}
+
+/* Legend */
+.chart-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  margin-top: 0;
+  margin-bottom: var(--space-3);
+  flex-wrap: wrap;
+}
+
+.chart-legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.chart-legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-3xs);
+  flex-shrink: 0;
+}
+
+.chart-legend-label {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-secondary);
+}
+
+/* Empty State */
+.chart-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 240px;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-s);
+  color: var(--color-content-tertiary);
+}
+
+/* Responsive */
+@media (max-width: 575px) {
+
+  /* NÃO altere chart-label do SVG (viewBox 0..100) */
+  .chart-tooltip {
+    font-size: var(--font-size-2xs);
+    min-width: 180px;
+  }
+
+  .chart-legend {
+    gap: var(--space-2);
+  }
+
+  .chart-legend-label {
+    font-size: var(--font-size-2xs);
+  }
+}
