@@ -1,6 +1,8 @@
 import { routes } from "./routes.js";
 import { hideRouteLoader, showRouteLoader } from "./route-loader.js";
 
+const componentCssModules = import.meta.glob("../components/*/*.css");
+
 let currentCssEl = null;
 let currentLayout = null;
 let currentCleanup = null;
@@ -38,24 +40,38 @@ function resetRouteVisualState(root = document) {
 
 function setPageCss(href) {
   if (currentCssEl) currentCssEl.remove();
+
   currentCssEl = document.createElement("link");
   currentCssEl.rel = "stylesheet";
-  currentCssEl.href = href;
+
+  // Se vier "/src/...", converte para um caminho que o Vite resolve no build
+  if (href?.startsWith("/src/")) {
+    const relFromApp = `../${href.slice("/src/".length)}`; // -> ../pages/login/login.css
+    currentCssEl.href = new URL(relFromApp, import.meta.url).href;
+  } else {
+    currentCssEl.href = href;
+  }
+
   document.head.appendChild(currentCssEl);
 }
 
-function loadComponentCss(names) {
-  if (!names) return;
-  for (const name of names) {
+async function loadComponentCss(components = []) {
+  for (const name of components) {
     if (loadedComponentCss.has(name)) continue;
     loadedComponentCss.add(name);
-    const link = document.createElement("link");
-    link.rel = "stylesheet";
-    link.href = `/src/components/${name}/${name}.css`;
-    link.dataset.component = name;
-    document.head.appendChild(link);
+
+    const key = `../components/${name}/${name}.css`;
+    const loader = componentCssModules[key];
+
+    if (!loader) {
+      console.warn(`[CSS] Não encontrado: ${key}`);
+      continue;
+    }
+
+    await loader(); // Vite injeta o CSS corretamente no build
   }
 }
+
 
 async function renderLayout(root, layout) {
   if (currentLayout === layout) return;
@@ -122,8 +138,16 @@ async function renderRoute(root) {
     resetRouteVisualState(root);
 
     await renderLayout(root, route.layout);
-    setPageCss(route.css);
-    loadComponentCss(route.components);
+    // antes de renderizar a rota:
+    if (route.css) {
+      if (typeof route.css === "function") {
+        await route.css();              // rota nova (correta)
+      } else if (typeof route.css === "string") {
+        setPageCss(route.css);          // rotas antigas "/src/..."
+      }
+    }
+
+    await loadComponentCss(route.components);
 
     const view = root.querySelector("#view");
     if (!view) {
