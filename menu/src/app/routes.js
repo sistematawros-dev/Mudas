@@ -1,10 +1,10 @@
-﻿export const routes = {
+export const routes = {
   "/login": {
     title: "Login",
     pageTitle: "Login",
     breadcrumb: ["Login"],
     html: () => import("../pages/login/login.html?raw"),
-    css: "/src/pages/login/login.css",
+    css: () => import("../pages/login/login.css"),
     js: () => import("../pages/login/login.js"),
     components: ['button', 'input'],
     layout: "blank",
