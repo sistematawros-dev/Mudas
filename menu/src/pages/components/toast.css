@@ -1,0 +1,228 @@
+.page {
+  padding: var(--space-6);
+  max-width: 1400px;
+}
+
+.page-header {
+  margin-bottom: var(--space-8);
+}
+
+.page-header h1 {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-2);
+}
+
+.page-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  max-width: 700px;
+}
+
+/* Demo sections */
+.demo-section {
+  margin-bottom: var(--space-8);
+}
+
+.demo-title {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--gray-400);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: var(--space-4);
+}
+
+.demo-subtitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+  margin-bottom: var(--space-3);
+}
+
+.demo-subtitle--dark {
+  color: var(--gray-100);
+}
+
+/* Demo grid */
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-4);
+}
+
+.demo-grid--2cols {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+/* Toast preview wrapper - makes toasts static for demo */
+.demo-grid .toast,
+.demo-neutral-stack .toast {
+  position: relative;
+  animation: none;
+  pointer-events: auto;
+}
+
+/* Neutral stack demo */
+.demo-neutral-stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--gray-100);
+  border-radius: var(--radius-lg);
+  max-width: 400px;
+}
+
+.demo-neutral-stack--dark {
+  background: var(--gray-900);
+}
+
+/* Interactive demo */
+.demo-interactive {
+  background: var(--gray-50);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  border: 1px solid var(--border-light);
+}
+
+.demo-interactive-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-6);
+  margin-bottom: var(--space-6);
+}
+
+.demo-interactive-col {
+  padding: var(--space-4);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  border: 1px solid var(--border-light);
+}
+
+.demo-interactive-col--dark {
+  background: var(--gray-900);
+  border-color: var(--gray-700);
+}
+
+.demo-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.demo-btn {
+  padding: var(--space-2) var(--space-4);
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  color: white;
+}
+
+.demo-btn--success {
+  background: var(--success);
+}
+
+.demo-btn--success:hover {
+  background: var(--success-600);
+}
+
+.demo-btn--error {
+  background: var(--danger);
+}
+
+.demo-btn--error:hover {
+  background: var(--danger-600);
+}
+
+.demo-btn--warning {
+  background: var(--warning);
+  color: var(--gray-900);
+}
+
+.demo-btn--warning:hover {
+  background: var(--warning-600);
+}
+
+.demo-btn--info {
+  background: var(--info);
+}
+
+.demo-btn--info:hover {
+  background: var(--info-600);
+}
+
+.demo-btn--neutral {
+  background: var(--gray-500);
+}
+
+.demo-btn--neutral:hover {
+  background: var(--gray-600);
+}
+
+/* Options */
+.demo-options {
+  border-top: 1px solid var(--border-light);
+  padding-top: var(--space-4);
+}
+
+.demo-options-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-4);
+  margin-bottom: var(--space-4);
+}
+
+.demo-option {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.demo-option select {
+  padding: var(--space-2) var(--space-3);
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--bg);
+  cursor: pointer;
+}
+
+.demo-option select:focus {
+  outline: none;
+  border-color: var(--primary);
+}
+
+.demo-btn-dismiss {
+  padding: var(--space-2) var(--space-4);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.demo-btn-dismiss:hover {
+  background: var(--gray-100);
+  border-color: var(--gray-300);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .demo-interactive-row {
+    grid-template-columns: 1fr;
+  }
+
+  .demo-grid--2cols {
+    grid-template-columns: 1fr;
+  }
+}
