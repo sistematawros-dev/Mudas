@@ -1,0 +1,58 @@
+.app-shell{
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  align-items: stretch;
+  min-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+  transition: grid-template-columns 0.3s ease-in-out;
+}
+
+/* Sidebar colapsado - reduz a primeira coluna */
+.app-shell--sidebar-collapsed {
+  grid-template-columns: 80px 1fr;
+}
+
+.app-sidebar{
+  background: var(--surface);
+  border-right: 1px solid var(--border);
+  position: relative;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  margin-top: 0;
+  padding-top: 0;
+}
+.app-main{
+  display: grid;
+  grid-template-rows: auto 1fr;
+  row-gap: 0;
+  background: var(--surface-background);
+  height: 100vh;
+  overflow: hidden;
+}
+.app-header{
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+}
+.view--app{
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: var(--surface-background);
+  min-height: 0;
+}
+.view--blank{ min-height: 100vh; }
+
+.btn{
+  border: 0;
+  border-radius: var(--radius-md);
+  padding: 12px 14px;
+  cursor: pointer;
+}
+.btn-primary{
+  background: var(--primary);
+  color: var(--color-content-on-primary);
+}
