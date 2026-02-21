@@ -160,7 +160,7 @@ export function initClasseProdutosDrawer(options = {}) {
   const drawerHtml = Drawer.create({
     id: DRAWER_ID,
     title: 'Classe',
-    width: 430,
+    width: 540,
     content: '',
     footer: '',
   });

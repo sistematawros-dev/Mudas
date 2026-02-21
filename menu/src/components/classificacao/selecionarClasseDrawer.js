@@ -89,7 +89,6 @@ function filterTree(tree = [], rawSearch = '') {
 function classRowActions() {
   return `
     <span class="selecionar-classe-drawer__row-actions" aria-hidden="true">
-      <svg viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5L13.5 4.5L5 13H3V11L11.5 2.5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
       <svg viewBox="0 0 16 16" fill="none"><path d="M1.5 8S4 3.5 8 3.5S14.5 8 14.5 8S12 12.5 8 12.5S1.5 8 1.5 8Z" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="8" r="1.4" stroke="currentColor" stroke-width="1.2"/></svg>
       <svg viewBox="0 0 16 16" fill="none"><path d="M3 1.8H10L13.2 5V14.2H3V1.8Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M10 1.8V5H13.2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
     </span>
@@ -143,7 +142,6 @@ function renderTree(state = {}) {
               data-scd-id="${escapeHtml(grupoId)}"
             >
               <span class="selecionar-classe-drawer__row-left" aria-hidden="true">
-                <svg class="selecionar-classe-drawer__icon-edit" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5L13.5 4.5L5 13H3V11L11.5 2.5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <svg class="selecionar-classe-drawer__icon-chevron ${isGrupoExpanded ? 'is-expanded' : ''}" viewBox="0 0 16 16" fill="none"><path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <svg class="selecionar-classe-drawer__icon-folder" viewBox="0 0 16 16" fill="none"><path d="M1.8 4.5H6.2L7.3 5.8H14.2V11.7C14.2 12.3 13.7 12.8 13.1 12.8H2.9C2.3 12.8 1.8 12.3 1.8 11.7V4.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
               </span>
@@ -170,7 +168,6 @@ function renderTree(state = {}) {
                       data-scd-id="${escapeHtml(categoriaId)}"
                     >
                       <span class="selecionar-classe-drawer__row-left" aria-hidden="true">
-                        <svg class="selecionar-classe-drawer__icon-edit" viewBox="0 0 16 16" fill="none"><path d="M11.5 2.5L13.5 4.5L5 13H3V11L11.5 2.5Z" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <svg class="selecionar-classe-drawer__icon-chevron ${isCategoriaExpanded ? 'is-expanded' : ''}" viewBox="0 0 16 16" fill="none"><path d="M6 3.5L10.5 8L6 12.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
                         <svg class="selecionar-classe-drawer__icon-folder" viewBox="0 0 16 16" fill="none"><path d="M1.8 4.5H6.2L7.3 5.8H14.2V11.7C14.2 12.3 13.7 12.8 13.1 12.8H2.9C2.3 12.8 1.8 12.3 1.8 11.7V4.5Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
                       </span>
@@ -195,15 +192,15 @@ function renderTree(state = {}) {
                               data-scd-categoria-id="${escapeHtml(categoriaId)}"
                               data-scd-grupo-id="${escapeHtml(grupoId)}"
                             >
-                              <span class="selecionar-classe-drawer__row-label">
-                                <span class="selecionar-classe-drawer__row-code">${escapeHtml(classe.codigo || '-')}</span>
-                                <span class="selecionar-classe-drawer__row-name">${escapeHtml(classe.nome || '-')}</span>
-                              </span>
                               ${state.mode === 'cadastro' ? `
                                 <span class="selecionar-classe-drawer__row-file" aria-hidden="true">
                                   <svg viewBox="0 0 16 16" fill="none"><path d="M3 1.8H10L13.2 5V14.2H3V1.8Z" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/><path d="M10 1.8V5H13.2" stroke="currentColor" stroke-width="1.2" stroke-linejoin="round"/></svg>
                                 </span>
                               ` : classRowActions()}
+                              <span class="selecionar-classe-drawer__row-label">
+                                <span class="selecionar-classe-drawer__row-code">${escapeHtml(classe.codigo || '-')}</span>
+                                <span class="selecionar-classe-drawer__row-name">${escapeHtml(classe.nome || '-')}</span>
+                              </span>
                             </button>
                           </li>
                         `;
@@ -284,7 +281,7 @@ export function initSelecionarClasseDrawer(options = {}) {
   const drawerHtml = Drawer.create({
     id: DRAWER_ID,
     title: 'Selecionar Classe do Produto/Serviço',
-    width: 430,
+    width: 540,
     content: '',
     footer: '',
   });
