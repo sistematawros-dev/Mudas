@@ -22,11 +22,14 @@ function handleRouteChange(event) {
   updatePageTitle(route.pageTitle);
   const breadcrumbItems = route.headerBreadcrumb || route.breadcrumb;
   const tabs = Array.isArray(route.headerTabs) ? route.headerTabs : [];
+  const subTabs = Array.isArray(route.headerSubTabs) ? route.headerSubTabs : [];
   const activeTab = route.headerActiveTab || '';
+  const activeSubTab = route.headerActiveSubTab || '';
 
   updateBreadcrumb(breadcrumbItems);
   updateTabs(tabs, activeTab);
-  setHeaderVariant(tabs.length > 0, breadcrumbItems && breadcrumbItems.length > 0);
+  updateSubTabs(subTabs, activeSubTab);
+  setHeaderVariant((tabs.length > 0) || (subTabs.length > 0), breadcrumbItems && breadcrumbItems.length > 0);
 }
 
 function updatePageTitle(pageTitle) {
@@ -90,6 +93,26 @@ function updateTabs(tabs, activeTab) {
     }
 
     tabsElement.appendChild(item);
+  });
+}
+
+function updateSubTabs(subTabs, activeSubTab) {
+  const subTabsElement = document.getElementById('header-subtabs');
+  if (!subTabsElement) return;
+
+  subTabsElement.innerHTML = '';
+
+  subTabs.forEach((tab) => {
+    const item = document.createElement('a');
+    item.className = 'header-subtab';
+    item.href = tab.href || window.location.hash || '#/dashboard';
+    item.textContent = tab.label;
+
+    if (tab.label === activeSubTab || tab.active) {
+      item.classList.add('header-subtab--active');
+    }
+
+    subTabsElement.appendChild(item);
   });
 }
 
