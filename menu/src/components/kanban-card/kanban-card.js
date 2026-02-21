@@ -23,6 +23,7 @@ export function create(options = {}) {
     subtitle = '',
     badgeLabel = '',
     badgeVariant = 'light',
+    badgeStyle = 'filled',
     items = [],
     id = generateId('card'),
   } = options;
@@ -30,6 +31,7 @@ export function create(options = {}) {
   const badgeHtml = badgeLabel ? Badge.create({
     text: badgeLabel,
     variant: badgeVariant,
+    style: badgeStyle,
     size: 'sm',
   }) : '';
 
@@ -38,11 +40,13 @@ export function create(options = {}) {
       return '<div class="kanban-card__divider"></div>';
     }
 
+    const hasIcon = item.icon !== null && item.icon !== false && item.icon !== '';
     const iconName = item.icon || 'circle';
-    const iconSvg = icon(iconName, { size: 16 });
+    const iconSvg = hasIcon ? icon(iconName, { size: 16 }) : '';
+    const itemClassName = item.className ? ` ${item.className}` : '';
 
     return `
-      <div class="kanban-card__item">
+      <div class="kanban-card__item${itemClassName}">
         ${iconSvg}
         <span>${item.label || ''}</span>
         ${item.value ? `<span class="kanban-card__item-label">${item.value}</span>` : ''}
