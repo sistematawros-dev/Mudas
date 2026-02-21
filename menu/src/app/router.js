@@ -1,5 +1,6 @@
 import { routes } from "./routes.js";
 import { hideRouteLoader, showRouteLoader } from "./route-loader.js";
+import { resetModalStack } from "../components/modal/modal.js";
 
 const componentCssModules = import.meta.glob("../components/*/*.css");
 
@@ -135,6 +136,7 @@ async function renderRoute(root) {
       try { currentCleanup(); } catch (e) { console.error("[router] cleanup error:", e); }
       currentCleanup = null;
     }
+    resetModalStack();
     resetRouteVisualState(root);
 
     await renderLayout(root, route.layout);
