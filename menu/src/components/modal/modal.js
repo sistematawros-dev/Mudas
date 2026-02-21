@@ -1,5 +1,3 @@
-import './modal.css';
-
 /**
  * Modal / Bottom Sheet Component
  */
@@ -212,6 +210,15 @@ export function closeAll() {
 }
 
 /**
+ * Limpa a stack de modais ativos sem tentar fechar elementos do DOM.
+ * Deve ser chamado pelo router antes de renderizar uma nova rota,
+ * para evitar que IDs de modais de rotas anteriores bloqueiem o Escape.
+ */
+export function resetModalStack() {
+  activeModals.length = 0;
+}
+
+/**
  * Inicializa modais
  */
 export function init(container = document, callbacks = {}) {
@@ -279,6 +286,7 @@ export default {
   open,
   close,
   closeAll,
+  resetModalStack,
   init,
   icons
 };
