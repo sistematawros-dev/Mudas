@@ -4,7 +4,8 @@
   align-items: stretch;
   min-height: 100vh;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: visible;
   transition: grid-template-columns 0.3s ease-in-out;
 }
 
@@ -19,7 +20,8 @@
   position: relative;
   top: 0;
   height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: hidden;
   margin-top: 0;
   padding-top: 0;
 }
@@ -56,3 +58,4 @@
   background: var(--primary);
   color: var(--color-content-on-primary);
 }
+
