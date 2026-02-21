@@ -5,6 +5,10 @@ import { createClassificacaoProdutosServicosMarkup } from './classificacaoProdut
 import { initGrupoEmpresaDrawer } from '../../components/grupo-empresa/grupoEmpresaDrawer.js';
 import { initClasseProdutosDrawer } from '../../components/classificacao/classeProdutosDrawer.js';
 import { initSelecionarClasseDrawer } from '../../components/classificacao/selecionarClasseDrawer.js';
+import { initRamoDrawer } from '../../components/pessoas-empresas/ramoDrawer.js';
+import { initPessoasEmpresasFiltrosDrawer } from '../../components/pessoas-empresas/pessoasEmpresasFiltrosDrawer.js';
+import { initProdutosFiltrosDrawer } from '../../components/produtos-servicos/produtosFiltrosDrawer.js';
+import { initProdutoServicoVerDrawer } from '../../components/produtos-servicos/produtoServicoVerDrawer.js';
 
 export function init() {
   const appHeader = document.getElementById('app-header');
@@ -29,16 +33,18 @@ export function init() {
   const originalTableBodyHtml = tableBody?.innerHTML || '';
   const originalFiltersParent = filtersSection?.parentElement || null;
   const originalFiltersNextSibling = filtersSection?.nextElementSibling || null;
+  const pessoasEmpresasStorageKey = 'TAWROS_DEMO_PESSOAS_EMPRESAS_V1';
 
   const currentHash = (window.location.hash || '').replace('#', '');
   const isProdutosServicosRoute = currentHash.startsWith('/cadastros/produtos-servicos');
   const isProdutosClassificacaoRoute = currentHash.startsWith('/cadastros/produtos-servicos/classificacao');
+  const isGrupoEmpresasRoute = currentHash.startsWith('/cadastros/pessoas-empresas/grupo-empresa');
   let currentMode = isProdutosServicosRoute ? 'produtos-servicos' : 'pessoas-empresas';
   let saveTimeoutId = null;
 
   let cadastroState = {
-    isOpen: false,
-    activeSubTab: 'pessoas-empresas',
+    isOpen: isGrupoEmpresasRoute,
+    activeSubTab: isGrupoEmpresasRoute ? 'grupo-empresas' : 'pessoas-empresas',
     tipo: 'pessoas',
     isAtivo: true,
     isComplementaresOpen: true,
@@ -137,6 +143,7 @@ export function init() {
       classeProdutosSelectedByClasse: {},
     },
     isGrupoDrawerOpen: false,
+    isRamoDrawerOpen: false,
     isClasseProdutosDrawerOpen: false,
     isSelecionarClasseDrawerOpen: false,
     grupoDrawerMode: 'create',
@@ -179,7 +186,111 @@ export function init() {
       observacoes: '',
       setor: '',
     },
+    pessoasEmpresasFiltros: {},
+    produtosFiltros: {},
+    ramoDrawerTab: 'ativos',
+    ramoItems: [
+      { id: 'ramo-1', nome: 'Autopeças', ativo: true },
+      { id: 'ramo-2', nome: 'Autopeças', ativo: true },
+      { id: 'ramo-3', nome: 'Autopeças', ativo: true },
+      { id: 'ramo-4', nome: 'Autopeças', ativo: true },
+    ],
   };
+
+  function escapeHtml(value) {
+    return String(value ?? '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
+  function parseInitialPessoasEmpresasRows() {
+    if (!tableBody) return [];
+    const rows = Array.from(tableBody.querySelectorAll('tr'));
+    return rows.map((row, index) => {
+      const cells = row.querySelectorAll('td');
+      return {
+        id: `seed-${index + 1}`,
+        codigo: (cells[0]?.textContent || '').trim(),
+        grupo: (cells[1]?.textContent || '').trim() || '-',
+        tipo: (cells[2]?.textContent || '').trim(),
+        documento: (cells[3]?.textContent || '').trim(),
+        razaoSocial: (cells[4]?.textContent || '').trim(),
+        nomeFantasia: (cells[5]?.textContent || '').trim(),
+      };
+    }).filter((row) => row.codigo || row.razaoSocial || row.documento);
+  }
+
+  function loadPessoasEmpresasRows() {
+    try {
+      const raw = window.sessionStorage.getItem(pessoasEmpresasStorageKey);
+      if (!raw) return parseInitialPessoasEmpresasRows();
+      const parsed = JSON.parse(raw);
+      return Array.isArray(parsed) ? parsed : parseInitialPessoasEmpresasRows();
+    } catch (_) {
+      return parseInitialPessoasEmpresasRows();
+    }
+  }
+
+  function persistPessoasEmpresasRows() {
+    try {
+      window.sessionStorage.setItem(pessoasEmpresasStorageKey, JSON.stringify(pessoasEmpresasRows));
+    } catch (_) {
+      // no-op: sessionStorage may be unavailable in some environments
+    }
+  }
+
+  function resolveSelectLabel(selectId, selectedValue) {
+    const select = document.getElementById(selectId);
+    if (!(select instanceof HTMLSelectElement)) return '';
+    const selectedOption = Array.from(select.options || []).find((option) => option.value === selectedValue);
+    return (selectedOption?.textContent || '').trim();
+  }
+
+  let pessoasEmpresasRows = loadPessoasEmpresasRows();
+
+  function renderPessoasEmpresasRows() {
+    if (!tableBody) return;
+    const query = (searchInput?.value || '').trim().toLowerCase();
+    const filteredRows = !query ? pessoasEmpresasRows : pessoasEmpresasRows.filter((row = {}) => {
+      const values = [
+        row.codigo,
+        row.grupo,
+        row.tipo,
+        row.documento,
+        row.razaoSocial,
+        row.nomeFantasia,
+      ];
+      return values.some((value) => String(value || '').toLowerCase().includes(query));
+    });
+
+    if (filteredRows.length === 0) {
+      tableBody.innerHTML = `
+        <tr>
+          <td colspan="7">Nenhum cadastro encontrado.</td>
+        </tr>
+      `;
+      return;
+    }
+
+    tableBody.innerHTML = filteredRows.map((row) => `
+      <tr data-code="${escapeHtml(row.codigo || '')}">
+        <td>${escapeHtml(row.codigo || '')}</td>
+        <td>${escapeHtml(row.grupo || '-')}</td>
+        <td>${escapeHtml(row.tipo || '')}</td>
+        <td>${escapeHtml(row.documento || '')}</td>
+        <td>${escapeHtml(row.razaoSocial || '')}</td>
+        <td>${escapeHtml(row.nomeFantasia || '')}</td>
+        <td class="cadastros-actions">
+          <button type="button" class="cadastros-link" data-action="view">Ver</button>
+          <button type="button" class="cadastros-link cadastros-link--edit" data-action="edit">Editar</button>
+          <button type="button" class="cadastros-link cadastros-link--danger" data-action="delete">Excluir</button>
+        </td>
+      </tr>
+    `).join('');
+  }
 
   function cancelPendingSave() {
     if (!saveTimeoutId) return;
@@ -222,6 +333,63 @@ export function init() {
     onOpenCadastro: (cadastro) => {
       if (!cadastro?.href) return;
       window.open(cadastro.href, '_blank', 'noopener,noreferrer');
+    },
+  });
+
+  const ramoDrawer = initRamoDrawer({
+    onClose: () => {
+      cadastroState = {
+        ...cadastroState,
+        isRamoDrawerOpen: false,
+      };
+    },
+    onToggleAtivo: (id, ativo) => {
+      cadastroState = {
+        ...cadastroState,
+        ramoItems: (Array.isArray(cadastroState.ramoItems) ? cadastroState.ramoItems : []).map((item) => {
+          if (String(item?.id || '') !== String(id)) return item;
+          return { ...(item || {}), ativo: Boolean(ativo) };
+        }),
+      };
+    },
+    onRename: (id, nome) => {
+      cadastroState = {
+        ...cadastroState,
+        ramoItems: (Array.isArray(cadastroState.ramoItems) ? cadastroState.ramoItems : []).map((item) => {
+          if (String(item?.id || '') !== String(id)) return item;
+          return { ...(item || {}), nome: String(nome || item?.nome || '') };
+        }),
+      };
+    },
+  });
+
+  const pessoasEmpresasFiltrosDrawer = initPessoasEmpresasFiltrosDrawer({
+    onApply: (filters = {}) => {
+      cadastroState = {
+        ...cadastroState,
+        pessoasEmpresasFiltros: filters || {},
+      };
+    },
+    onClear: () => {
+      cadastroState = {
+        ...cadastroState,
+        pessoasEmpresasFiltros: {},
+      };
+    },
+  });
+
+  const produtosFiltrosDrawer = initProdutosFiltrosDrawer({
+    onApply: (filters = {}) => {
+      cadastroState = {
+        ...cadastroState,
+        produtosFiltros: filters || {},
+      };
+    },
+    onClear: () => {
+      cadastroState = {
+        ...cadastroState,
+        produtosFiltros: {},
+      };
     },
   });
 
@@ -273,6 +441,20 @@ export function init() {
           classeProdutosSelectedByClasse: selectedMap,
         },
       };
+    },
+  });
+
+  const produtoServicoVerDrawer = initProdutoServicoVerDrawer({
+    onClose: () => {
+      cadastroState = {
+        ...cadastroState,
+        isProdutoServicoVerDrawerOpen: false,
+      };
+    },
+    onEdit: (itemId) => {
+      const item = getProdutoServicoViewItemById(itemId);
+      if (!item) return;
+      startProdutoServicoEdit(item);
     },
   });
 
@@ -398,6 +580,21 @@ export function init() {
     });
   }
 
+  function openRamoDrawer({ triggerEl = null, initialTab = 'ativos' } = {}) {
+    const nextTab = initialTab === 'inativos' ? 'inativos' : 'ativos';
+    cadastroState = {
+      ...cadastroState,
+      isRamoDrawerOpen: true,
+      ramoDrawerTab: nextTab,
+    };
+
+    ramoDrawer.open({
+      triggerEl,
+      initialTab: nextTab,
+      items: Array.isArray(cadastroState.ramoItems) ? cadastroState.ramoItems : [],
+    });
+  }
+
   function openClasseProdutosDrawer({ classeId = null, triggerEl = null } = {}) {
     if (cadastroState.isSelecionarClasseDrawerOpen) selecionarClasseDrawer.close();
     const classificacao = cadastroState.produtosClassificacao || {};
@@ -452,6 +649,98 @@ export function init() {
     });
   }
 
+  function openProdutoServicoVerDrawer({ triggerEl = null, item = null } = {}) {
+    cadastroState = {
+      ...cadastroState,
+      isProdutoServicoVerDrawerOpen: true,
+    };
+    produtoServicoVerDrawer.open({
+      triggerEl,
+      item: item || {},
+    });
+  }
+
+  function buildProdutoServicoViewItemFromRow(row) {
+    if (!(row instanceof HTMLTableRowElement)) return null;
+    const cells = row.querySelectorAll('td');
+    if (!cells || cells.length < 5) return null;
+
+    const codigo = String(cells[0]?.textContent || '').trim();
+    const classe = String(cells[1]?.textContent || '').trim();
+    const tipo = String(cells[2]?.textContent || '').trim();
+    const descricao = String(cells[3]?.textContent || '').trim();
+    const unidade = String(cells[4]?.textContent || '').trim();
+
+    const mockByCode = {
+      'INS-001': {
+        status: 'Ativo',
+        marca: ['Yara', 'Nutriplant'],
+        fabricante: ['Yara Brasil', 'Nutriplant Indústria'],
+        fornecedores: 'Agro Distribuidor SA, Fertilizantes Centro Oeste Ltda',
+        grupoEquivalencia: 'GE-FERT-001',
+        ncm: '3105.30.00',
+        principioAtivo: 'NPK (Nitrogênio, Fósforo e Potássio)',
+        grupoQuimico: 'Fertilizante Mineral Misto',
+        modoAcao: 'Nutrição foliar balanceada - Absorção rápida',
+        registroMapa: 'SP-12345/67890',
+      },
+    };
+
+    return {
+      id: codigo || '',
+      codigo: codigo || '',
+      nome: descricao || '',
+      tipo: tipo || '',
+      classe: classe || '',
+      unidade: unidade || '',
+      descricao: descricao || '',
+      ...(mockByCode[codigo] || {}),
+    };
+  }
+
+  function getProdutoServicoViewItemById(itemId) {
+    if (!tableBody || !itemId) return null;
+    const rows = tableBody.querySelectorAll('tr');
+    for (const row of rows) {
+      const item = buildProdutoServicoViewItemFromRow(row);
+      if (String(item?.id || '') === String(itemId)) return item;
+    }
+    return null;
+  }
+
+  function startProdutoServicoEdit(item) {
+    const normalizedItem = item || {};
+    const nextTipo = String(normalizedItem.tipo || '').toLowerCase().includes('serv') ? 'servico' : 'produto';
+
+    cadastroState = {
+      ...cadastroState,
+      isProdutoServicoVerDrawerOpen: false,
+      isProdutosCadastroOpen: true,
+      isEmbalagensCadastroOpen: false,
+      produtosCadastro: {
+        ...(cadastroState.produtosCadastro || {}),
+        tipo: nextTipo,
+        saveError: '',
+        form: {
+          ...((cadastroState.produtosCadastro && cadastroState.produtosCadastro.form) || {}),
+          classe: normalizedItem.classe || '',
+          descricao: normalizedItem.descricao || '',
+          unidade: normalizedItem.unidade || '',
+          fornecedores: normalizedItem.fornecedores || '',
+          grupoEquivalencia: normalizedItem.grupoEquivalencia || '',
+          ncm: normalizedItem.ncm || '',
+          principioAtivo: normalizedItem.principioAtivo || '',
+          grupoQuimico: normalizedItem.grupoQuimico || '',
+          modoAcao: normalizedItem.modoAcao || '',
+          registroMapa: normalizedItem.registroMapa || '',
+        },
+        marcaChips: Array.isArray(normalizedItem.marca) ? normalizedItem.marca : (cadastroState.produtosCadastro?.marcaChips || []),
+        fabricanteChips: Array.isArray(normalizedItem.fabricante) ? normalizedItem.fabricante : (cadastroState.produtosCadastro?.fabricanteChips || []),
+      },
+    };
+    renderCadastroPessoaEmpresa();
+  }
+
   function openCadastroPessoaEmpresa() {
     cadastroState = {
       ...cadastroState,
@@ -478,6 +767,7 @@ export function init() {
   function closeCadastroPessoaEmpresa() {
     cancelPendingSave();
     if (cadastroState.isGrupoDrawerOpen) grupoEmpresaDrawer.close();
+    if (cadastroState.isRamoDrawerOpen) ramoDrawer.close();
     if (cadastroState.isClasseProdutosDrawerOpen) classeProdutosDrawer.close();
     if (cadastroState.isSelecionarClasseDrawerOpen) selecionarClasseDrawer.close();
     cadastroState = {
@@ -486,6 +776,7 @@ export function init() {
       isSaving: false,
       saveError: '',
       isGrupoDrawerOpen: false,
+      isRamoDrawerOpen: false,
       isClasseProdutosDrawerOpen: false,
       isSelecionarClasseDrawerOpen: false,
       isEmbalagensCadastroOpen: false,
@@ -582,7 +873,21 @@ export function init() {
       });
 
       if (!cadastroState.isOpen) return;
-      console.log('Salvar cadastro pessoa/empresa', buildCadastroPayload());
+      const payload = buildCadastroPayload();
+      const nextCode = 'C-' + String(Date.now()).slice(-4);
+      const now = Date.now();
+      pessoasEmpresasRows = [{
+        id: 'cad-' + now,
+        codigo: nextCode,
+        grupo: resolveSelectLabel('cpe-grupo', payload.grupo) || '-',
+        tipo: payload.tipo === 'pessoas' ? 'PF' : 'PJ',
+        documento: String(payload.cnpj || '').trim(),
+        razaoSocial: String(payload.razaoSocial || '').trim(),
+        nomeFantasia: String(payload.nomeFantasia || '').trim(),
+      }, ...pessoasEmpresasRows];
+      persistPessoasEmpresasRows();
+      if (searchInput) searchInput.value = '';
+      renderPessoasEmpresasRows();
       closeCadastroPessoaEmpresa();
     } catch (error) {
       cadastroState = {
@@ -941,7 +1246,7 @@ export function init() {
   function applyPessoasEmpresasTable() {
     if (!tableHead || !tableBody) return;
     tableHead.innerHTML = originalTableHeadHtml;
-    tableBody.innerHTML = originalTableBodyHtml;
+    renderPessoasEmpresasRows();
   }
 
   function setAdvancedFilterVisual(isProdutosServicos) {
@@ -963,6 +1268,7 @@ export function init() {
     }
     const isProdutosServicos = currentMode === 'produtos-servicos';
     if (isProdutosServicos && cadastroState.isGrupoDrawerOpen) grupoEmpresaDrawer.close();
+    if (isProdutosServicos && cadastroState.isRamoDrawerOpen) ramoDrawer.close();
     if (!isProdutosServicos && cadastroState.isClasseProdutosDrawerOpen) classeProdutosDrawer.close();
     if (!isProdutosServicos && cadastroState.isSelecionarClasseDrawerOpen) selecionarClasseDrawer.close();
     if (!isProdutosServicos && (cadastroState.isProdutosCadastroOpen || cadastroState.isEmbalagensCadastroOpen)) {
@@ -1036,7 +1342,20 @@ export function init() {
   };
 
   const handleAdvancedFiltersClick = () => {
-    console.log('Filtros avançados');
+    if (currentMode === 'pessoas-empresas') {
+      pessoasEmpresasFiltrosDrawer.open({
+        triggerEl: advancedFiltersButton || null,
+        initialFilters: cadastroState.pessoasEmpresasFiltros || {},
+      });
+      return;
+    }
+
+    if (currentMode === 'produtos-servicos' && (cadastroState.activeProdutosSubTab || 'produtos-servicos') === 'produtos-servicos') {
+      produtosFiltrosDrawer.open({
+        triggerEl: advancedFiltersButton || null,
+        initialFilters: cadastroState.produtosFiltros || {},
+      });
+    }
   };
 
   const handleBadgeClick = (event) => {
@@ -1193,11 +1512,18 @@ export function init() {
     const createLink = event.target.closest('[data-cpe-create]');
     if (createLink && currentMode === 'pessoas-empresas') {
       const resource = createLink.getAttribute('data-cpe-create') || 'registro';
-      if (resource === 'grupo' && cadastroState.activeSubTab === 'grupo-empresas' && cadastroState.isOpen) {
+      if (resource === 'grupo' && cadastroState.isOpen) {
         openGrupoEmpresaDrawer({
           mode: 'create',
           grupoId: null,
           triggerEl: createLink,
+        });
+        return;
+      }
+      if (resource === 'ramo' && cadastroState.isOpen) {
+        openRamoDrawer({
+          triggerEl: createLink,
+          initialTab: cadastroState.ramoDrawerTab || 'ativos',
         });
         return;
       }
@@ -1225,6 +1551,36 @@ export function init() {
         },
       };
       renderCadastroPessoaEmpresa();
+      return;
+    }
+
+    const tableViewAction = event.target.closest('.cadastros-link[data-action="view"]');
+    if (
+      tableViewAction
+      && currentMode === 'produtos-servicos'
+      && (cadastroState.activeProdutosSubTab || 'produtos-servicos') === 'produtos-servicos'
+      && !cadastroState.isProdutosCadastroOpen
+    ) {
+      const row = tableViewAction.closest('tr');
+      const item = buildProdutoServicoViewItemFromRow(row);
+      openProdutoServicoVerDrawer({
+        triggerEl: tableViewAction,
+        item,
+      });
+      return;
+    }
+
+    const tableEditAction = event.target.closest('.cadastros-link[data-action="edit"]');
+    if (
+      tableEditAction
+      && currentMode === 'produtos-servicos'
+      && (cadastroState.activeProdutosSubTab || 'produtos-servicos') === 'produtos-servicos'
+      && !cadastroState.isProdutosCadastroOpen
+    ) {
+      const row = tableEditAction.closest('tr');
+      const item = buildProdutoServicoViewItemFromRow(row);
+      if (!item) return;
+      startProdutoServicoEdit(item);
       return;
     }
 
@@ -1843,6 +2199,11 @@ export function init() {
 
   const handlePageInput = (event) => {
     if (!(event.target instanceof Element)) return;
+
+    if (event.target.id === 'cadastros-search-input' && currentMode === 'pessoas-empresas') {
+      renderPessoasEmpresasRows();
+      return;
+    }
     const grupoSearchInput = event.target.closest('[data-cpe-grupo-search]');
     if (grupoSearchInput instanceof HTMLInputElement && currentMode === 'pessoas-empresas') {
       const query = (grupoSearchInput.value || '').trim().toLowerCase();
@@ -1969,6 +2330,10 @@ export function init() {
   return () => {
     cancelPendingSave();
     grupoEmpresaDrawer.cleanup();
+    ramoDrawer.cleanup();
+    pessoasEmpresasFiltrosDrawer.cleanup();
+    produtosFiltrosDrawer.cleanup();
+    produtoServicoVerDrawer.cleanup();
     classeProdutosDrawer.cleanup();
     selecionarClasseDrawer.cleanup();
     if (appHeader) appHeader.classList.remove('header--kanban-compact-tabs');
@@ -1982,4 +2347,18 @@ export function init() {
 }
 
 export default { init };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

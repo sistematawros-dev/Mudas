@@ -2,6 +2,11 @@
   margin-bottom: var(--space-4);
 }
 
+.cadastro-produtos-servicos.is-servico {
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
 .cadastro-produtos-servicos__header {
   display: flex;
   align-items: flex-start;
@@ -174,6 +179,10 @@
   border-radius: var(--radius-xs);
   margin-bottom: var(--space-3);
   background: transparent;
+}
+
+.cadastro-produtos-servicos__accordion.is-hidden {
+  display: none;
 }
 
 .cadastro-produtos-servicos__accordion-trigger {

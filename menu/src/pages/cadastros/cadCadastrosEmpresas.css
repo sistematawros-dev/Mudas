@@ -185,13 +185,7 @@
 }
 
 .cadastros-filters__dot {
-  position: absolute;
-  top: 6px;
-  right: 6px;
-  width: 8px;
-  height: 8px;
-  border-radius: var(--radius-full);
-  background: var(--color-danger);
+  display: none;
 }
 
 .cadastros-page--produtos-servicos .cadastros-badges {
@@ -918,8 +912,7 @@
   border-radius: var(--radius-xs);
   background: transparent;
   color: var(--color-content-primary);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
   align-items: center;
   gap: var(--space-2);
   padding: 0 var(--space-2);
@@ -954,6 +947,7 @@
   align-items: center;
   gap: var(--space-1);
   min-width: 0;
+  flex: 1 1 auto;
 }
 
 .selecionar-classe-drawer__row-code {
@@ -972,7 +966,7 @@
 
 .selecionar-classe-drawer__row--classe {
   position: relative;
-  grid-template-columns: minmax(0, 1fr) auto;
+  display: flex;
 }
 
 .selecionar-classe-drawer__row--classe.is-selected {
@@ -996,6 +990,7 @@
   align-items: center;
   gap: var(--space-1);
   color: var(--color-content-secondary);
+  margin-left: auto;
 }
 
 .selecionar-classe-drawer__row-actions svg {
@@ -1277,6 +1272,394 @@
     align-items: flex-start;
     gap: var(--space-2);
   }
+}
+
+/* Drawer: Filtros avançados Pessoas e Empresas */
+[data-drawer="pessoas-empresas-filtros-drawer"] .drawer__header {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+[data-drawer="produtos-filtros-drawer"] .drawer__header {
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+[data-drawer="pessoas-empresas-filtros-drawer"] .drawer__title {
+  margin: 0;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-drawer="produtos-filtros-drawer"] .drawer__title {
+  margin: 0;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+[data-drawer="pessoas-empresas-filtros-drawer"] .drawer__body {
+  padding: var(--space-4);
+}
+
+[data-drawer="produtos-filtros-drawer"] .drawer__body {
+  padding: var(--space-4);
+}
+
+[data-drawer="pessoas-empresas-filtros-drawer"] .drawer__footer {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+[data-drawer="produtos-filtros-drawer"] .drawer__footer {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-primary);
+}
+
+.pessoas-empresas-filtros-drawer {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.pessoas-empresas-filtros-drawer__top {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.pessoas-empresas-filtros-drawer__top .toggle-label,
+.pessoas-empresas-filtros-drawer__top .checkbox-label {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-primary);
+}
+
+.pessoas-empresas-filtros-drawer__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3) var(--space-4);
+}
+
+.pessoas-empresas-filtros-drawer__grid .field-label {
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+}
+
+.pessoas-empresas-filtros-drawer__grid .input {
+  height: 38px;
+  border-radius: var(--radius-2xs);
+  color: #98a2ad;
+}
+
+.pessoas-empresas-filtros-drawer__grid .input::placeholder,
+.pessoas-empresas-filtros-drawer__order .input::placeholder {
+  color: #98a2ad;
+  opacity: 1;
+}
+
+.pessoas-empresas-filtros-drawer__grid .input-wrapper--select .input,
+.pessoas-empresas-filtros-drawer__order .input-wrapper--select .input {
+  color: #98a2ad;
+}
+
+.produtos-filtros-drawer__full {
+  grid-column: 1 / -1;
+}
+
+.pessoas-empresas-filtros-drawer__chips {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.pessoas-empresas-filtros-drawer__chip {
+  background: var(--color-surface-selected);
+  border-color: var(--color-border-primary);
+  color: var(--color-content-brand);
+}
+
+.pessoas-empresas-filtros-drawer__chip .chip-close {
+  color: var(--color-content-brand);
+}
+
+.pessoas-empresas-filtros-drawer__order {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  column-gap: 24px;
+  align-items: start;
+}
+
+.pessoas-empresas-filtros-drawer__order-column {
+  display: grid;
+  gap: 6px;
+  align-content: start;
+  justify-items: start;
+  min-width: 0;
+}
+
+.pessoas-empresas-filtros-drawer__section-label {
+  margin: 0;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-primary);
+}
+
+.pessoas-empresas-filtros-drawer__order-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 22px;
+  margin-top: 12px;
+  padding: 0;
+  width: max-content;
+  align-self: start;
+}
+
+.pessoas-empresas-filtros-drawer__order-btn {
+  height: 20px;
+  padding: 0 8px;
+  border: 1px solid #cfd6dd;
+  border-radius: 999px;
+  background: #ffffff;
+  color: #495566;
+  font-size: 10px;
+  font-weight: var(--font-weight-regular);
+  line-height: 18px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  white-space: nowrap;
+}
+
+.pessoas-empresas-filtros-drawer__order-btn:first-child {
+  width: 94px;
+}
+
+.pessoas-empresas-filtros-drawer__order-btn:last-child {
+  width: 94px;
+}
+
+.pessoas-empresas-filtros-drawer__order-btn:hover {
+  border-color: #c7d0da;
+  background: #f8fafc;
+}
+
+.pessoas-empresas-filtros-drawer__order-btn.is-active {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-content-on-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+.pessoas-empresas-filtros-drawer__groupby {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.pessoas-empresas-filtros-drawer__groupby-options {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  column-gap: 20px;
+  row-gap: 8px;
+  align-items: center;
+}
+
+.pessoas-empresas-filtros-drawer__groupby-options .checkbox-label {
+  font-size: var(--font-size-s);
+  color: var(--color-content-primary);
+}
+
+.pessoas-empresas-filtros-drawer__groupby-options .checkbox {
+  width: 100%;
+}
+
+.pessoas-empresas-filtros-drawer__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.pessoas-empresas-filtros-drawer__footer-right {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .pessoas-empresas-filtros-drawer__grid,
+  .pessoas-empresas-filtros-drawer__order {
+    grid-template-columns: 1fr;
+  }
+
+  .pessoas-empresas-filtros-drawer__groupby-options {
+    grid-template-columns: repeat(2, minmax(0, max-content));
+  }
+
+  .pessoas-empresas-filtros-drawer__footer {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .pessoas-empresas-filtros-drawer__footer-right {
+    justify-content: flex-end;
+  }
+}
+
+/* Drawer: Ver Produto/Serviço */
+[data-drawer="produto-servico-ver-drawer"] .drawer__header {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-rows: auto auto;
+  align-items: start;
+  row-gap: 2px;
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+[data-drawer="produto-servico-ver-drawer"] .drawer__title {
+  margin: 0;
+  grid-column: 1;
+  grid-row: 1;
+  font-size: 30px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+}
+
+[data-drawer="produto-servico-ver-drawer"] .drawer__close {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+[data-drawer="produto-servico-ver-drawer"] .produto-servico-ver-drawer__subtitle-head {
+  margin: 0;
+  grid-column: 1;
+  grid-row: 2;
+  font-size: var(--font-size-s);
+  color: var(--color-content-secondary);
+}
+
+[data-drawer="produto-servico-ver-drawer"] .drawer__body {
+  padding: var(--space-4);
+}
+
+[data-drawer="produto-servico-ver-drawer"] .drawer__footer {
+  padding: 0;
+  border-top: none;
+}
+
+.produto-servico-ver-drawer {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.produto-servico-ver-drawer__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  padding-bottom: var(--space-1);
+}
+
+.produto-servico-ver-drawer__meta-item {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.produto-servico-ver-drawer__meta-label {
+  font-size: var(--font-size-s);
+  color: var(--color-content-secondary);
+}
+
+.produto-servico-ver-drawer__badge {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  padding: 0 var(--space-2);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-secondary);
+  color: var(--color-content-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+}
+
+.produto-servico-ver-drawer__badge--status {
+  background: #e9f6ea;
+  color: #1f7a36;
+}
+
+.produto-servico-ver-drawer__section {
+  border-top: 1px solid var(--color-border-primary);
+  padding-top: var(--space-2);
+}
+
+.produto-servico-ver-drawer__section-toggle {
+  width: 100%;
+  border: none;
+  background: transparent;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--color-content-primary);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  cursor: pointer;
+}
+
+.produto-servico-ver-drawer__chevron {
+  transition: transform 0.2s ease;
+}
+
+.produto-servico-ver-drawer__chevron.is-open {
+  transform: rotate(0deg);
+}
+
+.produto-servico-ver-drawer__section-content {
+  display: none;
+  padding-top: var(--space-2);
+}
+
+.produto-servico-ver-drawer__section-content.is-open {
+  display: block;
+}
+
+.produto-servico-ver-drawer__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2) var(--space-3);
+}
+
+.produto-servico-ver-drawer__full {
+  grid-column: 1 / -1;
+}
+
+.produto-servico-ver-drawer__label {
+  margin: 0 0 2px;
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+}
+
+.produto-servico-ver-drawer__value {
+  margin: 0;
+  font-size: var(--font-size-s);
+  color: var(--color-content-primary);
+  line-height: 1.4;
+}
+
+.produto-servico-ver-drawer__chips {
+  display: inline-flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-1);
+}
+
+.produto-servico-ver-drawer__footer {
+  margin-top: var(--space-2);
+  padding-top: var(--space-3);
+  border-top: 1px solid var(--color-border-primary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 

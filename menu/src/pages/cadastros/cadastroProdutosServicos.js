@@ -19,7 +19,7 @@ export function createCadastroProdutosServicosMarkup(state = {}) {
   const fabricanteChips = Array.isArray(state.fabricanteChips) ? state.fabricanteChips : ['Fabricante'];
 
   return `
-    <section class="cadastro-produtos-servicos" data-cadastro-produtos-servicos>
+    <section class="cadastro-produtos-servicos ${!isProduto ? 'is-servico' : ''}" data-cadastro-produtos-servicos>
       <header class="cadastro-produtos-servicos__header">
         <div>
           <h2 class="cadastro-produtos-servicos__title">Cadastro de Produtos e Serviços</h2>
@@ -45,7 +45,7 @@ export function createCadastroProdutosServicosMarkup(state = {}) {
       <section class="cadastro-produtos-servicos__card">
         <section class="cadastro-produtos-servicos__section">
           <div class="cadastro-produtos-servicos__section-header">
-            <h3 class="cadastro-produtos-servicos__section-title">Dados do produto</h3>
+            <h3 class="cadastro-produtos-servicos__section-title">${isProduto ? 'Dados do produto' : 'Dados do serviço'}</h3>
             <span class="cadastro-produtos-servicos__id">#43434</span>
           </div>
 
@@ -78,7 +78,7 @@ export function createCadastroProdutosServicosMarkup(state = {}) {
           </div>
         </section>
 
-        <section class="cadastro-produtos-servicos__accordion">
+        <section class="cadastro-produtos-servicos__accordion ${!isProduto ? 'is-hidden' : ''}">
           <button type="button" class="cadastro-produtos-servicos__accordion-trigger" data-cps-accordion="cadastro" ${isSaving ? 'disabled' : ''}>
             <span>Complementares de Cadastro</span>
             <span class="cadastro-produtos-servicos__accordion-arrow ${cadastroOpen ? 'is-open' : ''}" aria-hidden="true">⌄</span>
@@ -113,7 +113,7 @@ export function createCadastroProdutosServicosMarkup(state = {}) {
           </div>
         </section>
 
-        <section class="cadastro-produtos-servicos__accordion">
+        <section class="cadastro-produtos-servicos__accordion ${!isProduto ? 'is-hidden' : ''}">
           <button type="button" class="cadastro-produtos-servicos__accordion-trigger" data-cps-accordion="classe" ${isSaving ? 'disabled' : ''}>
             <span>Complementares de Classe</span>
             <span class="cadastro-produtos-servicos__accordion-arrow ${classeOpen ? 'is-open' : ''}" aria-hidden="true">⌄</span>
