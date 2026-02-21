@@ -21,7 +21,7 @@ export function create(options = {}) {
     content = '',
     footer = '',
     side = 'right',
-    width = 420,
+    width = 540,
   } = options;
 
   return `
