@@ -3,7 +3,6 @@ import * as Dropdown from '../../components/dropdown/dropdown.js';
 import * as Segmented from '../../components/segmented/segmented.js';
 import * as KpiCard from '../../components/kpi-card/kpi-card.js';
 import * as Chart from '../../components/chart/chart.js';
-import ApexCharts from 'apexcharts';
 import * as Tabs from '../../components/tabs/tabs.js';
 import * as ListItem from '../../components/list-item/list-item.js';
 
@@ -11,6 +10,14 @@ let engagementApexChart = null;
 let distributionApexChart = null;
 let engagementResizeObserver = null;
 let distributionResizeObserver = null;
+let apexChartsLoader = null;
+
+async function loadApexCharts() {
+  if (!apexChartsLoader) {
+    apexChartsLoader = import('apexcharts').then((module) => module.default);
+  }
+  return apexChartsLoader;
+}
 
 export function init() {
   disconnectDashboardChartObservers();
@@ -418,6 +425,8 @@ async function renderEngagementChartV2(chartContainer, engagementModel) {
     return;
   }
 
+  const ApexCharts = await loadApexCharts();
+
   const safeIndex = Math.min(Math.max(engagementModel.highlightIndex, 0), engagementModel.points.length - 1);
   const categories = engagementModel.points.map((point) => point.label);
   const seriesData = engagementModel.points.map((point) => point.value);
@@ -645,6 +654,8 @@ async function renderDistributionChartV2(chartContainer, data) {
     chartContainer.innerHTML = '<div class="chart-empty">Sem dados</div>';
     return;
   }
+
+  const ApexCharts = await loadApexCharts();
 
   const categories = data.map((item) => item.label);
   const seriesData = data.map((item) => item.value);
