@@ -44,6 +44,17 @@ function getTipoLabel(tipo) {
   return tipo === 'PJ' ? 'Pessoa JurÃ­dica' : 'Pessoa FÃ­sica';
 }
 
+function sanitizeTextInputValue(value, legacyValue = '') {
+  const normalized = String(value || '').trim();
+  if (!normalized) return '';
+  const legacyValues = Array.isArray(legacyValue) ? legacyValue : [legacyValue];
+  const shouldClear = legacyValues
+    .filter(Boolean)
+    .some((item) => normalized.toLowerCase() === String(item).toLowerCase());
+  if (shouldClear) return '';
+  return normalized;
+}
+
 function createCadastrosListItem(item = {}, isChecked = false, disabled = false) {
   const itemId = escapeHtml(item.id || '');
   const checkboxHtml = Checkbox.create({
@@ -200,7 +211,7 @@ export function initGrupoEmpresaDrawer(options = {}) {
   const drawerHtml = Drawer.create({
     id: DRAWER_ID,
     title: 'Grupo de Empresa',
-    width: 470,
+    width: 540,
     content: '',
     footer: '',
   });
@@ -408,8 +419,13 @@ export function initGrupoEmpresaDrawer(options = {}) {
       search: '',
       form: {
         codigo: initialData.codigo ? String(initialData.codigo) : (mode === 'create' ? generateCodigo() : ''),
-        nome: initialData.nome ? String(initialData.nome) : '',
-        descricao: initialData.descricao ? String(initialData.descricao) : '',
+        nome: sanitizeTextInputValue(initialData.nome, 'Nome do Grupo'),
+        descricao: sanitizeTextInputValue(initialData.descricao, [
+          'Descrição da empresa',
+          'DescriÃ§Ã£o da empresa',
+          'Adicione uma descrição',
+          'Adicione uma descriÃ§Ã£o',
+        ]),
       },
       linkedCadastros: incomingLinked,
       selectedIds: new Set(Array.isArray(params.selectedCadastroIds) ? params.selectedCadastroIds : []),
@@ -435,3 +451,7 @@ export function initGrupoEmpresaDrawer(options = {}) {
 }
 
 export default { initGrupoEmpresaDrawer };
+
+
+
+
