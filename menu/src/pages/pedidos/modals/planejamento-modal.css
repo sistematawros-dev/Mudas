@@ -1,0 +1,210 @@
+.planning-modal {
+  max-width: 760px;
+}
+
+.planning-modal .modal-body {
+  padding-top: var(--space-2);
+}
+
+.planning-modal__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.planning-modal [data-planning-dynamic-content] {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.planning-modal__summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-2);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-2xs);
+  background: var(--color-surface-secondary);
+  padding: var(--space-2);
+}
+
+.planning-modal__summary div {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.planning-modal__summary span {
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+}
+
+.planning-modal__summary strong {
+  font-size: var(--font-size-s);
+  color: var(--color-content-primary);
+}
+
+.planning-modal__summary .planning-modal__available {
+  color: var(--color-success);
+}
+
+.planning-modal__link-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding-top: var(--space-1);
+}
+
+.planning-modal__linked-feedback {
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+}
+
+.planning-modal__add-block {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-2xs);
+  background: var(--color-surface-secondary);
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.planning-modal__add-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.planning-modal__future-block {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-2xs);
+  background: var(--color-surface-secondary);
+  padding: var(--space-2);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.planning-modal__future-grid {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.planning-modal__future-grid--2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.planning-modal__future-grid--3 {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+  align-items: end;
+}
+
+.planning-modal__agenda-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.planning-modal__agenda-wrap .btn {
+  height: 40px;
+  min-height: 40px;
+}
+
+.planning-modal__agenda-label {
+  font-size: var(--font-size-s);
+  line-height: 1;
+}
+
+.planning-modal__date-field .input[type="date"]::-webkit-calendar-picker-indicator,
+.planning-modal__date-field .input[type="date"]::-webkit-clear-button,
+.planning-modal__date-field .input[type="date"]::-webkit-inner-spin-button {
+  display: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.planning-modal__date-field .input-icon--action {
+  cursor: pointer;
+}
+
+.planning-modal__table-wrap {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-2xs);
+  overflow: hidden;
+}
+
+.planning-modal__table-component .table {
+  font-size: var(--font-size-xs);
+}
+
+.planning-modal__table-component.table-container {
+  background: transparent;
+}
+
+.planning-modal__table-component .table th,
+.planning-modal__table-component .table td {
+  padding: var(--space-1-5) var(--space-2);
+  color: var(--color-content-primary);
+}
+
+.planning-modal__table-component .table th {
+  background: var(--color-surface-secondary);
+  color: var(--color-content-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.planning-modal__table-component .table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.planning-modal__table-component .table tr:hover td,
+.planning-modal__table-component .table tr.is-selected td,
+.planning-modal__table-component .table td {
+  background: transparent;
+}
+
+.planning-modal__actions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.planning-modal__icon-btn {
+  width: 24px;
+  height: 24px;
+  border: none;
+  background: transparent;
+  color: var(--color-content-secondary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.planning-modal__icon-btn--danger {
+  color: var(--color-danger);
+}
+
+.planning-modal__footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+@media (max-width: 768px) {
+  .planning-modal {
+    width: calc(100% - var(--space-4));
+    max-width: none;
+  }
+
+  .planning-modal__summary,
+  .planning-modal__add-grid,
+  .planning-modal__future-grid--2,
+  .planning-modal__future-grid--3 {
+    grid-template-columns: 1fr;
+  }
+}
