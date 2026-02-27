@@ -1,0 +1,105 @@
+/* Kanban Card - Variação do Card base */
+.kanban-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4);
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-xs);
+  cursor: pointer; /* ETAPA 3: Cursor já aplicado globalmente via utilities */
+  transition: var(--transition-base); /* ETAPA 3: Usa token ao invés de hardcode */
+}
+
+.kanban-card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-border-hover);
+}
+
+/* Header do card */
+.kanban-card__header {
+  /* ETAPA 3: Poderia usar utility "flex items-center justify-between gap-2" no HTML */
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-2);
+}
+
+.kanban-card__title {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0-5);
+}
+
+.kanban-card__code {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: var(--transition-colors); /* ETAPA 3: Usa token específico para cores */
+}
+
+.kanban-card__code:hover {
+  color: var(--color-primary-hover);
+}
+
+.kanban-card__subtitle {
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+  line-height: var(--line-height-ratio-tight);
+}
+
+/* Body do card */
+.kanban-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.kanban-card__item {
+  /* ETAPA 3: Poderia usar utility "flex-center-y gap-2" no HTML */
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+  line-height: var(--line-height-ratio-normal);
+}
+
+.kanban-card__item svg {
+  /* ETAPA 3: Poderia usar utility "icon-xs" no HTML */
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: var(--color-content-tertiary);
+}
+
+.kanban-card__item-label {
+  color: var(--color-content-primary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Divider */
+.kanban-card__divider {
+  height: 1px;
+  background: var(--color-border-secondary);
+  margin: var(--space-1) 0;
+}
+
+/* Responsive */
+@media (max-width: 575px) {
+  .kanban-card {
+    padding: var(--space-3);
+  }
+
+  .kanban-card__code {
+    font-size: var(--font-size-xs);
+  }
+
+  .kanban-card__item {
+    font-size: var(--font-size-2xs);
+  }
+}
