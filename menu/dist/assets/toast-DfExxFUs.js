@@ -1,0 +1,95 @@
+const t=`<div class="page">
+  <div class="page-header">
+    <h1>Toast</h1>
+    <p class="page-desc">O componente Toast representa as notificações do sistema que fornecem comentários sobre uma operação por meio de uma mensagem.</p>
+  </div>
+
+  <!-- Toast Filled -->
+  <section class="demo-section">
+    <h2 class="demo-title">Toast Filled</h2>
+    <div class="demo-grid" id="toast-filled"></div>
+  </section>
+
+  <!-- Toast Outlined -->
+  <section class="demo-section">
+    <h2 class="demo-title">Toast Outlined</h2>
+    <div class="demo-grid" id="toast-outlined"></div>
+  </section>
+
+  <!-- Toast Soft -->
+  <section class="demo-section">
+    <h2 class="demo-title">Toast Soft</h2>
+    <div class="demo-grid" id="toast-soft"></div>
+  </section>
+
+  <!-- Toast Neutral -->
+  <section class="demo-section">
+    <h2 class="demo-title">Toast Neutral</h2>
+    <div class="demo-grid demo-grid--2cols" id="toast-neutral"></div>
+  </section>
+
+  <!-- Interactive Demo -->
+  <section class="demo-section">
+    <h2 class="demo-title">Exemplo Interativo</h2>
+    <div class="demo-interactive">
+      <div class="demo-interactive-row">
+        <div class="demo-interactive-col">
+          <h3 class="demo-subtitle">Light Mode</h3>
+          <div class="demo-buttons" id="demo-light">
+            <button class="demo-btn demo-btn--success" data-type="success">Success</button>
+            <button class="demo-btn demo-btn--error" data-type="error">Error</button>
+            <button class="demo-btn demo-btn--warning" data-type="warning">Warning</button>
+            <button class="demo-btn demo-btn--info" data-type="info">Info</button>
+            <button class="demo-btn demo-btn--neutral" data-type="neutral">Neutral</button>
+          </div>
+        </div>
+        <div class="demo-interactive-col demo-interactive-col--dark">
+          <h3 class="demo-subtitle demo-subtitle--dark">Dark Mode</h3>
+          <div class="demo-buttons" id="demo-dark">
+            <button class="demo-btn demo-btn--success" data-type="success" data-dark="true">Success</button>
+            <button class="demo-btn demo-btn--error" data-type="error" data-dark="true">Error</button>
+            <button class="demo-btn demo-btn--warning" data-type="warning" data-dark="true">Warning</button>
+            <button class="demo-btn demo-btn--info" data-type="info" data-dark="true">Info</button>
+            <button class="demo-btn demo-btn--neutral" data-type="neutral" data-dark="true">Neutral</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="demo-options">
+        <h3 class="demo-subtitle">Opções</h3>
+        <div class="demo-options-row">
+          <label class="demo-option">
+            <span>Variante:</span>
+            <select id="variant-select">
+              <option value="filled">Filled</option>
+              <option value="outlined">Outlined</option>
+              <option value="soft">Soft</option>
+            </select>
+          </label>
+          <label class="demo-option">
+            <span>Posição:</span>
+            <select id="position-select">
+              <option value="top-right">Top Right</option>
+              <option value="top-left">Top Left</option>
+              <option value="top-center">Top Center</option>
+              <option value="bottom-right">Bottom Right</option>
+              <option value="bottom-left">Bottom Left</option>
+              <option value="bottom-center">Bottom Center</option>
+            </select>
+          </label>
+          <label class="demo-option">
+            <span>Duração:</span>
+            <select id="duration-select">
+              <option value="3000">3 segundos</option>
+              <option value="5000" selected>5 segundos</option>
+              <option value="10000">10 segundos</option>
+              <option value="0">Sem auto-dismiss</option>
+            </select>
+          </label>
+        </div>
+        <button class="demo-btn-dismiss" id="dismiss-all">Fechar Todos</button>
+      </div>
+    </div>
+  </section>
+</div>
+`;export{t as default};
