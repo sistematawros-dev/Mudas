@@ -1,0 +1,65 @@
+
+> tawrosnew@0.0.0 dev
+> vite
+
+[2m17:24:27[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m Re-optimizing dependencies because vite config has changed
+
+  [32m[1mVITE[22m v7.3.1[39m  [2mready in [0m[1m3471[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://localhost:[1m5173[22m/[39m
+[2m  [32m➜[39m  [1mNetwork[22m[2m: use [22m[1m--host[22m[2m to expose[22m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[31m(!) Failed to run dependency scan. Skipping dependency pre-bundling. Error: [31m  Failed to scan for dependencies from entries:
+  Z:/Producao/index.html
+Z:/Producao/sidebar_html_additions.html
+Z:/Producao/src/components/header/header.html
+Z:/Producao/src/components/sidebar/sidebar.html
+Z:/Producao/src/pages/agenda-eventos/agenda-eventos.html
+Z:/Producao/src/pages/cadastros/cadCadastrosEmpresas.html
+Z:/Producao/src/pages/components/accordion.html
+Z:/Producao/src/pages/components/avatar.html
+Z:/Producao/src/pages/components/badge.html
+Z:/Producao/src/pages/components/breadcrumb.html
+Z:/Producao/src/pages/components/broadcast-banner.html
+Z:/Producao/src/pages/components/button-icon.html
+Z:/Producao/src/pages/components/button.html
+Z:/Producao/src/pages/components/calendar.html
+Z:/Producao/src/pages/components/card.html
+Z:/Producao/src/pages/components/checkbox.html
+Z:/Producao/src/pages/components/chip.html
+Z:/Producao/src/pages/components/divider.html
+Z:/Producao/src/pages/components/dropdown.html
+Z:/Producao/src/pages/components/file-upload.html
+Z:/Producao/src/pages/components/input.html
+Z:/Producao/src/pages/components/link.html
+Z:/Producao/src/pages/components/modal.html
+Z:/Producao/src/pages/components/navbar.html
+Z:/Producao/src/pages/components/pagination.html
+Z:/Producao/src/pages/components/progress.html
+Z:/Producao/src/pages/components/radio.html
+Z:/Producao/src/pages/components/sidenav.html
+Z:/Producao/src/pages/components/slider.html
+Z:/Producao/src/pages/components/status.html
+Z:/Producao/src/pages/components/stepper.html
+Z:/Producao/src/pages/components/table.html
+Z:/Producao/src/pages/components/tabs.html
+Z:/Producao/src/pages/components/toast.html
+Z:/Producao/src/pages/components/toggle.html
+Z:/Producao/src/pages/components/tooltip.html
+Z:/Producao/src/pages/icons/icons.html
+Z:/Producao/src/pages/dashboard/dashboard.html
+Z:/Producao/src/pages/kanban/kanban.html
+Z:/Producao/src/pages/kanban-producao/kanban-producao.html
+Z:/Producao/src/pages/login/login.html
+Z:/Producao/src/pages/producao/producao.html
+Z:/Producao/src/pages/pedidos/pedidos.html
+Z:/Producao/src/pages/recuperar-senha/recuperar-senha.html
+
+  [31mThe service was stopped
+    at Z:\Producao\node_modules\esbuild\lib\main.js:974:26
+    at responseCallbacks.<computed> (Z:\Producao\node_modules\esbuild\lib\main.js:603:9)
+    at Socket.afterClose (Z:\Producao\node_modules\esbuild\lib\main.js:594:28)
+    at Socket.emit (node:events:530:35)
+    at endReadableNT (node:internal/streams/readable:1698:12)
+    at process.processTicksAndRejections (node:internal/process/task_queues:90:21)[39m
+^C
