@@ -1,0 +1,731 @@
+.patio-instructions-page {
+  padding: var(--space-3);
+  background: var(--color-surface-secondary);
+}
+
+.patio-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.patio-instructions__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.patio-instructions__title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.1;
+  color: var(--color-content-primary);
+}
+
+.patio-instructions__top-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.patio-instructions__view-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.patio-instructions__view-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border: 1px solid #d9e3ef;
+  border-radius: 6px;
+  background: #ffffff;
+  color: #7b8aa0;
+  cursor: pointer;
+  transition: color 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+}
+
+.patio-instructions__view-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+.patio-instructions__view-btn.is-active {
+  border-color: #b9d8ff;
+  background: #edf6ff;
+  color: #0a73b7;
+}
+
+.patio-instructions__surface {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-primary);
+}
+
+.patio-instructions__filters {
+  display: grid;
+  grid-template-columns: minmax(0, 2.2fr) minmax(180px, 0.7fr) minmax(240px, 0.9fr);
+  gap: 8px;
+  align-items: start;
+}
+
+.patio-instructions__filters .field {
+  margin: 0;
+}
+
+.patio-instructions__filters .field-label {
+  display: none;
+}
+
+.patio-instructions__filters .input,
+.patio-instructions__filters select {
+  height: 36px;
+  font-size: 12px;
+}
+
+.patio-instructions__filters .input::placeholder {
+  color: #9aa8ba;
+}
+
+.patio-instructions__filters .input-wrapper,
+.patio-instructions__filters .input-wrapper--select {
+  min-height: 36px;
+}
+
+.patio-control-tabs {
+  width: auto;
+}
+
+.patio-control-tabs .tabs-list {
+  width: fit-content;
+  padding: 3px;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.patio-control-tabs .tabs-tab {
+  min-width: 110px;
+  justify-content: center;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #6b778c;
+}
+
+.patio-control-tabs .tabs-tab.is-active {
+  color: #0a73b7;
+  background: #ffffff;
+  box-shadow: none;
+  border: 1px solid #dbe6f2;
+}
+
+.patio-instructions__content {
+  min-height: 320px;
+}
+
+.patio-instructions__list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.patio-instruction-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.65fr) auto auto;
+  align-items: center;
+  gap: 20px;
+  padding: 18px 16px;
+  border: 1px solid #e3eaf3;
+  border-radius: 12px;
+  background: #ffffff;
+}
+
+.patio-instruction-card__summary {
+  min-width: 0;
+}
+
+.patio-instruction-card__header-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.patio-instruction-card__code {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-instruction-card .badge,
+.patio-instruction-kanban-card .badge {
+  padding: 4px 10px;
+  font-size: 10px;
+  font-weight: 500;
+}
+
+.patio-instruction-card__date {
+  font-size: 12px;
+  color: #7f8da3;
+}
+
+.patio-instruction-card__meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 24px;
+  margin: 0;
+}
+
+.patio-instruction-card__meta-item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+  font-size: 12px;
+}
+
+.patio-instruction-card__meta-item dt,
+.patio-instruction-card__meta-item dd {
+  margin: 0;
+}
+
+.patio-instruction-card__meta-item dt {
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-instruction-card__meta-item dd {
+  color: #66758a;
+}
+
+.patio-instruction-card__meta-item--icon dt {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.patio-instruction-card__meta-item--icon svg {
+  width: 13px;
+  height: 13px;
+  color: #7c6cff;
+}
+
+.patio-instruction-card__details {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: center;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 14px;
+  font-weight: 600;
+  color: #1f2937;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.patio-instruction-card__details-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  color: #1f2937;
+}
+
+.patio-instruction-card__details-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.patio-instruction-card__actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.patio-instruction-card__actions .btn {
+  min-width: 100px;
+}
+
+.patio-instructions__kanban {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  align-items: start;
+}
+
+.patio-instructions-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+
+.patio-instructions-column__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 10px;
+  border: 1px solid #e4ebf5;
+  border-radius: 8px;
+  background: #f8fafc;
+}
+
+.patio-instructions-column__title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-instructions-column__count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #eef2f7;
+  font-size: 11px;
+  font-weight: 600;
+  color: #66758a;
+}
+
+.patio-instructions-column__body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patio-instruction-kanban-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 12px;
+  border: 1px solid #e4ebf5;
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.patio-instruction-kanban-card__topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.patio-instruction-kanban-card__code {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-instruction-kanban-card__secondary {
+  margin-top: 3px;
+  font-size: 10px;
+  color: #9aa8ba;
+}
+
+.patio-instruction-kanban-card__details {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 0;
+  background: transparent;
+  color: #1f2937;
+  cursor: pointer;
+  padding: 0;
+  flex-shrink: 0;
+}
+
+.patio-instruction-kanban-card__details svg {
+  width: 14px;
+  height: 14px;
+}
+
+.patio-instruction-kanban-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.patio-instruction-kanban-card__line {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 0;
+  font-size: 11px;
+  color: #6a778b;
+}
+
+.patio-instruction-kanban-card__line--producer {
+  color: #7f8da3;
+}
+
+.patio-instruction-kanban-card__icon {
+  display: inline-flex;
+  width: 12px;
+  height: 12px;
+  color: #7c6cff;
+  flex-shrink: 0;
+}
+
+.patio-instruction-kanban-card__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.patio-instruction-kanban-card__badge {
+  display: flex;
+}
+
+.patio-instruction-kanban-card__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.patio-instruction-kanban-card__actions--single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.patio-instruction-kanban-card__actions .btn {
+  min-width: 0;
+  width: 100%;
+  justify-content: center;
+}
+
+.patio-instructions__empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 280px;
+  border: 1px dashed #dbe5f0;
+  border-radius: 12px;
+  background: #fbfcfe;
+  text-align: center;
+}
+
+.patio-instructions__empty-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.patio-instructions__empty-text {
+  margin: 0;
+  font-size: 13px;
+  color: #7f8da3;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] {
+  background: #ffffff;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__header {
+  padding: 18px 20px;
+  border-bottom: 1px solid #edf2f7;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__close {
+  width: 24px;
+  height: 24px;
+  font-size: 0;
+  color: transparent;
+  position: relative;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__close::before,
+[data-drawer="patio-instructions-detail-drawer"] .drawer__close::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 5px;
+  width: 14px;
+  height: 1.5px;
+  border-radius: 999px;
+  background: #9aa8ba;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__close::before {
+  transform: rotate(45deg);
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__close::after {
+  transform: rotate(-45deg);
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__body {
+  padding: 18px 20px 24px;
+  background: #ffffff;
+}
+
+[data-drawer="patio-instructions-detail-drawer"] .drawer__footer {
+  padding: 16px 20px;
+  background: #ffffff;
+  border-top: 1px solid #edf2f7;
+}
+
+.patio-instructions-detail-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.patio-instructions-detail-drawer__meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 12px;
+  color: #73839a;
+}
+
+.patio-instructions-detail-drawer__meta-icon,
+.patio-instructions-detail-drawer__field-icon,
+.patio-instructions-detail-drawer__document-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+}
+
+.patio-instructions-detail-drawer__meta-icon svg,
+.patio-instructions-detail-drawer__field-icon svg,
+.patio-instructions-detail-drawer__document-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.patio-instructions-detail-drawer__section {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patio-instructions-detail-drawer__section-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.patio-instructions-detail-drawer__section-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-instructions-detail-drawer__section-title--caps {
+  font-size: 11px;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #8a98ac;
+}
+
+.patio-instructions-detail-drawer__card,
+.patio-instructions-detail-drawer__documents {
+  border: 1px solid #e7edf5;
+  border-radius: 8px;
+  background: #fbfcfe;
+}
+
+.patio-instructions-detail-drawer__card {
+  padding: 14px 16px;
+}
+
+.patio-instructions-detail-drawer__card--stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.patio-instructions-detail-drawer__card--logistics {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patio-instructions-detail-drawer__divider {
+  width: 100%;
+  height: 1px;
+  margin: 10px 0;
+  background: #edf2f7;
+}
+
+.patio-instructions-detail-drawer__grid {
+  display: grid;
+  gap: 14px;
+}
+
+.patio-instructions-detail-drawer__grid--top {
+  grid-template-columns: minmax(0, 1fr) 120px;
+}
+
+.patio-instructions-detail-drawer__grid--bottom {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.patio-instructions-detail-drawer__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.patio-instructions-detail-drawer__field--compact {
+  gap: 2px;
+}
+
+.patio-instructions-detail-drawer__field-label {
+  font-size: 10px;
+  color: #8b99ad;
+}
+
+.patio-instructions-detail-drawer__field-value {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #354052;
+}
+
+.patio-instructions-detail-drawer__field-value--strong {
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.patio-instructions-detail-drawer__transport-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid #dfe7f1;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.patio-instructions-detail-drawer__transport-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.patio-instructions-detail-drawer__documents {
+  padding: 6px;
+  background: #ffffff;
+}
+
+.patio-instructions-detail-drawer__document-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 34px;
+  padding: 8px 10px;
+  border: 1px solid #e7edf5;
+  border-radius: 6px;
+  background: #ffffff;
+}
+
+.patio-instructions-detail-drawer__document-icon {
+  color: #66a4ff;
+}
+
+.patio-instructions-detail-drawer__document-name {
+  font-size: 12px;
+  color: #354052;
+}
+
+.patio-instructions-detail-drawer__add-btn {
+  gap: 4px;
+  padding-inline: 10px;
+}
+
+.patio-instructions-detail-drawer__footer-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 10px;
+}
+
+@media (max-width: 1280px) {
+  .patio-instructions__kanban {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 1120px) {
+  .patio-instructions__filters {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .patio-instruction-card {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .patio-instruction-card__actions {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 720px) {
+  .patio-instructions__topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patio-instructions__top-actions {
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .patio-instruction-card__meta,
+  .patio-instructions-detail-drawer__grid--top,
+  .patio-instructions-detail-drawer__grid--bottom,
+  .patio-instructions__kanban,
+  .patio-instruction-kanban-card__actions {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .patio-instruction-card__actions {
+    flex-wrap: wrap;
+  }
+
+  .patio-instructions-detail-drawer__section-head {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}

@@ -1,0 +1,94 @@
+﻿diff --git a/src/pages/controle-patio/agendamentos/agendamentos.js b/src/pages/controle-patio/agendamentos/agendamentos.js
+--- a/src/pages/controle-patio/agendamentos/agendamentos.js
++++ b/src/pages/controle-patio/agendamentos/agendamentos.js
+@@ -659,6 +659,12 @@ async function persistScheduling(page) {
+       body: {
+         data_agendamento: apiDate,
+         nome_motorista: driver,
+         placa_veiculo: truck,
+         status: 'aprovado',
++        patio_fase: 'aguardando_chegada',
++        chegada_em: null,
++        chamado_em: null,
++        entrada_em: null,
++        finalizado_em: null,
++        ordem_fila: null,
+       },
+     }));
+@@ -680,6 +686,12 @@ async function cancelScheduling(rowId, page) {
+     body: {
+       status: 'aprovado',
+       data_agendamento: null,
+       nome_motorista: null,
+       placa_veiculo: null,
++      patio_fase: 'aguardando_chegada',
++      chegada_em: null,
++      chamado_em: null,
++      entrada_em: null,
++      finalizado_em: null,
++      ordem_fila: null,
+     },
+   });
+   await loadSchedulingData(page);
+ }
+
+diff --git a/src/pages/controle-patio/patio/patio.js b/src/pages/controle-patio/patio/patio.js
+--- a/src/pages/controle-patio/patio/patio.js
++++ b/src/pages/controle-patio/patio/patio.js
+@@ -533,6 +533,32 @@ function handleClick(event) {
+   if (action === 'card-action' && cardId && cardAction === 'check-in') {
++    getNextQueueOrder()
++      .then((nextOrder) => patchInstructionFromCard(cardId, {
++        patio_fase: 'fila_patio',
++        chegada_em: new Date().toISOString(),
++        ordem_fila: nextOrder,
++      }, page))
++      .catch((error) => console.error('[controle-patio/patio] falha ao fazer check-in', error));
++    return;
++  }
++
++  if (action === 'card-action' && cardId && cardAction === 'check-in-today') {
++    const todayIso = new Date().toISOString().slice(0, 10);
++    getNextQueueOrder()
++      .then((nextOrder) => patchInstructionFromCard(cardId, {
++        data_agendamento: todayIso,
++        patio_fase: 'fila_patio',
++        chegada_em: new Date().toISOString(),
++        ordem_fila: nextOrder,
++      }, page))
++      .catch((error) => console.error('[controle-patio/patio] falha ao fazer check-in de futuro', error));
++    return;
++  }
++
++  if (action === 'card-action' && cardId && cardAction === 'call') {
++    patchInstructionFromCard(cardId, {
++      patio_fase: 'chamado',
++      chamado_em: new Date().toISOString(),
++    }, page)
++    return;
++  }
+@@ -560,6 +586,12 @@ function handleClick(event) {
+   if (action === 'card-action' && cardId && cardAction === 'postpone') {
+     const tomorrow = new Date();
+     tomorrow.setDate(tomorrow.getDate() + 1);
+     const nextDate = tomorrow.toISOString().slice(0, 10);
+     patchInstructionFromCard(cardId, {
+       data_agendamento: nextDate,
++      patio_fase: 'aguardando_chegada',
++      chegada_em: null,
++      chamado_em: null,
++      entrada_em: null,
++      finalizado_em: null,
++      ordem_fila: null,
+     }, page)
+     return;
+   }
+@@ -470,6 +502,12 @@ async function confirmFinishModal(page) {
+   await patchInstructionFromCard(id, {
+     status: 'finalizado',
++    patio_fase: 'finalizado',
++    finalizado_em: new Date().toISOString(),
++    ordem_fila: null,
++    ...(Number.isFinite(quantityReal) ? { quantidade_real: quantityReal } : {}),
+   }, page);
+ }

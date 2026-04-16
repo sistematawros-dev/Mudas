@@ -1,0 +1,378 @@
+.patio-overview-page {
+  padding: var(--space-3);
+  background: var(--color-surface-secondary);
+  overflow-x: hidden;
+}
+
+.patio-overview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.patio-overview__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.patio-overview__title {
+  margin: 0;
+  font-size: var(--font-size-2xl, 36px);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.1;
+  color: var(--color-content-primary);
+}
+
+.patio-overview__today-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1-5);
+  height: 40px;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-primary);
+  color: var(--color-content-primary);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.patio-overview__today-icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: var(--color-content-secondary);
+}
+
+.patio-overview__today-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.patio-overview__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-2);
+}
+
+.patio-metric-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+  min-height: 88px;
+  padding: var(--space-4);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-primary);
+}
+
+.patio-metric-card__label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-secondary);
+}
+
+.patio-metric-card__value {
+  display: block;
+  font-size: 18px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  color: var(--color-content-primary);
+}
+
+.patio-metric-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-sm);
+}
+
+.patio-metric-card__icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.patio-metric-card__icon--info {
+  background: #ebf5ff;
+  color: #0a73b7;
+}
+
+.patio-metric-card__icon--warning {
+  background: #fff4df;
+  color: #ff9f1c;
+}
+
+.patio-metric-card__icon--success {
+  background: #e8f7ee;
+  color: #18a957;
+}
+
+.patio-metric-card__icon--danger {
+  background: #fdecef;
+  color: #d92d20;
+}
+
+.patio-overview__content {
+  display: grid;
+  grid-template-columns: minmax(0, 2.15fr) minmax(280px, 0.95fr);
+  gap: var(--space-2);
+  align-items: start;
+}
+
+.patio-panel {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-primary);
+  padding: var(--space-4);
+}
+
+.patio-panel--appointments {
+  min-width: 0;
+}
+
+.patio-panel--status {
+  min-height: 100%;
+}
+
+.patio-panel__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.patio-panel__header--stacked {
+  margin-bottom: var(--space-2);
+}
+
+.patio-panel__title-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.patio-panel__icon {
+  display: inline-flex;
+  width: 16px;
+  height: 16px;
+  color: #8a94a6;
+}
+
+.patio-panel__icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.patio-panel__title {
+  margin: 0;
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-content-primary);
+}
+
+.patio-panel__action {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-semibold);
+  color: #675cff;
+  cursor: pointer;
+}
+
+.patio-appointments-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.patio-appointment-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3);
+  border: 1px solid #eef2f7;
+  border-radius: var(--radius-sm);
+  background: #fafbfd;
+  cursor: pointer;
+  text-align: left;
+}
+
+.patio-appointment-card:hover {
+  border-color: #dfe7f2;
+  background: #f7f9fc;
+}
+
+.patio-appointment-card__main {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.patio-appointment-card__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #d7e0ec;
+  border-radius: var(--radius-full);
+  background: var(--color-surface-primary);
+  color: #0a73b7;
+  flex-shrink: 0;
+}
+
+.patio-appointment-card__icon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.patio-appointment-card__text {
+  min-width: 0;
+}
+
+.patio-appointment-card__code {
+  margin: 0;
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+  color: #1e293b;
+}
+
+.patio-appointment-card__person {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #8a94a6;
+}
+
+.patio-appointment-card__person svg {
+  width: 12px;
+  height: 12px;
+}
+
+.patio-appointment-card__meta {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-1);
+  flex-shrink: 0;
+}
+
+.patio-appointment-card__date {
+  font-size: 12px;
+  color: #8a94a6;
+}
+
+.patio-status-chart {
+  min-height: 220px;
+}
+
+.patio-status-chart .apexcharts-canvas {
+  margin: 0 auto;
+}
+
+.patio-status-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+}
+
+.patio-status-center__value {
+  font-size: 22px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  color: var(--color-content-primary);
+}
+
+.patio-status-center__label {
+  font-size: 12px;
+  color: #8a94a6;
+}
+
+.patio-status-legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-top: var(--space-1);
+}
+
+.patio-status-legend__item {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-s);
+  color: var(--color-content-secondary);
+}
+
+.patio-status-legend__dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-full);
+}
+
+@media (max-width: 1100px) {
+  .patio-overview__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .patio-overview__content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 720px) {
+  .patio-overview__topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patio-overview__today-btn {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .patio-overview__metrics {
+    grid-template-columns: 1fr;
+  }
+
+  .patio-appointment-card {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patio-appointment-card__meta {
+    align-items: flex-start;
+  }
+}
+
+.patio-status-chart .apexcharts-datalabel-label {
+  fill: #8a94a6;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.patio-status-chart .apexcharts-datalabel-value {
+  fill: var(--color-content-primary);
+  font-size: 22px;
+  font-weight: 600;
+}
+

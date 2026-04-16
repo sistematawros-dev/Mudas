@@ -1,0 +1,572 @@
+﻿/* Dashboard Page */
+.dashboard {
+  padding: var(--space-0) var(--space-6) var(--space-0);
+  background: var(--color-surface-secondary);
+  padding-left: var(--space-6);
+  min-height: 100vh;
+}
+
+/* Section */
+.dashboard-section {
+  margin-bottom: var(--space-4);
+}
+
+/* Dashboard Card (janela base para Resumo de desempenho) */
+.dashboard-card {
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  padding: var(--space-6);
+  box-shadow: var(--shadow-xs);
+  overflow: visible;
+}
+
+/* Section Header */
+.dashboard-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  margin-bottom: var(--space-5);
+  flex-wrap: wrap;
+}
+
+.dashboard-section-header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.dashboard-section-title {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-ratio-tight);
+  color: var(--color-content-primary);
+}
+
+.dashboard-section-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* Dropdown customizado no header */
+.dashboard-dropdown .dropdown-trigger {
+  min-width: 180px;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-content-primary);
+}
+
+.dashboard-dropdown .dropdown-trigger>.dropdown-trigger-icon:last-child {
+  margin-left: auto;
+}
+
+/* Botão de filtros customizado */
+#dashboard-filters-btn {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  gap: var(--space-2);
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-content-primary);
+}
+
+#dashboard-filters-btn:hover {
+  background: var(--color-surface-hover);
+  border-color: var(--color-border-primary);
+}
+
+/* KPI Grid */
+.dashboard-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+}
+
+/* Dashboard Grid - Layout do Figma */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-4);
+}
+
+/* Primeira linha: 2 cards (Engajamento, Distribuição) */
+.dashboard-grid>.card:nth-child(1),
+.dashboard-grid>.card:nth-child(2) {
+  grid-column: span 3;
+}
+
+/* Segunda linha: 3 cards (Controle, Crescimento, Sugestões) */
+.dashboard-grid>.card:nth-child(3),
+.dashboard-grid>.card:nth-child(4),
+.dashboard-grid>.card:nth-child(5) {
+  grid-column: span 2;
+}
+
+/* ===== CONTEÚDOS ESPECÍFICOS DOS CARDS ===== */
+
+/* Chart wrapper - ocupa todo espaço disponível do card-content */
+.card-content .chart {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+}
+
+.card-content .chart svg {
+  display: block;
+  width: 100%;
+}
+
+#engagement-dropdown .dropdown-trigger {
+  min-width: 180px;
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-primary);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  background: var(--color-surface-primary);
+  color: var(--color-content-primary);
+}
+
+#engagement-dropdown .dropdown-trigger>.dropdown-trigger-icon:last-child {
+  margin-left: auto;
+}
+
+#engagement-chart .chart-tooltip {
+  min-width: 304px;
+  border-radius: 12px;
+  border: 1px solid rgba(137, 143, 143, 0.18);
+  box-shadow: 0 10px 30px rgba(30, 36, 40, 0.12);
+  background: var(--color-surface-primary);
+  overflow: hidden;
+}
+
+#engagement-chart,
+#distribution-chart {
+  overflow: hidden;
+}
+
+#engagement-chart .apexcharts-tooltip {
+  min-width: 304px;
+  border-radius: 12px;
+  border: 1px solid rgba(137, 143, 143, 0.18);
+  box-shadow: 0 10px 30px rgba(30, 36, 40, 0.12);
+  background: var(--color-surface-primary);
+  overflow: hidden;
+  padding: 0;
+}
+
+#engagement-chart .apexcharts-tooltip.apexcharts-theme-light {
+  border: 1px solid rgba(137, 143, 143, 0.18);
+  background: var(--color-surface-primary);
+}
+
+#engagement-chart .apexcharts-tooltip-title {
+  display: none;
+}
+
+#engagement-chart .engagement-tooltip-header {
+  padding: var(--space-4) var(--space-4) var(--space-3);
+  border-bottom: 1px solid rgba(137, 143, 143, 0.12);
+}
+
+#engagement-chart .engagement-tooltip-body {
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+#engagement-chart .engagement-tooltip-detail {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  color: var(--color-content-secondary);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-medium);
+  line-height: 1.3;
+}
+
+#engagement-chart .engagement-tooltip-trend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  font-size: var(--font-size-l);
+  font-weight: var(--font-weight-semibold);
+}
+
+#engagement-chart .engagement-tooltip-trend-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+}
+
+#engagement-chart .engagement-tooltip-trend--positive {
+  color: var(--color-success);
+}
+
+#engagement-chart .engagement-tooltip-trend--positive .engagement-tooltip-trend-icon {
+  background: var(--color-success);
+}
+
+#engagement-chart .engagement-tooltip-trend--negative {
+  color: var(--color-danger);
+}
+
+#engagement-chart .engagement-tooltip-trend--negative .engagement-tooltip-trend-icon {
+  background: var(--color-danger);
+}
+
+#engagement-chart .engagement-tooltip-context {
+  max-width: 150px;
+}
+
+/* Growth Stats (card Crescimento semanal) */
+.dashboard-growth-stats {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.dashboard-growth-value {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.2;
+  color: var(--color-content-primary);
+}
+
+.dashboard-growth-change {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-success);
+}
+
+@media (max-width: 575px) {
+  .dashboard-growth-stats {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.dashboard-growth-change svg {
+  flex-shrink: 0;
+  color: var(--color-success);
+}
+
+/* Card com header em coluna tem altura de conteúdo menor */
+.card--dashboard .card-header--column+.card-content {
+  min-height: 200px;
+}
+
+/* Mantém o card de crescimento com a mesma altura do card Controle de produção */
+.card--dashboard.card--growth {
+  height: 353px;
+}
+
+/* Sobrescreve a regra base que define height:auto para header em coluna */
+.card--dashboard.card--growth:has(.card-header--column) {
+  height: 353px;
+}
+
+/* Centraliza o gráfico de crescimento no card */
+.card--dashboard.card--growth .card-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#growth-chart .chart {
+  position: static;
+  margin: 0 auto;
+}
+
+/* Mantém os itens de sugestões dentro do card principal */
+.card--dashboard.card--suggestions {
+  overflow: hidden;
+}
+
+.card--dashboard.card--suggestions .card-content {
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: var(--space-1);
+}
+
+.card--dashboard.card--suggestions .list {
+  gap: var(--space-1);
+}
+
+.card--dashboard.card--suggestions .list-item {
+  padding: var(--space-3) var(--space-4);
+}
+
+.card--dashboard.card--suggestions .list-item-icon {
+  width: 36px;
+  height: 36px;
+}
+
+.card--dashboard.card--suggestions .list-item-icon svg,
+.card--dashboard.card--suggestions .list-item-icon img {
+  width: 18px;
+  height: 18px;
+}
+
+/* Production List */
+#production-control {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+.card--dashboard.card--production {
+  overflow: hidden;
+}
+
+.card--dashboard.card--production .card-content {
+  overflow: hidden;
+  min-height: 0;
+}
+
+#production-control .tabs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+}
+
+#production-control .tabs-content {
+  flex: 1 1 auto;
+  min-height: 0;
+  padding: var(--space-0) 0 0;
+}
+
+#production-control .tabs-panel.is-active {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+#production-control .tabs--button .tabs-list {
+  background: var(--color-surface-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  padding: 4px;
+  gap: 2px;
+}
+
+#production-control .tabs--button .tabs-tab {
+  justify-content: center;
+  border-radius: var(--radius-xs);
+  color: var(--color-content-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+#production-control .tabs--button .tabs-tab.is-active {
+  background: var(--color-surface-primary);
+  color: var(--color-content-primary);
+  box-shadow: var(--shadow-xs);
+}
+
+.production-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: -210px;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  background: var(--color-surface-primary);
+  flex: 1 1 auto;
+  height: auto;
+  min-height: 0;
+  overflow-y: auto;
+}
+
+.production-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) var(--space-4);
+  border-bottom: 1px solid var(--color-border-secondary);
+}
+
+.production-item:last-child {
+  border-bottom: none;
+}
+
+.production-item-indicator {
+  width: 4px;
+  height: 36px;
+  border-radius: var(--radius-3xs);
+  flex-shrink: 0;
+}
+
+.production-item-label {
+  flex: 1;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-s);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-primary);
+}
+
+.production-item-value {
+  min-width: 72px;
+  text-align: right;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-content-primary);
+  margin-right: var(--space-3);
+}
+
+.production-item-badge {
+  flex-shrink: 0;
+}
+
+.production-percentage {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  height: 32px;
+  padding: 0 var(--space-2);
+  border: 1.5px solid #53B9E9;
+  border-radius: var(--radius-sm);
+  color: #2E86B5;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-m);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+}
+
+/* Responsive */
+@media (max-width: 991px) {
+  .dashboard-kpi-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .dashboard-grid>.card:nth-child(1),
+  .dashboard-grid>.card:nth-child(2),
+  .dashboard-grid>.card:nth-child(3),
+  .dashboard-grid>.card:nth-child(4),
+  .dashboard-grid>.card:nth-child(5) {
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .dashboard-section-header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    gap: var(--space-3);
+  }
+
+  .dashboard-section-actions {
+    width: 100%;
+  }
+
+  .dashboard-dropdown {
+    width: 100%;
+  }
+
+  .dashboard-dropdown .dropdown-trigger {
+    width: 100%;
+  }
+}
+
+@media (max-width: 575px) {
+  .dashboard {
+    padding: var(--space-4) var(--space-4) var(--space-0);
+  }
+
+  .dashboard-card {
+    padding: var(--space-4);
+  }
+
+  .dashboard-kpi-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .dashboard-section-title {
+    font-size: var(--font-size-l);
+  }
+
+  .dashboard-card-title {
+    font-size: var(--font-size-s);
+  }
+
+  .dashboard-growth-value {
+    font-size: var(--font-size-2xl);
+  }
+
+  .dashboard-section-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .dashboard-dropdown,
+  .dashboard-segmented,
+  #dashboard-filters-btn {
+    width: 100%;
+  }
+
+  /* Ajusta altura dos gráficos em mobile */
+  .card--dashboard .card-content {
+    min-height: 220px;
+  }
+
+  .card--dashboard .card-header--column+.card-content {
+    min-height: 160px;
+  }
+
+  #engagement-dropdown .dropdown-trigger {
+    min-width: 144px;
+    font-size: var(--font-size-s);
+  }
+
+  #engagement-chart .chart-tooltip {
+    min-width: 250px;
+  }
+
+  #engagement-chart .apexcharts-tooltip {
+    min-width: 250px;
+  }
+}

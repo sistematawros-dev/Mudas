@@ -1,0 +1,61 @@
+﻿<main class="cadastros-page cad-filiais-page">
+  <section class="cadastros-header" id="filiais-list-header">
+    <h2 class="cadastros-title">Filiais</h2>
+    <button type="button" class="btn btn--primary" id="filiais-new-btn">Novo cadastro</button>
+  </section>
+
+  <section id="cadastro-filial-container" hidden></section>
+
+  <section class="cadastros-table-card" id="filiais-list-card">
+    <section class="cadastros-filters">
+      <div class="cadastros-search">
+        <input
+          id="filiais-search-input"
+          class="cadastros-search__input"
+          type="text"
+          placeholder="Buscar por: Código, Nome ou CNPJ..."
+        />
+        <span class="cadastros-search__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none">
+            <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" />
+            <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+          </svg>
+        </span>
+      </div>
+    </section>
+
+    <div class="cadastros-table-wrap">
+      <table class="cadastros-table">
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Nome</th>
+            <th>CNPJ</th>
+            <th>Status</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody id="filiais-table-body"></tbody>
+      </table>
+    </div>
+
+    <footer class="cadastros-table-footer">
+      <div class="cadastros-table-footer__left">
+        <span class="cadastros-table-info" id="filiais-table-info">Mostrando 0 a 0 de 0 entradas.</span>
+      </div>
+      <nav class="cadastros-pagination" aria-label="Paginação de filiais">
+        <button type="button" class="cadastros-pagination__btn" id="filiais-page-prev" aria-label="Página anterior">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <button type="button" class="cadastros-pagination__number is-active" id="filiais-page-number">1</button>
+        <button type="button" class="cadastros-pagination__btn" id="filiais-page-next" aria-label="Próxima página">
+          <svg viewBox="0 0 16 16" fill="none">
+            <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+      </nav>
+    </footer>
+  </section>
+</main>

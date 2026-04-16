@@ -1,0 +1,44 @@
+<main class="patio-instruction-page">
+  <div class="patio-instruction">
+    <section class="patio-instruction__topbar" aria-label="Cabeçalho da nova instrução">
+      <div class="patio-instruction__title-wrap">
+        <h1 class="patio-instruction__title">Nova Instrução</h1>
+        <p class="patio-instruction__subtitle">Preencha os dados contratuais para iniciar o processo logístico.</p>
+      </div>
+
+      <div class="patio-instruction__actions patio-instruction__actions--top" id="patio-instruction-top-actions"></div>
+    </section>
+
+    <section class="patio-instruction__card" aria-label="Formulário de nova instrução">
+      <div class="patio-instruction__section">
+        <header class="patio-instruction__section-header">
+          <h2 class="patio-instruction__section-title">Dados do Contrato</h2>
+        </header>
+        <div class="patio-instruction__grid" id="patio-contract-fields"></div>
+      </div>
+
+      <div class="patio-instruction__section">
+        <header class="patio-instruction__section-header">
+          <h2 class="patio-instruction__section-title">Detalhes Logísticos</h2>
+        </header>
+
+        <div class="patio-logistics-builder">
+          <div class="patio-logistics-builder__grid" id="patio-logistics-fields"></div>
+          <div class="patio-logistics-builder__chips" id="patio-blocks-chips" aria-live="polite"></div>
+          <div class="patio-logistics-builder__actions" id="patio-logistics-actions"></div>
+        </div>
+
+        <div class="patio-logistics-list" id="patio-logistics-list" aria-live="polite"></div>
+      </div>
+
+      <div class="patio-instruction__section patio-instruction__section--documentation">
+        <header class="patio-instruction__section-header">
+          <h2 class="patio-instruction__section-title">Documentação</h2>
+        </header>
+        <div id="patio-document-upload"></div>
+      </div>
+
+      <footer class="patio-instruction__footer" id="patio-instruction-footer-actions"></footer>
+    </section>
+  </div>
+</main>

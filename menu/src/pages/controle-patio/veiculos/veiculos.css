@@ -1,0 +1,212 @@
+.patio-vehicles-page {
+  padding: 0 0 32px;
+}
+
+.patio-vehicles {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.patio-vehicles__topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.patio-vehicles__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.patio-vehicles__title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+.patio-vehicles__subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral-600);
+}
+
+.patio-vehicles__surface {
+  background: var(--color-neutral-white);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: 24px;
+  padding: 24px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.06);
+}
+
+.patio-vehicles__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.patio-vehicles-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  min-height: 100%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 1px solid var(--color-neutral-200);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
+}
+
+.patio-vehicles-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.patio-vehicles-card__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.patio-vehicles-card__title {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.2;
+  font-weight: 600;
+  color: var(--color-neutral-900);
+}
+
+.patio-vehicles-card__subtitle {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral-600);
+}
+
+.patio-vehicles-card__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.patio-vehicles-card__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin: 0;
+}
+
+.patio-vehicles-card__field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  min-width: 0;
+}
+
+.patio-vehicles-card__field--full {
+  grid-column: 1 / -1;
+}
+
+.patio-vehicles-card__field dt {
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 600;
+  color: var(--color-neutral-500);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.patio-vehicles-card__field dd {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-neutral-800);
+  word-break: break-word;
+}
+
+.patio-vehicles-card__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.patio-vehicles-card__edit {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-brand-primary-600, #1d4ed8);
+  cursor: pointer;
+}
+
+.patio-vehicles-card__edit:hover {
+  text-decoration: underline;
+}
+
+.patio-vehicles-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 280px;
+  border-radius: 20px;
+  border: 1px dashed var(--color-neutral-300);
+  background: var(--color-neutral-50);
+  text-align: center;
+  padding: 32px;
+}
+
+.patio-vehicles-empty-state__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--color-neutral-white);
+  color: var(--color-neutral-700);
+}
+
+.patio-vehicles-empty-state__icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.patio-vehicles-empty-state__title {
+  font-size: 18px;
+  line-height: 1.3;
+  color: var(--color-neutral-900);
+}
+
+.patio-vehicles-empty-state__text {
+  max-width: 420px;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--color-neutral-600);
+}
+
+@media (max-width: 768px) {
+  .patio-vehicles__surface {
+    padding: 16px;
+    border-radius: 20px;
+  }
+
+  .patio-vehicles__list {
+    grid-template-columns: 1fr;
+  }
+
+  .patio-vehicles-card__grid {
+    grid-template-columns: 1fr;
+  }
+}

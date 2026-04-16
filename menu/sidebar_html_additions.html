@@ -1,0 +1,192 @@
+<!--
+  SIDEBAR FIGMA SYNC - HTML ADDITIONS
+  Add these components to: c:\Projetos\TawrosNew\src\components\sidebar\sidebar.html
+
+  Date: 2026-02-10
+  Based on: Figma Node "Nav - Sidebar - open"
+-->
+
+<!-- ============================================================================
+     NEW COMPONENT #1: "New Campaign" Button
+     Insert this AFTER the sidebar-header and BEFORE the sidebar-search
+     ============================================================================ -->
+
+<!-- New Campaign Button -->
+<div class="sidebar-campaign">
+  <button class="sidebar-campaign-button" aria-label="Create new campaign">
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M8 3.5V12.5M3.5 8H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <span>New campaign</span>
+    <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <path d="M5.5 3L10.5 8L5.5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+</div>
+
+
+<!-- ============================================================================
+     NEW COMPONENT #2: Badge Support for Menu Items
+     Example usage: Add this inside a sidebar-link, after the sidebar-text
+     ============================================================================ -->
+
+<!-- Example: Menu item with badge -->
+<li class="sidebar-item">
+  <a href="#/integrations" class="sidebar-link" data-route="/integrations">
+    <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <!-- Icon path here -->
+    </svg>
+    <span class="sidebar-text">Integrations</span>
+    <span class="sidebar-badge">2</span> <!-- Badge showing count -->
+  </a>
+</li>
+
+
+<!-- ============================================================================
+     UPDATED STRUCTURE: Full sidebar with new components
+     Replace the existing sidebar structure with this updated version
+     ============================================================================ -->
+
+<nav class="sidebar" aria-label="Menu principal">
+  <!-- Header -->
+  <div class="sidebar-header">
+    <img src="/src/assets/logo-tawros.png" alt="Tawros" class="sidebar-logo" />
+  </div>
+
+  <!-- NEW: Campaign Button -->
+  <div class="sidebar-campaign">
+    <button class="sidebar-campaign-button" aria-label="Create new campaign">
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M8 3.5V12.5M3.5 8H12.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span>New campaign</span>
+      <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+        <path d="M5.5 3L10.5 8L5.5 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Search -->
+  <div class="sidebar-search">
+    <input type="text" class="sidebar-search-input" placeholder="Buscar" aria-label="Buscar no menu" />
+    <svg class="sidebar-search-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M21 21L15 15M17 10C17 13.866 13.866 17 10 17C6.13401 17 3 13.866 3 10C3 6.13401 6.13401 3 10 3C13.866 3 17 6.13401 17 10Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- Menu -->
+  <ul class="sidebar-menu" role="list">
+    <!-- Painel/Dashboard -->
+    <li class="sidebar-item">
+      <a href="#/dashboard" class="sidebar-link" data-route="/dashboard">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M3 9L12 2L21 9V20C21 20.5304 20.7893 21.0391 20.4142 21.4142C20.0391 21.7893 19.5304 22 19 22H5C4.46957 22 3.96086 21.7893 3.58579 21.4142C3.21071 21.0391 3 20.5304 3 20V9Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M9 22V12H15V22" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="sidebar-text">Painel</span>
+      </a>
+    </li>
+
+    <!-- Cadastros -->
+    <li class="sidebar-item sidebar-item--has-submenu">
+      <button class="sidebar-link" data-toggle="cadastros" data-route="/cadastros" aria-expanded="false">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21M16 7C16 9.20914 14.2091 11 12 11C9.79086 11 8 9.20914 8 7C8 4.79086 9.79086 3 12 3C14.2091 3 16 4.79086 16 7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="sidebar-text">Cadastros</span>
+        <svg class="sidebar-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M6 9L12 15L18 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+      <ul class="sidebar-submenu" data-submenu="cadastros" role="list">
+        <!-- Submenu items here... -->
+      </ul>
+    </li>
+
+    <!-- BI e Relatórios -->
+    <li class="sidebar-item">
+      <a href="#/bi-relatorios" class="sidebar-link" data-route="/bi-relatorios">
+        <svg class="sidebar-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M18 20V10M12 20V4M6 20V14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="sidebar-text">BI e Relatórios</span>
+      </a>
+    </li>
+
+    <!-- More menu items... -->
+  </ul>
+
+  <!-- User Profile -->
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="sidebar-user-avatar">
+        <img src="https://ui-avatars.com/api/?name=Andre+Santos&background=0D8ABC&color=fff" alt="Andre Santos" />
+      </div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name">Andre Santos</div>
+        <div class="sidebar-user-email">andresantos@gmail.com</div>
+      </div>
+      <button class="sidebar-user-toggle" aria-label="Menu do usuário">
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" fill="currentColor"/>
+          <path d="M19 13C19.5523 13 20 12.5523 20 12C20 11.4477 19.5523 11 19 11C18.4477 11 18 11.4477 18 12C18 12.5523 18.4477 13 19 13Z" fill="currentColor"/>
+          <path d="M5 13C5.55228 13 6 12.5523 6 12C6 11.4477 5.55228 11 5 11C4.44772 11 4 11.4477 4 12C4 12.5523 4.44772 13 5 13Z" fill="currentColor"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ============================================================================
+     JAVASCRIPT ADDITIONS
+     Add this to sidebar.js to handle the new campaign button
+     ============================================================================ -->
+
+<!--
+// In sidebar.js, add this function:
+
+function setupCampaignButton() {
+  const campaignButton = document.querySelector('.sidebar-campaign-button');
+
+  if (!campaignButton) return;
+
+  campaignButton.addEventListener('click', () => {
+    // Handle new campaign creation
+    // This could open a modal, navigate to a new page, etc.
+    console.log('New campaign button clicked');
+
+    // Example: Navigate to campaign creation page
+    // window.location.hash = '#/campaigns/new';
+
+    // Example: Dispatch custom event for modal
+    // window.dispatchEvent(new CustomEvent('open-campaign-modal'));
+  });
+}
+
+// Then call it in the init() function:
+export function init() {
+  setupToggleHandlers();
+  setupSearchHandler();
+  setupCampaignButton(); // Add this line
+  updateActiveLink();
+  window.addEventListener('hashchange', updateActiveLink);
+}
+-->
+
+
+<!-- ============================================================================
+     IMPLEMENTATION CHECKLIST
+     ============================================================================
+
+     [ ] 1. Add "New Campaign" button HTML between header and search
+     [ ] 2. Add campaign button styles from sidebar_css_fixes.css
+     [ ] 3. Add campaign button handler in sidebar.js
+     [ ] 4. (Optional) Add badges to menu items that need them
+     [ ] 5. (Optional) Add badge styles from sidebar_css_fixes.css
+     [ ] 6. Test button click behavior
+     [ ] 7. Test visual appearance matches Figma
+     [ ] 8. Verify responsive behavior
+     [ ] 9. Test accessibility (keyboard navigation, screen reader)
+
+     ============================================================================ -->

@@ -1,0 +1,605 @@
+.patio-schedule-management-page {
+  padding: var(--space-3);
+  background: var(--color-surface-secondary);
+}
+
+.patio-schedule-management {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.patio-schedule-management__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.patio-schedule-management__title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-content-primary);
+}
+
+.patio-schedule-management__surface,
+.patio-schedule-management__card,
+.patio-schedule-management__agenda-panel,
+.patio-schedule-card {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-primary);
+}
+
+.patio-schedule-management__surface {
+  padding: 20px;
+}
+
+.patio-schedule-management__card {
+  padding: 20px;
+}
+
+.patio-schedule-management__card-header {
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e7edf4;
+}
+
+.patio-schedule-management__card-title,
+.patio-schedule-management__agenda-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-schedule-management__card-subtitle {
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: #6b7280;
+}
+
+.patio-schedule-management__mode {
+  margin-top: 22px;
+  width: fit-content;
+}
+
+.patio-schedule-management__mode .segmented {
+  padding: 2px;
+  border: 1px solid #dbe5ef;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.patio-schedule-management__mode .segmented-item {
+  min-width: 100px;
+  font-size: 12px;
+}
+
+.patio-schedule-management__form-grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.patio-schedule-management__form-row {
+  display: grid;
+  gap: 16px;
+}
+
+.patio-schedule-management__form-row--single {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+}
+
+.patio-schedule-management__form-row--period {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.patio-schedule-management__form-row--actions {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+}
+
+.patio-schedule-management__field {
+  margin: 0;
+}
+
+.patio-date-field--plain .input-icon--right[data-open-picker] {
+  display: none;
+}
+
+.patio-date-field--plain .input-wrapper--icon-right .input {
+  padding-right: 12px;
+}
+
+.patio-schedule-management__field .field-label {
+  font-size: 12px;
+  color: #374151;
+}
+
+.patio-schedule-management__field .input,
+.patio-schedule-management__field select,
+.patio-schedule-management__modal-field .input,
+.patio-schedule-management__modal-field textarea {
+  height: 40px;
+  font-size: 14px;
+}
+
+.patio-schedule-management__field .input-wrapper,
+.patio-schedule-management__field .input-wrapper--select {
+  min-height: 40px;
+}
+
+.patio-schedule-management__actions-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: end;
+}
+
+.patio-schedule-management__field--limit {
+  min-width: 0;
+}
+
+.patio-schedule-management__submit-wrap {
+  display: flex;
+  align-items: end;
+  height: 100%;
+}
+
+.patio-schedule-management__submit-wrap .btn {
+  height: 40px;
+  min-width: 138px;
+}
+
+.patio-schedule-management__agenda-panel {
+  margin-top: 20px;
+  padding: 20px;
+  background: #fcfdff;
+}
+
+.patio-schedule-management__agenda-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.patio-schedule-management__legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 14px;
+  font-size: 12px;
+  color: #4b5563;
+}
+
+.patio-schedule-management__legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.patio-schedule-management__legend-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+}
+
+.patio-schedule-management__legend-dot--open {
+  background: #3b82f6;
+}
+
+.patio-schedule-management__legend-dot--blocked {
+  background: #ef4444;
+}
+
+.patio-schedule-management__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.patio-schedule-management__view-toggle,
+.patio-schedule-management__nav-buttons {
+  display: inline-flex;
+  gap: 8px;
+}
+
+.patio-schedule-management__toolbar-filters {
+  display: inline-flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.patio-schedule-management__toolbar-select {
+  margin: 0;
+  min-width: 112px;
+}
+
+.patio-schedule-management__toolbar-select .field-label,
+.patio-schedule-management__toolbar-select .field-helper {
+  display: none;
+}
+
+.patio-schedule-management__toolbar-select .input,
+.patio-schedule-management__toolbar-select select {
+  height: 36px;
+  font-size: 14px;
+}
+
+.patio-schedule-management__toolbar-select .input-wrapper--select {
+  min-height: 36px;
+}
+
+.patio-schedule-management__cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.patio-schedule-management__cards-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patio-schedule-management__cards-column-header {
+  padding: 8px 10px;
+  border: 1px solid #d9e3ef;
+  border-radius: 8px;
+  background: #f7fafc;
+  color: #334155;
+  font-size: 12px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.patio-schedule-management__cards-column-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patio-schedule-card {
+  overflow: hidden;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+}
+
+.patio-schedule-card__note {
+  padding: 8px 14px;
+  background: #fef3c7;
+  color: #92400e;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.patio-schedule-card__body {
+  padding: 16px 14px 14px;
+}
+
+.patio-schedule-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.patio-schedule-card__date-wrap {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.patio-schedule-card__calendar {
+  display: inline-flex;
+  width: 24px;
+  height: 24px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: #f2f6fb;
+  color: #6b7280;
+}
+
+.patio-schedule-card__calendar svg {
+  width: 14px;
+  height: 14px;
+}
+
+.patio-schedule-card__date {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-schedule-card__weekday {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.patio-schedule-card__badge-wrap .badge {
+  white-space: nowrap;
+}
+
+.patio-schedule-card__occupancy {
+  margin-top: 18px;
+}
+
+.patio-schedule-card__occupancy-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.patio-schedule-card__occupancy-head strong {
+  font-size: 14px;
+  color: #1f2937;
+}
+
+.patio-schedule-card__progress-wrap {
+  margin-top: 10px;
+}
+
+.patio-schedule-card__progress-wrap .progress-track {
+  height: 8px;
+  background: #edf2f7;
+}
+
+.patio-schedule-card__availability {
+  margin: 10px 0 0;
+  font-size: 12px;
+}
+
+.patio-schedule-card__availability--open,
+.patio-schedule-card__availability--blocked {
+  color: #6b7280;
+}
+
+.patio-schedule-card__actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+
+.patio-schedule-card__actions .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.patio-schedule-calendar {
+  border: 1px solid #e5edf5;
+  border-radius: 10px;
+  background: #ffffff;
+  overflow: hidden;
+}
+
+.patio-schedule-calendar__weekdays,
+.patio-schedule-calendar__week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.patio-schedule-calendar__weekday,
+.patio-schedule-calendar__cell {
+  border-right: 1px solid #e7edf4;
+}
+
+.patio-schedule-calendar__weekday:last-child,
+.patio-schedule-calendar__cell:last-child {
+  border-right: none;
+}
+
+.patio-schedule-calendar__weekdays {
+  border-bottom: 1px solid #e7edf4;
+  background: #ffffff;
+}
+
+.patio-schedule-calendar__weekday {
+  padding: 10px 8px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: 500;
+  color: #607089;
+}
+
+.patio-schedule-calendar__week {
+  border-bottom: 1px solid #e7edf4;
+}
+
+.patio-schedule-calendar__week:last-child {
+  border-bottom: none;
+}
+
+.patio-schedule-calendar__cell {
+  min-height: 140px;
+  padding: 6px 6px 10px;
+  background: #ffffff;
+}
+
+.patio-schedule-calendar__day-number {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 24px;
+  line-height: 1;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 10px;
+}
+
+.patio-schedule-calendar__items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.patio-schedule-calendar__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  min-height: 20px;
+  padding: 3px 8px;
+  border-radius: 4px;
+  background: #edf2f7;
+  font-size: 12px;
+  color: #425066;
+}
+
+.patio-schedule-calendar__item-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 999px;
+  flex-shrink: 0;
+}
+
+.patio-schedule-calendar__item-dot--open {
+  background: #3b82f6;
+}
+
+.patio-schedule-calendar__item-dot--blocked {
+  background: #ef4444;
+}
+
+.patio-schedule-calendar__item-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.patio-schedule-management__modal.modal--center {
+  width: calc(100% - 32px);
+  max-width: 420px;
+  border-radius: 16px;
+}
+
+.patio-schedule-management__modal .modal-header {
+  padding: 20px 20px 0;
+}
+
+.patio-schedule-management__modal .modal-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-schedule-management__modal .modal-description {
+  margin-top: 8px;
+  font-size: 15px;
+  line-height: 1.45;
+  color: #6b7280;
+}
+
+.patio-schedule-management__modal .modal-close {
+  color: #1f2937;
+}
+
+.patio-schedule-management__modal .modal-body {
+  padding: 16px 20px 0;
+}
+
+.patio-schedule-management__modal .modal-footer {
+  padding: 12px 20px 20px;
+}
+
+.patio-schedule-management__modal--cancel .modal-body {
+  display: none;
+}
+
+.patio-schedule-management__modal-field {
+  margin: 0;
+}
+
+.patio-schedule-management__modal-field .field-label {
+  font-size: 12px;
+  color: #374151;
+}
+
+.patio-schedule-management__modal-field--textarea .input--textarea {
+  min-height: 116px;
+  resize: vertical;
+}
+
+.patio-schedule-management__modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  width: 100%;
+}
+
+.patio-schedule-management__modal-actions .btn {
+  min-width: 96px;
+}
+
+@media (max-width: 1180px) {
+  .patio-schedule-management__cards-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .patio-schedule-management__form-row--single,
+  .patio-schedule-management__form-row--period,
+  .patio-schedule-management__form-row--actions,
+  .patio-schedule-management__actions-row,
+  .patio-schedule-management__cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .patio-schedule-management__agenda-header {
+    flex-direction: column;
+  }
+
+  .patio-schedule-management__toolbar {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .patio-schedule-calendar {
+    overflow-x: auto;
+  }
+
+  .patio-schedule-calendar__weekdays,
+  .patio-schedule-calendar__week {
+    min-width: 760px;
+  }
+}
+
+@media (max-width: 640px) {
+  .patio-schedule-management__surface,
+  .patio-schedule-management__card,
+  .patio-schedule-management__agenda-panel {
+    padding: 16px;
+  }
+
+  .patio-schedule-management__toolbar-filters {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patio-schedule-management__toolbar-select {
+    width: 100%;
+  }
+
+  .patio-schedule-management__modal-actions {
+    flex-direction: column-reverse;
+  }
+
+  .patio-schedule-management__modal-actions .btn {
+    width: 100%;
+  }
+}
+
+
+
+

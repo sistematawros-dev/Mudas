@@ -1,0 +1,613 @@
+.patio-scheduling-page {
+  padding: var(--space-3);
+  background: var(--color-surface-secondary);
+}
+
+.patio-scheduling {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.patio-scheduling__topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+}
+
+.patio-scheduling__title {
+  margin: 0;
+  font-size: 32px;
+  font-weight: var(--font-weight-semibold);
+  line-height: 1.1;
+  color: var(--color-content-primary);
+}
+
+.patio-scheduling__surface,
+.patio-scheduling__section,
+.patio-scheduling__table-surface {
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-xs);
+  background: var(--color-surface-primary);
+}
+
+.patio-scheduling__surface {
+  padding: 16px;
+}
+
+.patio-scheduling__intro-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.patio-scheduling__section {
+  padding: 14px 16px 16px;
+}
+
+.patio-scheduling__section--compact {
+  min-height: 116px;
+}
+
+.patio-scheduling__section-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.patio-scheduling__section-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: #e9f4ff;
+  color: #0a73b7;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.patio-scheduling__section-title {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-scheduling__section-body {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patio-scheduling__fields-row {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.patio-scheduling__field {
+  margin: 0;
+}
+
+.patio-scheduling__field .field-label {
+  font-size: 12px;
+  color: #1f2937;
+}
+
+.patio-scheduling__field .input,
+.patio-scheduling__field select {
+  height: 36px;
+  font-size: 12px;
+}
+
+.patio-scheduling__field .input-wrapper,
+.patio-scheduling__field .input-wrapper--select {
+  min-height: 36px;
+}
+
+.patio-scheduling__date-field-wrap {
+  max-width: 240px;
+}
+
+.patio-control-tabs {
+  width: auto;
+}
+
+.patio-control-tabs .tabs-list {
+  width: fit-content;
+  padding: 3px;
+  border-radius: 8px;
+  background: #f7f9fc;
+}
+
+.patio-control-tabs .tabs-tab {
+  min-width: 110px;
+  justify-content: center;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: #6b778c;
+}
+
+.patio-control-tabs .tabs-tab.is-active {
+  color: #0a73b7;
+  background: #ffffff;
+  box-shadow: none;
+  border: 1px solid #dbe6f2;
+}
+
+.patio-scheduling__contracts-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.patio-scheduling__panel {
+  min-width: 0;
+  border: 1px solid #d9e3ef;
+  border-radius: 10px;
+  background: #ffffff;
+}
+
+.patio-scheduling__panel--cargo {
+  background: #f6fbff;
+  border-color: #c6def6;
+}
+
+.patio-scheduling__panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  border-bottom: 1px solid #e6edf5;
+}
+
+.patio-scheduling__panel-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #334155;
+}
+
+.patio-scheduling__panel-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  border-radius: 999px;
+  background: #eff6ff;
+  color: #2563eb;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.patio-scheduling__panel-body {
+  padding: 10px;
+}
+
+.patio-scheduling__panel-body--list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patio-scheduling__contract-item,
+.patio-scheduling__cargo-card,
+.patio-scheduling__block-card {
+  border: 1px solid #dfe8f2;
+  border-radius: 8px;
+  background: #ffffff;
+}
+
+.patio-scheduling__contract-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px;
+}
+
+.patio-scheduling__contract-text {
+  min-width: 0;
+}
+
+.patio-scheduling__contract-code,
+.patio-scheduling__cargo-code {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #0a73b7;
+}
+
+.patio-scheduling__contract-subtitle,
+.patio-scheduling__cargo-subtitle {
+  margin: 4px 0 0;
+  font-size: 10px;
+  color: #8a94a6;
+}
+
+.patio-scheduling__contract-cta .btn-icon-only,
+.patio-scheduling__cargo-card-header .btn-icon-only {
+  width: 26px;
+  height: 26px;
+}
+
+.patio-scheduling__panel-body--cargo {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.patio-scheduling__cargo-card {
+  padding: 10px;
+  background: #ffffff;
+}
+
+.patio-scheduling__cargo-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+
+.patio-scheduling__cargo-summary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #526072;
+  flex-wrap: wrap;
+}
+
+.patio-scheduling__cargo-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.patio-scheduling__cargo-card--kg .patio-scheduling__cargo-card-header {
+  margin-bottom: 8px;
+}
+
+.patio-scheduling__block-card--kg {
+  padding: 14px 16px;
+}
+
+.patio-scheduling__block-row--kg {
+  align-items: center;
+  gap: 16px;
+}
+
+.patio-scheduling__block-main--kg {
+  align-items: flex-start;
+}
+
+.patio-scheduling__block-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.patio-scheduling__kg-badge-wrap .badge {
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: #16a34a;
+  background: #eaf8ef;
+  border-color: #b7ebc6;
+}
+
+.patio-scheduling__kg-quantity-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.patio-scheduling__kg-quantity-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #6b7280;
+}
+
+.patio-scheduling__kg-quantity-input {
+  width: 88px;
+  text-align: center;
+}
+
+.patio-scheduling__block-card {
+  padding: 10px;
+  background: #ffffff;
+}
+
+.patio-scheduling__block-card.is-expanded {
+  background: #edf6ff;
+  border-color: #b8d7f4;
+}
+
+.patio-scheduling__block-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.patio-scheduling__block-main {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.patio-scheduling__block-icon {
+  display: inline-flex;
+  width: 14px;
+  height: 14px;
+  color: #0a73b7;
+}
+
+.patio-scheduling__block-icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.patio-scheduling__block-title {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.patio-scheduling__block-controls {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.patio-scheduling__block-availability,
+.patio-scheduling__quantity-label,
+.patio-scheduling__bales-helper {
+  font-size: 10px;
+  color: #6b7280;
+}
+
+.patio-scheduling__quantity-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.patio-scheduling__quantity-input {
+  width: 52px;
+  text-align: center;
+}
+
+.patio-scheduling__block-toggle,
+.patio-scheduling__bales-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border: 0;
+  border-radius: 6px;
+  background: transparent;
+  color: #64748b;
+  cursor: pointer;
+  padding: 0;
+}
+
+.patio-scheduling__block-toggle:hover,
+.patio-scheduling__bales-toggle:hover {
+  background: rgba(15, 23, 42, 0.05);
+}
+
+.patio-scheduling__block-toggle svg,
+.patio-scheduling__bales-toggle svg {
+  width: 14px;
+  height: 14px;
+}
+
+.patio-scheduling__block-checkbox {
+  align-items: center;
+}
+
+.patio-scheduling__bales-panel {
+  margin-top: 12px;
+  padding: 10px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #dfe8f2;
+}
+
+.patio-scheduling__bales-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.patio-scheduling__bales-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.patio-scheduling__bales-helper {
+  margin: 0 0 10px;
+}
+
+.patio-scheduling__bales-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.patio-scheduling__bale-chip {
+  min-width: 28px;
+  justify-content: center;
+  padding-inline: 9px;
+  border-radius: 999px;
+}
+
+.patio-scheduling__bale-chip.is-selected {
+  background: #0a73b7;
+  border-color: #0a73b7;
+}
+
+.patio-scheduling__confirm-action {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0 10px 10px;
+}
+
+.patio-scheduling__table-surface {
+  overflow: hidden;
+}
+
+.patio-scheduling__table-wrap {
+  overflow-x: auto;
+}
+
+.patio-scheduling__table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 920px;
+}
+
+.patio-scheduling__table th,
+.patio-scheduling__table td {
+  padding: 12px 10px;
+  text-align: left;
+  border-bottom: 1px solid #edf2f7;
+  font-size: 11px;
+  color: #475569;
+  vertical-align: middle;
+}
+
+.patio-scheduling__table th {
+  font-weight: 700;
+  color: #111827;
+  background: #ffffff;
+}
+
+.patio-scheduling__table-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.patio-scheduling__table-link {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  font-size: 11px;
+  color: #0a73b7;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.patio-scheduling__table-link--danger {
+  color: #dc2626;
+}
+
+.patio-scheduling__table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+}
+
+.patio-scheduling__entries-select {
+  min-width: 112px;
+  height: 32px;
+  padding: 0 30px 0 10px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: #0a73b7;
+  font-size: 12px;
+  font-weight: 600;
+  appearance: none;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3 4.5L6 7.5L9 4.5' stroke='%230a73b7' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px center;
+}
+
+.patio-scheduling__entries-select:hover,
+.patio-scheduling__entries-select:focus {
+  outline: none;
+  border-color: #dbe6f2;
+  background-color: #f8fafc;
+}
+
+.patio-scheduling__pagination-wrap .pagination {
+  justify-content: flex-end;
+}
+
+.patio-scheduling__pagination-wrap .pagination-btn {
+  min-width: 26px;
+  height: 26px;
+  font-size: 11px;
+  border-radius: 6px;
+}
+
+.patio-scheduling__pagination-wrap .pagination-btn.is-active {
+  background: #0a73b7;
+  border-color: #0a73b7;
+}
+
+.patio-scheduling__pagination-wrap .pagination-btn--nav {
+  color: #94a3b8;
+}
+
+@media (max-width: 1100px) {
+  .patio-scheduling__intro-grid,
+  .patio-scheduling__contracts-grid,
+  .patio-scheduling__fields-row {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .patio-scheduling__date-field-wrap {
+    max-width: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .patio-scheduling__table-footer,
+  .patio-scheduling__block-row,
+  .patio-scheduling__cargo-card-header,
+  .patio-scheduling__topbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .patio-scheduling__block-controls,
+  .patio-scheduling__confirm-action,
+  .patio-scheduling__pagination-wrap .pagination {
+    justify-content: flex-start;
+  }
+
+  .patio-scheduling__kg-quantity-field {
+    margin-left: 0;
+  }
+
+  .patio-scheduling__table-actions,
+  .patio-scheduling__cargo-summary {
+    gap: 8px;
+  }
+}

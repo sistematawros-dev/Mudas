@@ -1,0 +1,174 @@
+<section class="page">
+  <div class="page-header">
+    <h1>Breadcrumb</h1>
+    <p class="page-desc">Breadcrumbs consistem em uma lista de links que ajudam um usuário a visualizar a localização de uma página dentro da estrutura hierárquica de um site.</p>
+  </div>
+
+  <div class="demo-section">
+    <h2 class="demo-title">Componente / Breadcrumb</h2>
+
+    <div class="demo-breadcrumb-grid">
+      <!-- Com ícone home -->
+      <nav class="breadcrumb">
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">
+            <span class="breadcrumb-icon">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M2 6L8 1.5L14 6V13.5C14 14.0523 13.5523 14.5 13 14.5H3C2.44772 14.5 2 14.0523 2 13.5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 14.5V8H10V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Home
+          </a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">Page</a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">Sub</a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item is-current">
+          <span class="breadcrumb-current">Current Page</span>
+        </div>
+      </nav>
+
+      <!-- Sem ícone -->
+      <nav class="breadcrumb">
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">Home</a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">Page</a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item is-current">
+          <span class="breadcrumb-current">Current Page</span>
+        </div>
+      </nav>
+
+      <!-- Só dois níveis -->
+      <nav class="breadcrumb">
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">
+            <span class="breadcrumb-icon">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M2 6L8 1.5L14 6V13.5C14 14.0523 13.5523 14.5 13 14.5H3C2.44772 14.5 2 14.0523 2 13.5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 14.5V8H10V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Home
+          </a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item is-current">
+          <span class="breadcrumb-current">Current Page</span>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Master Assets -->
+  <div class="demo-section">
+    <h2 class="demo-title">Master assets</h2>
+
+    <div class="demo-master-box">
+      <nav class="breadcrumb">
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">
+            <span class="breadcrumb-icon">
+              <svg viewBox="0 0 16 16" fill="none"><path d="M2 6L8 1.5L14 6V13.5C14 14.0523 13.5523 14.5 13 14.5H3C2.44772 14.5 2 14.0523 2 13.5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 14.5V8H10V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+            Home
+          </a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item">
+          <a href="#" class="breadcrumb-link">Biblioteca</a>
+          <span class="breadcrumb-separator">/</span>
+        </div>
+        <div class="breadcrumb-item is-current">
+          <span class="breadcrumb-current">Blog</span>
+        </div>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Exemplo Light/Dark -->
+  <div class="demo-section">
+    <h2 class="demo-title">Exemplo</h2>
+
+    <div class="demo-row demo-row--example">
+      <!-- Light Mode -->
+      <div class="demo-col">
+        <span class="demo-label">Light Mode</span>
+        <div class="demo-example-box">
+          <div class="demo-breadcrumb-stack">
+            <nav class="breadcrumb">
+              <div class="breadcrumb-item">
+                <a href="#" class="breadcrumb-link">
+                  <span class="breadcrumb-icon">
+                    <svg viewBox="0 0 16 16" fill="none"><path d="M2 6L8 1.5L14 6V13.5C14 14.0523 13.5523 14.5 13 14.5H3C2.44772 14.5 2 14.0523 2 13.5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 14.5V8H10V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  Master
+                </a>
+                <span class="breadcrumb-separator">/</span>
+              </div>
+              <div class="breadcrumb-item">
+                <a href="#" class="breadcrumb-link">Biblioteca</a>
+                <span class="breadcrumb-separator">/</span>
+              </div>
+              <div class="breadcrumb-item is-current">
+                <span class="breadcrumb-current">Blog</span>
+              </div>
+            </nav>
+
+            <nav class="breadcrumb">
+              <div class="breadcrumb-item">
+                <a href="#" class="breadcrumb-link">Page</a>
+                <span class="breadcrumb-separator">/</span>
+              </div>
+              <div class="breadcrumb-item is-current">
+                <span class="breadcrumb-current">Current Page</span>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dark Mode -->
+      <div class="demo-col">
+        <span class="demo-label demo-label--dark">Dark Mode</span>
+        <div class="demo-example-box demo-example-box--dark">
+          <div class="demo-breadcrumb-stack">
+            <nav class="breadcrumb breadcrumb--dark">
+              <div class="breadcrumb-item">
+                <a href="#" class="breadcrumb-link">
+                  <span class="breadcrumb-icon">
+                    <svg viewBox="0 0 16 16" fill="none"><path d="M2 6L8 1.5L14 6V13.5C14 14.0523 13.5523 14.5 13 14.5H3C2.44772 14.5 2 14.0523 2 13.5V6Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 14.5V8H10V14.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  </span>
+                  Master
+                </a>
+                <span class="breadcrumb-separator">/</span>
+              </div>
+              <div class="breadcrumb-item">
+                <a href="#" class="breadcrumb-link">Biblioteca</a>
+                <span class="breadcrumb-separator">/</span>
+              </div>
+              <div class="breadcrumb-item is-current">
+                <span class="breadcrumb-current">Blog</span>
+              </div>
+            </nav>
+
+            <nav class="breadcrumb breadcrumb--dark">
+              <div class="breadcrumb-item">
+                <a href="#" class="breadcrumb-link">Page</a>
+                <span class="breadcrumb-separator">/</span>
+              </div>
+              <div class="breadcrumb-item is-current">
+                <span class="breadcrumb-current">Current Page</span>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
