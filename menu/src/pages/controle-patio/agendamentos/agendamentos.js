@@ -302,7 +302,7 @@ function findAgendaDisponibilidade(dataAgendamentoIso, tipoProduto) {
   const targetDate = String(dataAgendamentoIso).trim();
   const targetProduct = normalizeProduto(tipoProduto);
   return state.agendaCatalog.find((item) => (
-    String(item?.data_carregamento || '') === targetDate
+    String(item?.data_carregamento || '').slice(0, 10) === targetDate
     && normalizeProduto(item?.tipo_produto) === targetProduct
     && normalizeText(item?.status) !== 'blocked'
   )) || null;
