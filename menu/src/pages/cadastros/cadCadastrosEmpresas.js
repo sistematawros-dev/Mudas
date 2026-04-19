@@ -51,7 +51,7 @@ export function init() {
   let editingPessoaEmpresaId = null;
   let editingProdutoServicoId = null;
   let editingEmbalagemId = null;
-  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
   const pendingControllers = new Set();
 
   let produtosServicosRows = [];

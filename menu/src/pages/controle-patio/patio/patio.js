@@ -5,7 +5,7 @@ import { createPatioState, createPatioEntryForm, patioModalIds } from './patio.d
 import { renderPatioBoard } from './patio.templates.js';
 import { initPatioEntryDrawer } from './entry-drawer.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
 const state = createPatioState();
 let cleanupInputs = null;
 let cleanupModal = null;

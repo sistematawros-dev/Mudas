@@ -7,7 +7,7 @@
 let isSubmitting = false;
 let activeTab = 'email';
 let activeController = null;
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
 
 // DOM Elements (initialized in init())
 let recoveryForm;
