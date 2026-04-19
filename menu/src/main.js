@@ -1,4 +1,4 @@
-import { bootstrap } from './app/bootstrap.js';
+﻿import { bootstrap } from './app/bootstrap.js';
 import './styles/tokens.css';
 import './styles/global.css';
 import './styles/layout.css';
@@ -10,7 +10,7 @@ function normalizeApiBase(value) {
   return String(value).replace(/\/+$/, '');
 }
 
-const apiFixa = normalizeApiBase('http://192.168.15.10:3000/api/v1');
+const apiFixa = normalizeApiBase('https://api.tawros.com.br/api/v1');
 window.localStorage.setItem('TAWROS_API_URL', apiFixa);
 window.TAWROS_API_URL = apiFixa;
 

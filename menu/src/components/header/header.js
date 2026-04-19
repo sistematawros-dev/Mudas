@@ -1,4 +1,4 @@
-import html from './header.html?raw';
+﻿import html from './header.html?raw';
 import './header.css';
 
 export function render(container) {
@@ -142,7 +142,7 @@ function setupUserMenu() {
 
   if (!userBtn || !userModal) return () => {};
 
-  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 
   function showError(msg) {
     if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }
@@ -243,7 +243,7 @@ function setupAdminPasswordModal() {
 
   if (!modal) return () => {};
 
-  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 
   function showError(msg) {
     if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }

@@ -32,7 +32,7 @@ const blockIcon = `
 const closeIcon = Button.getIcon('close');
 const PLUMA_EDIT_MODAL_ID = 'patio-pluma-edit-modal';
 const STANDARD_EDIT_MODAL_ID = 'patio-standard-edit-modal';
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 let activeController = null;
 let cleanupInput = null;
 let cleanupStandardEditModal = () => { };

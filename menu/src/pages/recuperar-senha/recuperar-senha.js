@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Password Recovery Page
  * Handles password recovery with email, CPF, or phone number
  */
@@ -7,7 +7,7 @@
 let isSubmitting = false;
 let activeTab = 'email';
 let activeController = null;
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 
 // DOM Elements (initialized in init())
 let recoveryForm;

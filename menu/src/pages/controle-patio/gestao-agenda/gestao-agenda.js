@@ -1,10 +1,10 @@
-import * as Input from '../../../components/input/input.js';
+﻿import * as Input from '../../../components/input/input.js';
 import * as Modal from '../../../components/modal/modal.js';
 import * as Segmented from '../../../components/segmented/segmented.js';
 import { createGestaoAgendaState, gestaoAgendaModalIds } from './gestao-agenda.data.js';
 import { renderGestaoAgenda } from './gestao-agenda.templates.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 const state = createGestaoAgendaState();
 let cleanupInputs = null;
 let cleanupModal = null;

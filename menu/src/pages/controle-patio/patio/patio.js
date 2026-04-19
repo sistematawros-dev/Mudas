@@ -1,11 +1,11 @@
-import * as Checkbox from '../../../components/checkbox/checkbox.js';
+﻿import * as Checkbox from '../../../components/checkbox/checkbox.js';
 import * as Input from '../../../components/input/input.js';
 import * as Modal from '../../../components/modal/modal.js';
 import { createPatioState, createPatioEntryForm, patioModalIds } from './patio.data.js';
 import { renderPatioBoard } from './patio.templates.js';
 import { initPatioEntryDrawer } from './entry-drawer.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 const state = createPatioState();
 let cleanupInputs = null;
 let cleanupModal = null;

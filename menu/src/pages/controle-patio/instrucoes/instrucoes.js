@@ -1,4 +1,4 @@
-import * as Badge from '../../../components/badge/badge.js';
+﻿import * as Badge from '../../../components/badge/badge.js';
 import * as Button from '../../../components/button/button.js';
 import * as Input from '../../../components/input/input.js';
 import { initInstructionDetailsDrawer } from './instruction-details-drawer.js';
@@ -9,7 +9,7 @@ import {
   scheduleFilterOptions,
 } from './instrucoes.data.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 let activeController = null;
 
 function getPodeNovaInstrucao() {

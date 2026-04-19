@@ -1,4 +1,4 @@
-import { createCadastroPessoaEmpresaMarkup } from './cadastroPessoaEmpresa.js';
+﻿import { createCadastroPessoaEmpresaMarkup } from './cadastroPessoaEmpresa.js';
 import {
   formatPhone, formatCep, formatCpfCnpj,
   isValidEmail, isValidPhone, isValidCep, isValidCpfCnpj,
@@ -51,7 +51,7 @@ export function init() {
   let editingPessoaEmpresaId = null;
   let editingProdutoServicoId = null;
   let editingEmbalagemId = null;
-  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
   const pendingControllers = new Set();
 
   let produtosServicosRows = [];

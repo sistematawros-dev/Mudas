@@ -1,11 +1,11 @@
-import { startSession, initSessionManager, generateSessionKey } from '../../app/session.js';
+﻿import { startSession, initSessionManager, generateSessionKey } from '../../app/session.js';
 
 // State
 let isSubmitting = false;
 let activeController = null;
 let loginPhase = 'form'; // 'form' | 'filial'
 let authData = null; // { token, refreshToken, user }
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.tawros.com.br/api/v1';
 
 // DOM Elements (initialized in init())
 let loginForm;
