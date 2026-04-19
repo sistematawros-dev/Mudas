@@ -88,15 +88,19 @@ function renderBody(item) {
             ${renderField('Unidade de Retirada', item.branch, { icon: locationIcon, strong: true })}
             ${renderField('Produto', item.productName, { strong: true })}
           </div>
-          <div class="patio-instructions-detail-drawer__transport-card">
-            <div class="patio-instructions-detail-drawer__transport-name">
-              <span class="patio-instructions-detail-drawer__field-icon">${carrierIcon}</span>
-              <span>${item.carrier}</span>
+          <div class="patio-instructions-detail-drawer__transport-list">
+            ${(Array.isArray(item.transportes) && item.transportes.length ? item.transportes : [{ name: item.carrier, quantityLabel: item.quantityLabel }]).map((t) => `
+            <div class="patio-instructions-detail-drawer__transport-card">
+              <div class="patio-instructions-detail-drawer__transport-name">
+                <span class="patio-instructions-detail-drawer__field-icon">${carrierIcon}</span>
+                <span>${t.name}</span>
+              </div>
+              <div class="patio-instructions-detail-drawer__grid patio-instructions-detail-drawer__grid--bottom">
+                ${renderField('Blocos', item.blocks, { strong: true, compact: true })}
+                ${renderField('Quantidade', t.quantityLabel, { strong: true, compact: true })}
+              </div>
             </div>
-            <div class="patio-instructions-detail-drawer__grid patio-instructions-detail-drawer__grid--bottom">
-              ${renderField('Blocos', item.blocks, { strong: true, compact: true })}
-              ${renderField('Quantidade', item.quantityLabel, { strong: true, compact: true })}
-            </div>
+            `).join('')}
           </div>
         </div>
       </section>
@@ -114,17 +118,18 @@ function renderBody(item) {
   `;
 }
 
-function renderFooter() {
+function renderFooter(item, podeAprovarRejeitar = false) {
+  const isRejected = item?.status === 'rejected' || item?.status === 'recusado';
   return `
     <div class="patio-instructions-detail-drawer__footer-actions">
       ${createDrawerButton(Button.create({ text: 'Cancelar', variant: 'dark', style: 'outline', size: 'sm' }), 'cancel')}
-      ${createDrawerButton(Button.create({ text: 'Aprovar', variant: 'success', size: 'sm' }), 'approve')}
+      ${podeAprovarRejeitar && !isRejected ? createDrawerButton(Button.create({ text: 'Aprovar', variant: 'success', size: 'sm' }), 'approve') : ''}
     </div>
   `;
 }
 
 export function initInstructionDetailsDrawer(options = {}) {
-  const { onPrimaryAction = null } = options;
+  const { onPrimaryAction = null, podeAprovarRejeitar = false } = options;
 
   document.querySelector(`[data-drawer="${DRAWER_ID}"]`)?.remove();
   document.querySelector(`[data-drawer-backdrop="${DRAWER_ID}"]`)?.remove();
@@ -158,7 +163,7 @@ export function initInstructionDetailsDrawer(options = {}) {
 
     title.textContent = `Detalhes: ${selectedItem.code}`;
     body.innerHTML = renderBody(selectedItem);
-    footer.innerHTML = renderFooter();
+    footer.innerHTML = renderFooter(selectedItem, podeAprovarRejeitar);
   };
 
   const handleClick = (event) => {

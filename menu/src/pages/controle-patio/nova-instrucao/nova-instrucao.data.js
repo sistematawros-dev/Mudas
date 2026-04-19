@@ -25,7 +25,7 @@ export const initialFormValues = {
   contractNumber: '',
   producerDocument: '',
   sellerName: '',
-  productType: 'caroco',
+  productType: '',
   branch: '',
   carrierName: '',
   blockInput: '',

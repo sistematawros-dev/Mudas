@@ -354,3 +354,108 @@
     gap: var(--space-2);
   }
 }
+
+/* ── Modal de troca de senha ───────────────────────────────────────────────── */
+.header-user-modal[hidden] {
+  display: none;
+}
+
+.header-user-modal {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 200;
+  width: 280px;
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-md, 8px);
+  box-shadow: 0 8px 24px rgba(0,0,0,.12);
+  padding: var(--space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.header-dropdown {
+  position: relative;
+}
+
+.header-user-modal__title {
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  color: var(--color-content-primary);
+  margin: 0;
+}
+
+.header-user-modal__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.header-user-modal__label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+}
+
+.header-user-modal__input {
+  padding: 6px 10px;
+  border: 1px solid var(--color-border-default);
+  border-radius: var(--radius-xs, 4px);
+  font-size: var(--font-size-s);
+  background: var(--color-surface-primary);
+  color: var(--color-content-primary);
+  outline: none;
+}
+
+.header-user-modal__input:focus {
+  border-color: var(--color-primary);
+}
+
+.header-user-modal__error {
+  font-size: var(--font-size-xs);
+  color: var(--color-error, #d32f2f);
+  margin: 0;
+}
+
+.header-user-modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-2);
+}
+
+.header-user-modal__btn {
+  padding: 6px 14px;
+  border-radius: var(--radius-xs, 4px);
+  font-size: var(--font-size-s);
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.header-user-modal__btn--cancel {
+  background: transparent;
+  border-color: var(--color-border-default);
+  color: var(--color-content-primary);
+}
+
+.header-user-modal__btn--confirm {
+  background: var(--color-primary);
+  color: #fff;
+}
+
+.header-user-modal__btn--confirm:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.header-user-modal__select {
+  width: 100%;
+  appearance: auto;
+}
+
+.header-admin-senha-modal {
+  width: 320px;
+}

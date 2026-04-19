@@ -188,11 +188,10 @@ function renderModals(selectedCard, blockReason) {
   `;
 }
 
-function renderAgendaCard(card) {
+function renderAgendaCard(card, blockingCardId, blockingReason, operadorPatio = false) {
   const isBlocked = card.status === 'blocked';
+  const isEnteringBlock = !isBlocked && String(card.id) === String(blockingCardId);
   const available = Math.max(card.capacity - card.occupied, 0);
-  const primaryActionLabel = isBlocked ? 'Desbloquear' : 'Bloquear';
-  const primaryAction = isBlocked ? 'unblock-card' : 'open-block-modal';
   const progressColor = isBlocked ? 'danger' : 'primary';
   const percent = card.capacity > 0 ? (card.occupied / card.capacity) * 100 : 0;
   const progress = Progress.createSimpleBar({
@@ -202,14 +201,6 @@ function renderAgendaCard(card) {
     size: 'sm',
   });
 
-  const primaryButton = Button.create({
-    text: primaryActionLabel,
-    variant: 'error',
-    style: 'outline',
-    size: 'sm',
-    iconLeft: 'trash',
-  }).replace('<button ', `<button data-action="${primaryAction}" data-card-id="${card.id}" `);
-
   const cancelButton = Button.create({
     text: 'Cancelar',
     variant: 'secondary',
@@ -218,8 +209,67 @@ function renderAgendaCard(card) {
     iconLeft: 'close',
   }).replace('<button ', `<button data-action="open-cancel-modal" data-card-id="${card.id}" `);
 
+  let footer = '';
+  if (operadorPatio) {
+    if (isEnteringBlock) {
+      const confirmBtn = Button.create({
+        text: 'Confirmar Bloqueio',
+        variant: 'error',
+        size: 'sm',
+      }).replace('<button ', `<button data-action="confirm-block-inline" data-card-id="${card.id}" `);
+      const cancelBtn = Button.create({
+        text: 'Cancelar',
+        variant: 'secondary',
+        style: 'outline',
+        size: 'sm',
+      }).replace('<button ', `<button data-action="cancel-block-inline" data-card-id="${card.id}" `);
+      footer = `
+        <div class="patio-schedule-card__block-inline">
+          <textarea
+            class="patio-schedule-card__block-reason"
+            data-action="block-reason-input"
+            data-card-id="${card.id}"
+            placeholder="Motivo do bloqueio (opcional)"
+            rows="2"
+          >${blockingReason || ''}</textarea>
+          <div class="patio-schedule-card__block-inline-actions">
+            ${confirmBtn}
+            ${cancelBtn}
+          </div>
+        </div>
+      `;
+    } else if (isBlocked) {
+      const unblockBtn = Button.create({
+        text: 'Desbloquear',
+        variant: 'error',
+        style: 'outline',
+        size: 'sm',
+      }).replace('<button ', `<button data-action="unblock-card" data-card-id="${card.id}" `);
+      footer = `
+        <footer class="patio-schedule-card__actions">
+          ${unblockBtn}
+          ${cancelButton}
+        </footer>
+      `;
+    } else {
+      const blockBtn = Button.create({
+        text: 'Bloquear',
+        variant: 'error',
+        style: 'outline',
+        size: 'sm',
+        iconLeft: 'trash',
+      }).replace('<button ', `<button data-action="open-block-inline" data-card-id="${card.id}" `);
+      footer = `
+        <footer class="patio-schedule-card__actions">
+          ${blockBtn}
+          ${cancelButton}
+        </footer>
+      `;
+    }
+  }
+
   return `
-    <article class="patio-schedule-card patio-schedule-card--${card.status}">
+    <article class="patio-schedule-card patio-schedule-card--${card.status}${isEnteringBlock ? ' patio-schedule-card--blocking' : ''}">
       ${isBlocked && card.note ? `<div class="patio-schedule-card__note">${card.note}</div>` : ''}
       <div class="patio-schedule-card__body">
         <header class="patio-schedule-card__header">
@@ -244,16 +294,13 @@ function renderAgendaCard(card) {
           <p class="patio-schedule-card__availability patio-schedule-card__availability--${card.status}">${isBlocked ? card.freeLabel : `${available} livres`}</p>
         </section>
 
-        <footer class="patio-schedule-card__actions">
-          ${primaryButton}
-          ${cancelButton}
-        </footer>
+        ${footer}
       </div>
     </article>
   `;
 }
 
-function renderAgendaGrid(cards) {
+function renderAgendaGrid(cards, blockingCardId, blockingReason, operadorPatio = false) {
   const cardsByDate = cards.reduce((acc, card) => {
     const key = String(card?.dateIso || card?.dateLabel || 'sem-data');
     if (!acc[key]) acc[key] = [];
@@ -272,7 +319,7 @@ function renderAgendaGrid(cards) {
           <section class="patio-schedule-management__cards-column" data-date="${dateKey}">
             <header class="patio-schedule-management__cards-column-header">${columnTitle}</header>
             <div class="patio-schedule-management__cards-column-list">
-              ${dateCards.map((card) => renderAgendaCard(card)).join('')}
+              ${dateCards.map((card) => renderAgendaCard(card, blockingCardId, blockingReason, operadorPatio)).join('')}
             </div>
           </section>
         `;
@@ -323,7 +370,7 @@ function renderAgendaContent(state) {
     return renderCalendarView(state.calendar);
   }
 
-  return renderAgendaGrid(state.cards);
+  return renderAgendaGrid(state.cards, state.blockingCardId, state.blockingReason, state.operadorPatio);
 }
 
 function renderFormFields(state) {
@@ -359,6 +406,23 @@ function renderFormFields(state) {
   `;
 }
 
+function renderEmpresaSelector(state) {
+  if (!state.filiais || state.filiais.length === 0) return '';
+  const items = state.filiais.map((f) => ({ value: String(f.id), label: f.nome }));
+  return `
+    <div class="patio-schedule-management__empresa-selector">
+      ${Input.createSelect({
+        id: 'gestaoAgendaFilialSelect',
+        label: 'Empresa',
+        value: String(state.selectedFilialId || ''),
+        items,
+        size: 'sm',
+        className: 'patio-schedule-management__empresa-select',
+      })}
+    </div>
+  `;
+}
+
 export function renderGestaoAgenda(state) {
   const segmented = Segmented.create({
     items: modeOptions,
@@ -371,6 +435,7 @@ export function renderGestaoAgenda(state) {
   const calendarButton = renderToolbarModeButton(calendarIcon, 'calendar', state.filters.view === 'calendar', 'Visualização em calendário');
 
   return `
+    ${renderEmpresaSelector(state)}
     <section class="patio-schedule-management__card">
       <header class="patio-schedule-management__card-header">
         <div>
@@ -383,9 +448,7 @@ export function renderGestaoAgenda(state) {
         ${segmented}
       </div>
 
-      <div class="patio-schedule-management__form-grid">
-        ${renderFormFields(state)}
-      </div>
+      ${state.operadorPatio ? `<div class="patio-schedule-management__form-grid">${renderFormFields(state)}</div>` : ''}
 
       <section class="patio-schedule-management__agenda-panel">
         <header class="patio-schedule-management__agenda-header">

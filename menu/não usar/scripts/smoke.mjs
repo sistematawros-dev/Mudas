@@ -1,4 +1,4 @@
-const base = process.env.BASE_URL ?? 'http://192.168.15.26:3000';
+const base = process.env.BASE_URL ?? 'http://192.168.15.10:3000';
 
 async function run() {
   const res = await fetch(`${base}/api/v1/health`);

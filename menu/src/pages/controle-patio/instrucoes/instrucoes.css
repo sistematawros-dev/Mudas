@@ -622,6 +622,14 @@
   color: #1f2937;
 }
 
+.patio-instructions-detail-drawer__transport-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 220px;
+  overflow-y: auto;
+}
+
 .patio-instructions-detail-drawer__transport-card {
   display: flex;
   flex-direction: column;

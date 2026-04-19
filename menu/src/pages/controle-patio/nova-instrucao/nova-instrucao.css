@@ -1242,3 +1242,51 @@
     flex-wrap: wrap;
   }
 }
+
+/* Transfer button styling */
+.patio-pluma-blocks__footer {
+  display: flex;
+  justify-content: flex-start;
+  padding: 16px 0 0 0;
+  margin-top: 12px;
+  border-top: 1px solid #dbe4ef;
+}
+
+.patio-pluma-transfer-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  background: #ffffff;
+  color: #334155;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.patio-pluma-transfer-btn:hover {
+  border-color: #94a3b8;
+  background: #f8fafc;
+}
+
+.patio-pluma-transfer-btn:active {
+  transform: scale(0.98);
+}
+
+.patio-pluma-transfer-btn__icon {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.patio-pluma-transfer-btn__text {
+  line-height: 1;
+}
+
+/* Hide empty carriers list */
+.patio-logistics-list.is-empty {
+  display: none;
+}

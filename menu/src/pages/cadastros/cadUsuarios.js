@@ -1,4 +1,4 @@
-﻿const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+﻿const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 
 const state = {
   rows: [],
@@ -82,6 +82,8 @@ async function apiRequest(path, { method = 'GET', query, body, retryOnUnauthoriz
   if (body !== undefined) headers['Content-Type'] = 'application/json';
   const token = getAccessToken();
   if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
 
   const response = await fetch(url.toString(), {
     method,
@@ -142,6 +144,7 @@ function mapRowToForm(row = {}) {
     ativo: row.ativo !== false,
     administrador: row.administrador === true,
     vincularPessoa: row.vincular_pessoa === true,
+    operadorPatio: row.operador_patio === true,
     filialIds: Array.isArray(row.filial_ids) ? row.filial_ids.map((v) => Number(v)) : [],
     licencaIds: Array.isArray(row.licenca_ids) ? row.licenca_ids.map((v) => Number(v)) : [],
   };
@@ -156,6 +159,7 @@ function toPayload(form = {}) {
     ativo: form.ativo !== false,
     administrador: form.administrador === true,
     vincular_pessoa: form.vincularPessoa === true,
+    operador_patio: form.operadorPatio === true,
     filial_ids: Array.isArray(form.filialIds) ? form.filialIds : [],
     licenca_ids: Array.isArray(form.licencaIds) ? form.licencaIds : [],
   };
@@ -199,7 +203,10 @@ function getFilialLabel(id) {
 function getLicencaLabel(id) {
   const found = state.lookups.licencas.find((item) => Number(item?.id) === Number(id));
   if (!found) return `Licença ${id}`;
-  return `${String(found.modulo || '').toUpperCase()} (${Number(found.quantidade_licencas || 0)})`;
+  const total = Number(found.quantidade_licencas || 0);
+  const used = Number(found.licencas_usadas || 0);
+  const disponivel = Math.max(0, total - used);
+  return `${String(found.modulo || '').toUpperCase()} (${disponivel}/${total} disponível)`;
 }
 
 function createMultiSelectItems(items = [], selectedIds = [], field) {
@@ -211,12 +218,26 @@ function createMultiSelectItems(items = [], selectedIds = [], field) {
     const id = Number(item.id || 0);
     if (!id) return '';
     const checked = selected.has(id) ? 'checked' : '';
-    const label = field === 'filial'
-      ? `${item.codigo || ''} - ${item.nome || ''}`
-      : `${String(item.modulo || '').toUpperCase()} (${Number(item.quantidade_licencas || 0)})`;
+    let label;
+    let isDisabled = state.saving;
+    if (field === 'licenca') {
+      const total = Number(item.quantidade_licencas || 0);
+      const used = Number(item.licencas_usadas || 0);
+      const disponivel = Math.max(0, total - used);
+      label = `${String(item.modulo || '').toUpperCase()} (${disponivel}/${total} disponível)`;
+      if (disponivel <= 0 && !selected.has(id)) isDisabled = true;
+    } else {
+      label = `${item.codigo || ''} - ${item.nome || ''}`;
+    }
+    const disabledAttr = isDisabled ? 'disabled' : '';
+    const titleAttr = field === 'licenca' && !selected.has(id) && (() => {
+      const total = Number(item.quantidade_licencas || 0);
+      const used = Number(item.licencas_usadas || 0);
+      return used >= total ? `title="Sem vagas disponíveis para ${String(item.modulo || '').toUpperCase()}"` : '';
+    })();
     return `
-          <label class="cad-usuarios-multiselect-item">
-            <input type="checkbox" data-usuario-multi="${field}" value="${id}" ${checked} ${state.saving ? 'disabled' : ''} />
+          <label class="cad-usuarios-multiselect-item${isDisabled && !state.saving ? ' cad-usuarios-multiselect-item--exhausted' : ''}">
+            <input type="checkbox" data-usuario-multi="${field}" value="${id}" ${checked} ${disabledAttr} ${titleAttr || ''} />
             <span>${escapeHtml(label)}</span>
           </label>
         `;
@@ -318,6 +339,11 @@ function renderForm() {
       </label>
 
       <label class="cad-usuarios-toggle-line">
+        <input id="usuario-operador-patio" type="checkbox" ${state.form.operadorPatio ? 'checked' : ''} ${state.saving ? 'disabled' : ''} />
+        <span>Operador de pátio</span>
+      </label>
+
+      <label class="cad-usuarios-toggle-line">
         <input id="usuario-ativo" type="checkbox" ${state.form.ativo ? 'checked' : ''} ${state.saving ? 'disabled' : ''} />
         <span>Cadastro ativo</span>
       </label>
@@ -365,6 +391,7 @@ function renderTable() {
             <div class="cad-usuarios-row-actions">
               <button type="button" class="btn btn--outline-dark" data-usuario-action="edit" data-id="${id}">Editar</button>
               <button type="button" class="btn btn--outline-dark" data-usuario-action="delete" data-id="${id}">Excluir</button>
+              <button type="button" class="btn btn--outline-dark" data-usuario-action="force-logout" data-id="${id}" title="Encerra a sessão ativa deste usuário">Deslogar</button>
             </div>
           </td>
         </tr>
@@ -452,6 +479,7 @@ function bindFormFromDom() {
   const confirmeSenha = pageRef?.querySelector('#usuario-confirme-senha');
   const admin = pageRef?.querySelector('#usuario-admin');
   const vincularPessoa = pageRef?.querySelector('#usuario-vincular-pessoa');
+  const operadorPatio = pageRef?.querySelector('#usuario-operador-patio');
   const ativo = pageRef?.querySelector('#usuario-ativo');
 
   state.form = {
@@ -464,6 +492,7 @@ function bindFormFromDom() {
     confirmeSenha: confirmeSenha instanceof HTMLInputElement ? confirmeSenha.value : state.form.confirmeSenha,
     administrador: admin instanceof HTMLInputElement ? admin.checked : state.form.administrador,
     vincularPessoa: vincularPessoa instanceof HTMLInputElement ? vincularPessoa.checked : state.form.vincularPessoa,
+    operadorPatio: operadorPatio instanceof HTMLInputElement ? operadorPatio.checked : state.form.operadorPatio,
     ativo: ativo instanceof HTMLInputElement ? ativo.checked : state.form.ativo,
     filialIds: getCheckedIds('input[data-usuario-multi="filial"]'),
     licencaIds: getCheckedIds('input[data-usuario-multi="licenca"]'),
@@ -496,6 +525,23 @@ async function saveForm() {
     state.saving = false;
     state.saveError = error instanceof Error ? error.message : 'Falha ao salvar usuário.';
     renderForm();
+  }
+}
+
+async function forceLogoutUser(id, row) {
+  if (!id) return;
+  const nome = row?.nome ? escapeHtml(String(row.nome)) : `ID ${id}`;
+  if (!window.confirm(`Deseja deslogar o usuário "${nome}" do sistema? A sessão será encerrada no próximo heartbeat (até 10 minutos).`)) return;
+  try {
+    const result = await apiRequest(`/usuarios-cadastro/${id}/force-logout`, { method: 'POST' });
+    const terminated = Number(result?.data?.terminated ?? 0);
+    if (terminated > 0) {
+      window.alert(`Sessão do usuário "${nome}" encerrada com sucesso.`);
+    } else {
+      window.alert(`O usuário "${nome}" não possui sessão ativa no momento.`);
+    }
+  } catch (error) {
+    window.alert(error instanceof Error ? error.message : 'Falha ao encerrar sessão do usuário.');
   }
 }
 
@@ -558,6 +604,10 @@ function handleClick(event) {
   }
   if (action === 'delete') {
     void removeRow(id);
+    return;
+  }
+  if (action === 'force-logout') {
+    void forceLogoutUser(id, row);
   }
 }
 

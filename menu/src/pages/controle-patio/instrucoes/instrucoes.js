@@ -9,7 +9,7 @@ import {
   scheduleFilterOptions,
 } from './instrucoes.data.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 let activeController = null;
 
 function getPodeNovaInstrucao() {
@@ -22,6 +22,18 @@ function getPodeNovaInstrucao() {
     return false;
   }
 }
+
+function getPodeAprovarRejeitar() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    return Boolean(parsed?.podeAprovarRejeitar);
+  } catch {
+    return false;
+  }
+}
+
 
 const calendarIcon = `
   <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
@@ -153,6 +165,8 @@ async function apiRequest(path, { method = 'GET', query, body, auth = true, retr
   if (auth) {
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
   }
 
   const response = await fetch(url.toString(), {
@@ -192,6 +206,15 @@ function formatDate(dateValue) {
   return parsed.toLocaleDateString('pt-BR');
 }
 
+function toKg(quantidade, unidade) {
+  const u = String(unidade || '').trim().toLowerCase();
+  const q = Number(quantidade || 0);
+  if (u === 'toneladas') return q * 1000;
+  if (u === 'arrobas') return q * 15;
+  if (u === 'sacas') return q * 60;
+  return q; // quilogramas ou desconhecido
+}
+
 function formatInstructionUnit(tipoProduto, unidade) {
   const produto = String(tipoProduto || '').toLowerCase();
   if (produto === 'pluma') return 'Fardos';
@@ -206,10 +229,20 @@ function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
   const branch = lookups.filiais?.[String(row.filial_id)] || '-';
   const uiStatus = statusToUi(row.status);
   const transportes = transportesByInstrucao[String(row.id)] || [];
-  const quantidadeTransportes = transportes.reduce((sum, item) => sum + Number(item?.quantidade || 0), 0);
-  const quantidade = Number(row.quantidade_total || 0);
-  const quantidadeFinal = quantidade > 0 ? quantidade : quantidadeTransportes;
-  const unidade = formatInstructionUnit(row.tipo_produto, transportes[0]?.unidade || row.unidade);
+  const isPlumaRow = String(row.tipo_produto || '').toLowerCase() === 'pluma';
+  const unidade = isPlumaRow ? 'Fardos' : 'Quilogramas';
+  const quantidadeFinal = isPlumaRow
+    ? Number(row.quantidade_total || 0)
+    : transportes.length
+      ? transportes.reduce((sum, t) => sum + toKg(t.quantidade, t.unidade), 0)
+      : Number(row.quantidade_total || 0);
+
+  const transportesMapped = transportes.map((t) => ({
+    name: t.nome_transportadora || 'Transportadora',
+    quantidade: Number(t.quantidade || 0),
+    unidade: formatInstructionUnit(row.tipo_produto, t.unidade),
+    quantityLabel: `${Number(t.quantidade || 0).toLocaleString('pt-BR')} ${formatInstructionUnit(row.tipo_produto, t.unidade)}`,
+  }));
 
   return {
     id: String(row.id),
@@ -227,8 +260,9 @@ function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
     producerDocument: row.produtor_documento || '-',
     branch,
     productName: String(row.tipo_produto || '-').toUpperCase(),
-    carrier: '-',
-    quantityLabel: `${quantidadeFinal.toLocaleString('pt-BR')} ${unidade}`,
+    carrier: transportesMapped.length ? transportesMapped[0].name : '-',
+    quantityLabel: transportesMapped.length ? transportesMapped[0].quantityLabel : `${quantidadeFinal.toLocaleString('pt-BR')} ${unidade}`,
+    transportes: transportesMapped,
     documents: [],
   };
 }
@@ -321,7 +355,7 @@ function renderTopActions() {
     <div class="patio-instructions__view-toggle" aria-label="Alternar visualizao">
       ${viewButtons}
     </div>
-    ${getPodeNovaInstrucao() ? Button.create({ text: 'Nova Instruo', variant: 'primary', size: 'sm' }).replace('<button ', '<button data-action="new-instruction" ') : ''}
+    ${getPodeNovaInstrucao() ? Button.create({ text: 'Nova Instrução', variant: 'primary', size: 'sm' }).replace('<button ', '<button data-action="new-instruction" ') : ''}
   `;
 }
 
@@ -376,7 +410,7 @@ function getVisibleInstructions() {
 function getInstructionButtons(item, mode = 'list') {
   const buttons = [];
 
-  if (item.status === 'pending') {
+  if (item.status === 'pending' && getPodeAprovarRejeitar()) {
     buttons.push({ key: 'reject', text: 'Rejeitar', variant: 'error', style: 'outline' });
     buttons.push({ key: 'approve', text: 'Aprovar', variant: 'success', style: 'solid' });
   } else if (item.status === 'approved') {
@@ -384,8 +418,6 @@ function getInstructionButtons(item, mode = 'list') {
     buttons.push({ key: 'reopen', text: 'Reabrir', variant: 'dark', style: 'outline' });
   } else if (item.status === 'finished') {
     buttons.push({ key: 'reopen', text: 'Reabrir', variant: 'dark', style: 'outline' });
-  } else if (item.status === 'rejected') {
-    buttons.push({ key: 'reject', text: 'Rejeitar', variant: 'error', style: 'outline' });
   }
 
   return buttons.map((button) => {
@@ -579,6 +611,7 @@ function handleInput(event) {
 
 export function init() {
   detailsDrawer = initInstructionDetailsDrawer({
+    podeAprovarRejeitar: getPodeAprovarRejeitar(),
     onPrimaryAction: async (item) => {
       try {
         await updateInstructionStatus(item.id, 'approve');

@@ -51,7 +51,7 @@ export function init() {
   let editingPessoaEmpresaId = null;
   let editingProdutoServicoId = null;
   let editingEmbalagemId = null;
-  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
   const pendingControllers = new Set();
 
   let produtosServicosRows = [];
@@ -169,7 +169,6 @@ export function init() {
     nomeResponsavel: '',
     celular: '',
     telefoneFixo: '',
-    email: '',
     observacoes: '',
     setor: '',
   });
@@ -187,6 +186,7 @@ export function init() {
     isSaving: false,
     saveError: '',
     ramoChips: [],
+    emailChips: [],
     activeProdutosSubTab: isProdutosClassificacaoRoute ? 'classificacao' : 'produtos-servicos',
     isProdutosCadastroOpen: false,
     isEmbalagensCadastroOpen: false,
@@ -362,6 +362,8 @@ export function init() {
     if (auth) {
       const token = getAuthToken();
       if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
     }
 
     try {
@@ -1297,6 +1299,7 @@ export function init() {
       tipo: item.tipo_cadastro === 'empresa' ? 'empresas' : 'pessoas',
       saveError: '',
       ramoChips: mappedRamos.length ? mappedRamos : cadastroState.ramoChips,
+      emailChips: Array.isArray(item.emails) ? item.emails.filter(Boolean) : [],
       form: {
         ...(cadastroState.form || {}),
         grupo: String(item.grupo_empresarial_id || ''),
@@ -1318,7 +1321,6 @@ export function init() {
         nomeResponsavel: item.nome_responsavel || '',
         celular: item.celular || '',
         telefoneFixo: item.telefone_fixo || '',
-        email: item.email || '',
         observacoes: item.observacoes || '',
       }
     };
@@ -1409,6 +1411,7 @@ export function init() {
       isOpen: true,
       saveError: '',
       ramoChips: [],
+      emailChips: [],
       form: createDefaultPessoaEmpresaForm(),
       activeSubTab: 'pessoas-empresas',
     };
@@ -1522,7 +1525,7 @@ export function init() {
       nome_responsavel: String(form.nomeResponsavel || '').trim() || null,
       celular: String(form.celular || '').trim() || null,
       telefone_fixo: String(form.telefoneFixo || '').trim() || null,
-      email: String(form.email || '').trim() || null,
+      emails: Array.isArray(cadastroState.emailChips) ? cadastroState.emailChips : [],
       observacoes: String(form.observacoes || '').trim() || null,
       ativo: Boolean(cadastroState.isAtivo),
     };
@@ -1539,7 +1542,8 @@ export function init() {
     if (form.cep && !isValidCep(form.cep)) return 'CEP inválido. Informe 8 dígitos.';
     if (form.celular && !isValidPhone(form.celular)) return 'Celular inválido. Informe DDD + número.';
     if (form.telefoneFixo && !isValidPhone(form.telefoneFixo)) return 'Telefone fixo inválido. Informe DDD + número.';
-    if (form.email && !isValidEmail(form.email)) return 'E-mail inválido.';
+    const invalidEmail = (cadastroState.emailChips || []).find((e) => !isValidEmail(e));
+    if (invalidEmail) return `E-mail inválido: ${invalidEmail}`;
     return '';
   }
 
@@ -2210,6 +2214,19 @@ export function init() {
       cadastroState = {
         ...cadastroState,
         ramoChips: (cadastroState.ramoChips || []).filter((item) => item !== chipValue),
+        saveError: '',
+      };
+      renderCadastroPessoaEmpresa();
+      return;
+    }
+
+    const removeEmailButton = event.target.closest('[data-cpe-remove-email]');
+    if (removeEmailButton && currentMode === 'pessoas-empresas') {
+      const emailValue = removeEmailButton.getAttribute('data-cpe-remove-email');
+      if (!emailValue) return;
+      cadastroState = {
+        ...cadastroState,
+        emailChips: (cadastroState.emailChips || []).filter((item) => item !== emailValue),
         saveError: '',
       };
       renderCadastroPessoaEmpresa();
@@ -3188,12 +3205,31 @@ export function init() {
     handleCadastroFieldUpdate(event.target);
   };
 
+  const handlePageKeydown = (event) => {
+    if (!(event.target instanceof HTMLInputElement)) return;
+    if (!event.target.matches('[data-cpe-email-input]')) return;
+    if (event.key !== 'Enter') return;
+    event.preventDefault();
+    const value = event.target.value.trim();
+    if (!value) return;
+    if ((cadastroState.emailChips || []).includes(value)) return;
+    cadastroState = {
+      ...cadastroState,
+      emailChips: [...(cadastroState.emailChips || []), value],
+      saveError: '',
+    };
+    event.target.value = '';
+    renderCadastroPessoaEmpresa();
+    document.getElementById('cpe-email')?.focus();
+  };
+
   window.addEventListener('header:tabchange', handleHeaderTabChange);
   if (advancedFiltersButton) advancedFiltersButton.addEventListener('click', handleAdvancedFiltersClick);
   if (badgesContainer) badgesContainer.addEventListener('click', handleBadgeClick);
   if (page) page.addEventListener('click', handlePageClick);
   if (page) page.addEventListener('change', handlePageChange);
   if (page) page.addEventListener('input', handlePageInput);
+  if (page) page.addEventListener('keydown', handlePageKeydown);
 
   void (async () => {
     await loadLookups();
@@ -3229,6 +3265,7 @@ export function init() {
     if (page) page.removeEventListener('click', handlePageClick);
     if (page) page.removeEventListener('change', handlePageChange);
     if (page) page.removeEventListener('input', handlePageInput);
+    if (page) page.removeEventListener('keydown', handlePageKeydown);
   };
 }
 

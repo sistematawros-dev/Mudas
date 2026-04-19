@@ -34,6 +34,8 @@ const calendarWeekdays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'S
 
 export function createGestaoAgendaState() {
   return {
+    filiais: [],
+    selectedFilialId: null,
     mode: 'single-date',
     form: {
       loadingDate: {
@@ -78,12 +80,13 @@ export function createGestaoAgendaState() {
       product: '',
       currentRangeLabel: '',
       currentMonthDate: new Date(),
-      filialId: null,
     },
     modal: {
       selectedCardId: null,
       blockReason: '',
     },
+    blockingCardId: null,
+    blockingReason: '',
     cards: [],
     allCards: [],
     calendar: {

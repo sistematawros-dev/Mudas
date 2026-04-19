@@ -32,7 +32,7 @@ const blockIcon = `
 const closeIcon = Button.getIcon('close');
 const PLUMA_EDIT_MODAL_ID = 'patio-pluma-edit-modal';
 const STANDARD_EDIT_MODAL_ID = 'patio-standard-edit-modal';
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 let activeController = null;
 let cleanupInput = null;
 let cleanupStandardEditModal = () => { };
@@ -137,6 +137,8 @@ async function apiRequest(path, { method = 'GET', query, body, auth = true, retr
   if (auth) {
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
   }
 
   const response = await fetch(url.toString(), {
@@ -241,8 +243,8 @@ function renderContractFields() {
     Input.create({ id: 'contractNumber', label: 'Número do Contrato', placeholder: 'Ex: CTR-2024-999', value: state.formValues.contractNumber }),
     Input.create({ id: 'producerDocument', label: 'CPF/CNPJ Produtor', placeholder: '000.000.000/0000-00', value: state.formValues.producerDocument }),
     Input.createAutocomplete({ id: 'sellerName', label: 'Nome do Vendedor / Produtor', placeholder: 'Selecione ou digite...', value: state.formValues.sellerName, suggestions: contractFieldOptions.sellers }),
-    Input.createSelect({ id: 'productType', label: 'Tipo de Produto', value: state.formValues.productType, items: contractFieldOptions.productTypes }),
-    Input.createSelect({ id: 'branch', label: 'Unidade de Retirada (Filial)', value: state.formValues.branch, items: contractFieldOptions.branches }),
+    Input.createSelect({ id: 'productType', label: 'Tipo de Produto', required: true, placeholder: 'Selecione...', value: state.formValues.productType, items: contractFieldOptions.productTypes }),
+    Input.createSelect({ id: 'branch', label: 'Unidade de Retirada (Filial)', required: true, placeholder: 'Selecione...', value: state.formValues.branch, items: contractFieldOptions.branches }),
   );
 
   container.innerHTML = fields.join('');
@@ -937,15 +939,25 @@ function renderPlumaBlocks() {
                   </div>
                   ${renderPlumaBlockField(block)}
                 ` : ''}
+                ${block.classification === 'Bloco Parcial' ? `
                 <div class="patio-pluma-block__actions">
                   <span data-pluma-save-block="${block.id}">${Button.create({ text: 'Salvar', variant: 'primary', size: 'sm' })}</span>
                   <span data-pluma-cancel-block="${block.id}">${Button.create({ text: 'Cancelar', variant: 'dark', style: 'outline', size: 'sm' })}</span>
                 </div>
+                ` : ''}
               </div>
             ` : ''}
           </article>
         `).join('')}
       </div>
+      ${state.plumaBlocks.length ? `
+        <div class="patio-pluma-blocks__footer">
+          <button type="button" class="patio-pluma-transfer-btn" data-pluma-transfer-to-carrier>
+            <span class="patio-pluma-transfer-btn__icon">+</span>
+            <span class="patio-pluma-transfer-btn__text">Adicionar à Lista</span>
+          </button>
+        </div>
+      ` : ''}
     </div>
   `;
 }
@@ -986,6 +998,13 @@ function renderPlumaCarriers() {
   const container = document.getElementById('patio-logistics-list');
   if (!container) return;
 
+  if (!state.plumaCarriers.length) {
+    container.innerHTML = '';
+    container.classList.add('is-empty');
+    return;
+  }
+
+  container.classList.remove('is-empty');
   container.innerHTML = state.plumaCarriers.map((carrier) => `
     <article class="patio-pluma-carrier" data-pluma-carrier-id="${carrier.id}">
       <header class="patio-pluma-carrier__header">
@@ -1032,13 +1051,7 @@ function renderPlumaLogisticsFields() {
   container.innerHTML = `
     <div class="patio-pluma-builder">
       <div class="patio-pluma-builder__row patio-pluma-builder__row--full">
-        ${Input.createSelect({
-    id: 'carrierName',
-    label: 'Transportadora Responsável',
-    value: state.formValues.carrierName,
-    items: contractFieldOptions.carriers,
-    placeholder: 'Nome da Transportadora',
-  })}
+        ${Input.createAutocomplete({ id: 'carrierName', label: 'Transportadora Responsável', placeholder: 'Nome da Transportadora', value: state.formValues.carrierName, suggestions: contractFieldOptions.carriers })}
       </div>
       <div class="patio-pluma-builder__row patio-pluma-builder__row--full">
         <div class="patio-pluma-builder__field">
@@ -1105,6 +1118,7 @@ function rerenderForProductTypeChange() {
   renderContractFields();
   renderLogisticsSection();
   updateHydratedFields();
+  bindCarrierAutocompleteSearch();
 }
 
 function readFormValues() {
@@ -1145,28 +1159,6 @@ function addPlumaBlocks(rawValue) {
       isOpen: true,
     });
 
-    if (state.formValues.carrierName) {
-      const carrierLabel = getCarrierLabel(state.formValues.carrierName);
-      let carrier = state.plumaCarriers.find((item) => item.carrierName === carrierLabel);
-      if (!carrier) {
-        carrier = {
-          id: `carrier-${slugify(carrierLabel)}`,
-          carrierName: carrierLabel,
-          totalBales: 0,
-          isExpanded: true,
-          blocks: [],
-        };
-        state.plumaCarriers.unshift(carrier);
-      }
-
-      carrier.blocks.unshift({
-        id: `carrier-row-${slugify(name)}-${Date.now()}`,
-        blockName: name,
-        baleQuantity: DEFAULT_BALE_QUANTITY,
-        classification: 'Bloco Completo',
-      });
-      carrier.totalBales = carrier.blocks.reduce((sum, item) => sum + Number(item.baleQuantity || 0), 0);
-    }
   });
 }
 
@@ -1182,6 +1174,10 @@ function handleBlockInputKeydown(event) {
     state.formValues.blockInput = '';
     renderPlumaLogisticsFields();
     updateHydratedFields();
+    setTimeout(() => {
+      const blockInput = document.getElementById('blockInput');
+      if (blockInput) blockInput.focus();
+    }, 0);
   }
 }
 
@@ -1389,8 +1385,13 @@ function bindFormSync() {
       }
       block.draftQuantity = String(block.draftBales.length);
       block.baleInputValue = '';
+      const blockId = block.id;
       renderPlumaBlocks();
       updateHydratedFields();
+      setTimeout(() => {
+        const newField = document.querySelector(`[data-pluma-bales-input="${blockId}"]`);
+        if (newField) newField.focus();
+      }, 0);
     });
   });
 
@@ -1433,6 +1434,9 @@ function handleSavePlumaBlock(blockId) {
   const nextBales = block.draftInclusionMode === 'bales'
     ? block.draftBales.map((item) => item.trim()).filter(Boolean)
     : [];
+  const quantityFieldEl = document.getElementById(`pluma-block-quantity-${blockId}`);
+  const draftQty = quantityFieldEl ? quantityFieldEl.value : block.draftQuantity;
+  block.draftQuantity = String(draftQty ?? '');
   const nextQuantity = block.draftInclusionMode === 'bales'
     ? nextBales.length
     : Number(block.draftQuantity || 0);
@@ -1442,53 +1446,13 @@ function handleSavePlumaBlock(blockId) {
   block.bales = [...nextBales];
   block.draftBales = [...nextBales];
   block.baleInputValue = '';
-  block.classification = block.draftInclusionMode === 'bales'
+  const isDefaultQuantity = block.draftInclusionMode !== 'bales' && nextQuantity === 150;
+  block.classification = block.draftInclusionMode === 'bales' || !isDefaultQuantity
     ? 'Bloco Parcial'
-    : (nextQuantity > 0 ? 'Bloco Completo' : 'Bloco Parcial');
+    : 'Bloco Completo';
   block.isOpen = false;
 
-  const carrierLabel = getCarrierLabel(state.formValues.carrierName);
-  if (carrierLabel) {
-    let carrier = state.plumaCarriers.find((item) => item.carrierName === carrierLabel);
-    if (!carrier) {
-      carrier = {
-        id: `carrier-${slugify(carrierLabel)}`,
-        carrierName: carrierLabel,
-        totalBales: 0,
-        isExpanded: true,
-        blocks: [],
-      };
-      state.plumaCarriers.unshift(carrier);
-    }
-
-    let carrierBlock = carrier.blocks.find((item) => item.blockName === block.name);
-    if (!carrierBlock) {
-      carrierBlock = {
-        id: `carrier-row-${slugify(block.name)}-${Date.now()}`,
-        blockName: block.name,
-        baleQuantity: 0,
-        classification: block.classification,
-      };
-      carrier.blocks.unshift(carrierBlock);
-    }
-
-    carrierBlock.blockName = block.name;
-    carrierBlock.baleQuantity = nextQuantity;
-    carrierBlock.classification = block.classification;
-
-    if (nextBales.length) {
-      carrierBlock.detailCodes = [...nextBales];
-      carrierBlock.isExpanded = true;
-    } else {
-      delete carrierBlock.detailCodes;
-      delete carrierBlock.isExpanded;
-    }
-
-    carrier.totalBales = carrier.blocks.reduce((sum, item) => sum + Number(item.baleQuantity || 0), 0);
-  }
-
   renderPlumaBlocks();
-  renderPlumaCarriers();
   updateHydratedFields();
 }
 
@@ -1502,6 +1466,50 @@ function handleCancelPlumaBlock(blockId) {
   block.baleInputValue = '';
   block.isOpen = false;
   renderPlumaBlocks();
+  updateHydratedFields();
+}
+
+function handleTransferBlocksToCarrier() {
+  if (!state.plumaBlocks.length) return;
+
+  const carrierLabel = String(state.formValues.carrierName || '').trim();
+  if (!carrierLabel) return;
+
+  let carrier = state.plumaCarriers.find((item) => item.carrierName === carrierLabel);
+  if (!carrier) {
+    carrier = {
+      id: `carrier-${slugify(carrierLabel)}-${Date.now()}`,
+      carrierName: carrierLabel,
+      totalBales: 0,
+      isExpanded: true,
+      blocks: [],
+    };
+    state.plumaCarriers.unshift(carrier);
+  }
+
+  state.plumaBlocks.forEach((block) => {
+    const transferredBlock = {
+      id: `carrier-row-${slugify(block.name)}-${Date.now()}`,
+      blockName: block.name,
+      baleQuantity: Number(block.baleQuantity || 0),
+      classification: block.classification,
+    };
+
+    if (block.inclusionMode === 'bales' && block.bales?.length) {
+      transferredBlock.detailCodes = [...block.bales];
+      transferredBlock.isExpanded = true;
+    }
+
+    carrier.blocks.unshift(transferredBlock);
+  });
+
+  carrier.totalBales = carrier.blocks.reduce((sum, item) => sum + Number(item.baleQuantity || 0), 0);
+
+  state.plumaBlocks = [];
+  state.formValues.blockInput = '';
+
+  renderPlumaBlocks();
+  renderPlumaCarriers();
   updateHydratedFields();
 }
 
@@ -1588,6 +1596,7 @@ function updateBuyerSuggestions(options = []) {
     buyerInput.dataset.selectedBuyerId = selectedId;
     buyerInput.dataset.selectedBuyerLabel = selectedLabel;
     buyerInput.dataset.skipBuyerSearch = 'true';
+    buyerInput.dataset.confirmedValue = selectedLabel;
     state.formValues.buyer = selectedLabel;
     state.formValues.buyerId = selectedId;
     suggestions.classList.remove('is-visible');
@@ -1672,7 +1681,20 @@ function bindBuyerAutocompleteSearch() {
   };
 
   buyerField.addEventListener('focus', triggerSearch);
-  buyerField.addEventListener('input', triggerSearch);
+  buyerField.addEventListener('input', (event) => { if (event.isTrusted) delete buyerField.dataset.confirmedValue; triggerSearch(); });
+  buyerField.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (buyerField.dataset.confirmedValue === undefined || buyerField.value !== buyerField.dataset.confirmedValue) {
+        buyerField.value = '';
+        state.formValues.buyer = '';
+        state.formValues.buyerId = '';
+        delete buyerField.dataset.selectedBuyerId;
+        delete buyerField.dataset.selectedBuyerLabel;
+        delete buyerField.dataset.confirmedValue;
+        updateBuyerSuggestions([]);
+      }
+    }, 200);
+  });
 }
 
 function updateCarrierSuggestions(options = []) {
@@ -1707,6 +1729,7 @@ function updateCarrierSuggestions(options = []) {
       carrierInput.dataset.selectedCarrierId = selectedId;
       carrierInput.dataset.selectedCarrierLabel = selectedLabel;
       carrierInput.dataset.skipCarrierSearch = 'true';
+      carrierInput.dataset.confirmedValue = selectedLabel;
       state.formValues.carrierName = selectedLabel;
       state.formValues.carrierId = selectedId;
       suggestions.classList.remove('is-visible');
@@ -1771,7 +1794,20 @@ function bindCarrierAutocompleteSearch() {
   };
 
   carrierField.addEventListener('focus', triggerSearch);
-  carrierField.addEventListener('input', triggerSearch);
+  carrierField.addEventListener('input', (event) => { if (event.isTrusted) delete carrierField.dataset.confirmedValue; triggerSearch(); });
+  carrierField.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (carrierField.dataset.confirmedValue === undefined || carrierField.value !== carrierField.dataset.confirmedValue) {
+        carrierField.value = '';
+        state.formValues.carrierName = '';
+        state.formValues.carrierId = '';
+        delete carrierField.dataset.selectedCarrierId;
+        delete carrierField.dataset.selectedCarrierLabel;
+        delete carrierField.dataset.confirmedValue;
+        updateCarrierSuggestions([]);
+      }
+    }, 200);
+  });
 }
 
 function producerDocOptionsFromRows(rows = []) {
@@ -1836,6 +1872,7 @@ function updateProducerDocumentSuggestions(options = []) {
     producerInput.dataset.selectedProducerId = selectedId;
     producerInput.dataset.selectedProducerDoc = selectedDoc;
     producerInput.dataset.skipProducerSearch = 'true';
+    producerInput.dataset.confirmedValue = selectedDoc;
 
     state.formValues.producerDocument = selectedDoc;
     state.formValues.sellerId = selectedId;
@@ -1902,6 +1939,7 @@ function updateSellerNameSuggestions(options = []) {
     sellerInput.dataset.selectedSellerId = selectedId;
     sellerInput.dataset.selectedSellerLabel = selectedNome;
     sellerInput.dataset.skipSellerSearch = 'true';
+    sellerInput.dataset.confirmedValue = selectedNome;
 
     state.formValues.sellerName = selectedNome;
     state.formValues.sellerId = selectedId;
@@ -2013,7 +2051,19 @@ function bindProducerDocumentAutocompleteSearch() {
   };
 
   producerField.addEventListener('focus', triggerSearch);
-  producerField.addEventListener('input', triggerSearch);
+  producerField.addEventListener('input', (event) => { if (event.isTrusted) delete producerField.dataset.confirmedValue; triggerSearch(); });
+  producerField.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (producerField.dataset.confirmedValue === undefined || producerField.value !== producerField.dataset.confirmedValue) {
+        producerField.value = '';
+        state.formValues.producerDocument = '';
+        delete producerField.dataset.selectedProducerId;
+        delete producerField.dataset.selectedProducerDoc;
+        delete producerField.dataset.confirmedValue;
+        updateProducerDocumentSuggestions([]);
+      }
+    }, 200);
+  });
 }
 
 function bindSellerNameAutocompleteSearch() {
@@ -2052,7 +2102,20 @@ function bindSellerNameAutocompleteSearch() {
   };
 
   sellerField.addEventListener('focus', triggerSearch);
-  sellerField.addEventListener('input', triggerSearch);
+  sellerField.addEventListener('input', (event) => { if (event.isTrusted) delete sellerField.dataset.confirmedValue; triggerSearch(); });
+  sellerField.addEventListener('blur', () => {
+    setTimeout(() => {
+      if (sellerField.dataset.confirmedValue === undefined || sellerField.value !== sellerField.dataset.confirmedValue) {
+        sellerField.value = '';
+        state.formValues.sellerName = '';
+        state.formValues.sellerId = '';
+        delete sellerField.dataset.selectedSellerId;
+        delete sellerField.dataset.selectedSellerLabel;
+        delete sellerField.dataset.confirmedValue;
+        updateSellerNameSuggestions([]);
+      }
+    }, 200);
+  });
 }
 
 async function loadDynamicLookups() {
@@ -2145,59 +2208,9 @@ async function resolvePessoaId(value, { onlyCompradores = false } = {}) {
   return rows[0]?.id ? Number(rows[0].id) : null;
 }
 
-async function resolveFilialId(value) {
-  const raw = String(value || '').trim();
-  if (!raw) return null;
-
-  if (/^\d+$/.test(raw)) return Number(raw);
-
-  const match = findOptionByText(contractFieldOptions.branches || [], raw);
-  if (match?.id && /^\d+$/.test(String(match.id))) return Number(match.id);
-  if (match?.value && /^\d+$/.test(String(match.value))) return Number(match.value);
-
-  const query = { q: raw, search: raw, limit: 20 };
-  try {
-    const result = await apiRequest('/lookups/filiais', { query })
-      .catch(() => apiRequest('/filiais', { query }));
-    const rows = parseApiResponse(result);
-    const found = rows.find((item = {}) => normalizeText(item?.nome || item?.razao_social || '') === normalizeText(raw));
-    if (found?.id) return Number(found.id);
-    if (rows[0]?.id) return Number(rows[0].id);
-    if (!rows.length) {
-      const allResult = await apiRequest('/lookups/filiais', { query: { limit: 1 } })
-        .catch(() => apiRequest('/filiais', { query: { limit: 1 } }));
-      const allRows = parseApiResponse(allResult);
-      if (allRows[0]?.id) return Number(allRows[0].id);
-    }
-  } catch {
-    // continue para os fallbacks abaixo
-  }
-
-  // Fallback direto quando o valor vem como "filial-1", "filial 2", etc.
-  const suffix = raw.match(/(?:filial[-\s]?)(\d+)$/i)?.[1];
-  if (suffix) {
-    const inferred = Number(suffix);
-    if (Number.isFinite(inferred) && inferred > 0) return inferred;
-  }
-
-  // Fallback resiliente: reaproveita IDs ja usados em instrucoes.
-  try {
-    const instrucoesRes = await apiRequest('/instrucoes', { query: { page: 1, limit: 400, sort: 'created_at', order: 'desc' } });
-    const instrucoes = parseApiResponse(instrucoesRes);
-    const filialIds = Array.from(new Set(
-      instrucoes
-        .map((item = {}) => Number(item?.filial_id))
-        .filter((id) => Number.isFinite(id) && id > 0),
-    ));
-    if (!filialIds.length) return null;
-    if (suffix) {
-      const inferred = Number(suffix);
-      if (filialIds.includes(inferred)) return inferred;
-    }
-    return filialIds[0];
-  } catch {
-    return null;
-  }
+function resolveFilialId() {
+  const id = Number(sessionStorage.getItem('filialId'));
+  return Number.isFinite(id) && id > 0 ? id : null;
 }
 
 function computeQuantidadeTotal() {
@@ -2213,12 +2226,15 @@ function computeQuantidadeTotal() {
 async function persistInstruction() {
   readFormValues();
 
+  if (!state.formValues.productType) throw new Error('Tipo de Produto é obrigatório. Selecione um tipo antes de salvar.');
+  if (!state.formValues.branch) throw new Error('Unidade de Retirada (Filial) é obrigatória. Selecione uma filial antes de salvar.');
+
   const compradorId = await resolvePessoaId(state.formValues.buyer, { onlyCompradores: true });
   if (!compradorId) throw new Error('Comprador inválido. Selecione um comprador cadastrado.');
 
   const produtorId = await resolvePessoaId(state.formValues.sellerName);
-  const filialId = await resolveFilialId(state.formValues.branch);
-  if (!filialId || !Number.isFinite(filialId) || filialId <= 0) throw new Error('Filial inválida. Selecione uma filial válida.');
+  const filialId = resolveFilialId();
+  if (!filialId || !Number.isFinite(filialId) || filialId <= 0) throw new Error('Filial inválida. Faça login novamente para continuar.');
 
   const quantidadeTotal = computeQuantidadeTotal();
   const instructionPayload = {
@@ -2230,55 +2246,86 @@ async function persistInstruction() {
     produtor_documento: state.formValues.producerDocument || null,
     produtor_id: produtorId,
     nome_vendedor_produtor: state.formValues.sellerName || null,
-    tipo_produto: state.formValues.productType || 'caroco',
+    tipo_produto: state.formValues.productType,
     filial_id: filialId,
     status: 'pendente',
     quantidade_total: quantidadeTotal,
     ativo: true,
   };
 
-  const created = await apiRequest('/instrucoes', { method: 'POST', body: instructionPayload });
-  const instructionId = Number(created?.data?.id);
-  if (!instructionId) throw new Error('Falha ao criar instrução.');
+  // Verificar se já existe instrução ativa com o mesmo número (órfã de tentativa anterior)
+  let instructionId;
+  const existingRes = await apiRequest('/instrucoes', {
+    query: { 'filter[numero_instrucao][eq]': instructionPayload.numero_instrucao, limit: 1 },
+  }).catch(() => null);
+  const orphanId = Number(existingRes?.data?.[0]?.id ?? 0);
 
-  if (!isPlumaProduct()) {
-    const transportes = state.standardLogisticsItems.map((item, index) => ({
-      instrucao_id: instructionId,
-      nome_transportadora: item.carrierName,
-      unidade: item.unit || 'quilogramas',
-      quantidade: Number(item.quantity || 0),
-      ordem: index + 1,
-    }));
-    if (transportes.length) {
-      await apiRequest('/instrucoes-transportes/bulk-create', { method: 'POST', body: transportes });
+  if (orphanId) {
+    const [blocosRes, transportesRes] = await Promise.all([
+      apiRequest('/instrucoes-blocos', { query: { 'filter[instrucao_id][eq]': orphanId, limit: 1 } }).catch(() => null),
+      apiRequest('/instrucoes-transportes', { query: { 'filter[instrucao_id][eq]': orphanId, limit: 1 } }).catch(() => null),
+    ]);
+    const hasBlocos = (blocosRes?.data?.length ?? 0) > 0;
+    const hasTransportes = (transportesRes?.data?.length ?? 0) > 0;
+    if (hasBlocos || hasTransportes) {
+      throw new Error(`Já existe uma instrução ativa com o número "${instructionPayload.numero_instrucao}". Use um número diferente.`);
     }
-    return;
+    // Instrução órfã sem blocos/transportes — atualizar e reutilizar
+    await apiRequest(`/instrucoes/${orphanId}`, { method: 'PATCH', body: instructionPayload });
+    instructionId = orphanId;
+  } else {
+    const created = await apiRequest('/instrucoes', { method: 'POST', body: instructionPayload });
+    instructionId = Number(created?.data?.id);
+    if (!instructionId) throw new Error('Falha ao criar instrução.');
   }
 
-  for (const carrier of state.plumaCarriers) {
-    for (let index = 0; index < carrier.blocks.length; index += 1) {
-      const block = carrier.blocks[index];
-      const blockPayload = {
+  try {
+    if (!isPlumaProduct()) {
+      const transportes = state.standardLogisticsItems.map((item, index) => ({
         instrucao_id: instructionId,
-        nome_transportadora: carrier.carrierName,
-        nome_bloco: block.blockName,
-        classificacao_bloco: block.classification,
-        modo_inclusao: Array.isArray(block.detailCodes) && block.detailCodes.length ? 'bales' : 'quantity',
-        quantidade_fardos: Number(block.baleQuantity || 0),
+        nome_transportadora: item.carrierName,
+        unidade: item.unit || 'quilogramas',
+        quantidade: Number(item.quantity || 0),
         ordem: index + 1,
-      };
-      const createdBlock = await apiRequest('/instrucoes-blocos', { method: 'POST', body: blockPayload });
-      const blockId = Number(createdBlock?.data?.id);
-      const detailCodes = Array.isArray(block.detailCodes) ? block.detailCodes : [];
-      if (blockId && detailCodes.length) {
-        const fardos = detailCodes.map((code, idx) => ({
-          instrucao_bloco_id: blockId,
-          codigo_fardo: String(code),
-          ordem: idx + 1,
-        }));
-        await apiRequest('/instrucoes-fardos/bulk-create', { method: 'POST', body: fardos });
+      }));
+      if (transportes.length) {
+        await apiRequest('/instrucoes-transportes/bulk-create', { method: 'POST', body: transportes });
+      }
+      return;
+    }
+
+    let blocoOrdem = 0;
+    for (const carrier of state.plumaCarriers) {
+      for (let index = 0; index < carrier.blocks.length; index += 1) {
+        blocoOrdem += 1;
+        const block = carrier.blocks[index];
+        const blockPayload = {
+          instrucao_id: instructionId,
+          nome_transportadora: carrier.carrierName,
+          nome_bloco: block.blockName,
+          classificacao_bloco: block.classification,
+          modo_inclusao: Array.isArray(block.detailCodes) && block.detailCodes.length ? 'bales' : 'quantity',
+          quantidade_fardos: Number(block.baleQuantity || 0),
+          ordem: blocoOrdem,
+        };
+        const createdBlock = await apiRequest('/instrucoes-blocos', { method: 'POST', body: blockPayload });
+        const blockId = Number(createdBlock?.data?.id);
+        const detailCodes = Array.isArray(block.detailCodes) ? block.detailCodes : [];
+        if (blockId && detailCodes.length) {
+          const fardos = detailCodes.map((code, idx) => ({
+            instrucao_bloco_id: blockId,
+            codigo_fardo: String(code),
+            ordem: idx + 1,
+          }));
+          await apiRequest('/instrucoes-fardos/bulk-create', { method: 'POST', body: fardos });
+        }
       }
     }
+  } catch (err) {
+    try {
+      await apiRequest(`/instrucoes/${instructionId}`, { method: 'DELETE' });
+    } catch (_) { /* ignora falha no rollback */ }
+    throw err;
   }
 }
 
@@ -2356,17 +2403,33 @@ function handleInteraction(event) {
     if (!block) return;
 
     const isPartial = mode === 'partial';
-    block.classification = isPartial ? 'Bloco Parcial' : 'Bloco Completo';
     block.inclusionMode = 'quantity';
     block.draftInclusionMode = 'quantity';
     block.isOpen = true;
     if (!isPartial) {
-      block.bales = [];
-      block.draftBales = [];
-      block.baleInputValue = '';
-      const quantity = Number(block.draftQuantity || block.baleQuantity || 150) || 150;
-      block.draftQuantity = String(quantity);
-      block.baleQuantity = quantity;
+      const currentQty = Number(block.draftQuantity || block.baleQuantity || 150) || 150;
+      if (currentQty !== 150) {
+        const standardize = window.confirm('A quantidade atual é diferente de 150. Deseja padronizar para 150 fardos?');
+        if (standardize) {
+          block.bales = [];
+          block.draftBales = [];
+          block.baleInputValue = '';
+          block.draftQuantity = '150';
+          block.baleQuantity = 150;
+          block.classification = 'Bloco Completo';
+        } else {
+          block.classification = 'Bloco Parcial';
+        }
+      } else {
+        block.bales = [];
+        block.draftBales = [];
+        block.baleInputValue = '';
+        block.draftQuantity = '150';
+        block.baleQuantity = 150;
+        block.classification = 'Bloco Completo';
+      }
+    } else {
+      block.classification = 'Bloco Parcial';
     }
 
     renderPlumaBlocks();
@@ -2448,6 +2511,12 @@ function handleInteraction(event) {
     return;
   }
 
+  const transferButton = event.target.closest('[data-pluma-transfer-to-carrier]');
+  if (transferButton) {
+    handleTransferBlocksToCarrier();
+    return;
+  }
+
   if (togglePlumaRowButton) {
     const [carrierId, blockId] = togglePlumaRowButton.dataset.plumaToggleRow.split(':');
     const carrier = state.plumaCarriers.find((item) => item.id === carrierId);
@@ -2504,6 +2573,20 @@ function handleInteraction(event) {
 export function init() {
   if (activeController) activeController.abort();
   activeController = new AbortController();
+
+  state.formValues = { ...initialFormValues };
+  state.standardLogisticsItems = initialStandardLogisticsItems.map((item) => ({ ...item }));
+  state.editingLogisticsId = null;
+  state.plumaBlocks = initialPlumaBlocks.map((block) => ({
+    ...block,
+    bales: [...(block.bales || [])],
+    draftBales: [...(block.draftBales || block.bales || [])],
+    baleInputValue: block.baleInputValue || '',
+  }));
+  state.plumaCarriers = initialPlumaCarriers.map((carrier) => ({
+    ...carrier,
+    blocks: carrier.blocks.map((block) => ({ ...block, detailCodes: [...(block.detailCodes || [])] })),
+  }));
 
   renderHeaderActions();
   renderContractFields();

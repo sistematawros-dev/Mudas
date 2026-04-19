@@ -90,6 +90,7 @@ export function create(options = {}) {
     readonly ? 'readonly' : '',
     required ? 'required' : '',
     maxLength ? `maxlength="${maxLength}"` : '',
+    'autocomplete="off"',
   ].filter(Boolean).join(' ');
 
   // Input element
@@ -242,7 +243,7 @@ export function createSelect(options = {}) {
     <div class="${fieldClasses.join(' ')}">
       ${labelHtml}
       <div class="input-wrapper input-wrapper--select input-wrapper--icon-right">
-        <select id="${id}" name="${name || id}" class="${inputClasses.join(' ')}" ${disabled ? 'disabled' : ''} ${required ? 'required' : ''}>
+        <select id="${id}" name="${name || id}" class="${inputClasses.join(' ')}" ${disabled ? 'disabled' : ''} ${required ? 'required' : ''} autocomplete="off">
           ${placeholder ? `<option value="" disabled ${!value ? 'selected' : ''}>${placeholder}</option>` : ''}
           ${optionsHtml}
         </select>

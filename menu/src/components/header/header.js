@@ -9,6 +9,8 @@ export function init() {
   window.addEventListener('route:change', handleRouteChange);
   const tabsElement = document.getElementById('header-tabs');
   const cleanupSettingsMenu = setupSettingsMenu();
+  const cleanupUserMenu = setupUserMenu();
+  const cleanupAdminPasswordModal = setupAdminPasswordModal();
   if (tabsElement) tabsElement.addEventListener('click', handleHeaderTabClick);
 
   const filialNomeEl = document.getElementById('header-filial-nome');
@@ -20,6 +22,8 @@ export function init() {
   return () => {
     window.removeEventListener('route:change', handleRouteChange);
     if (typeof cleanupSettingsMenu === 'function') cleanupSettingsMenu();
+    if (typeof cleanupUserMenu === 'function') cleanupUserMenu();
+    if (typeof cleanupAdminPasswordModal === 'function') cleanupAdminPasswordModal();
     if (tabsElement) tabsElement.removeEventListener('click', handleHeaderTabClick);
   };
 }
@@ -30,6 +34,7 @@ function setupSettingsMenu() {
   if (!settingsBtn || !settingsMenu) return () => {};
   const licencasItem = settingsMenu.querySelector('[data-header-settings-action="licencas-modulos"]');
   const usuariosItem = settingsMenu.querySelector('[data-header-settings-action="usuarios-cadastro"]');
+  const senhaItem = settingsMenu.querySelector('[data-header-settings-action="senha"]');
 
   const hasTawrosAccess = getCurrentUserTawros() === 1;
   const isAdmin = getCurrentUserIsAdmin();
@@ -47,6 +52,10 @@ function setupSettingsMenu() {
   }
   if (usuariosItem instanceof HTMLElement) {
     usuariosItem.hidden = !hasTawrosAccess;
+  }
+  // "Senha" aparece apenas para admin (não tawros)
+  if (senhaItem instanceof HTMLElement) {
+    senhaItem.hidden = !isAdmin || hasTawrosAccess;
   }
 
   const closeMenu = () => {
@@ -82,6 +91,10 @@ function setupSettingsMenu() {
     }
     if (action === 'usuarios-cadastro') {
       window.location.hash = '/cadastros/usuarios';
+      return;
+    }
+    if (action === 'senha') {
+      window.dispatchEvent(new CustomEvent('header:open-admin-senha-modal'));
     }
   };
 
@@ -104,6 +117,229 @@ function setupSettingsMenu() {
   return () => {
     settingsBtn.removeEventListener('click', toggleMenu);
     settingsMenu.removeEventListener('click', onMenuAction);
+    document.removeEventListener('click', onDocumentClick);
+    document.removeEventListener('keydown', onEscape);
+  };
+}
+
+function setupUserMenu() {
+  const hasTawrosAccess = getCurrentUserTawros() === 1;
+  const isAdmin = getCurrentUserIsAdmin();
+  const isCommonUser = !hasTawrosAccess && !isAdmin;
+
+  const userWrapper = document.getElementById('header-user-wrapper');
+  if (userWrapper instanceof HTMLElement) userWrapper.hidden = !isCommonUser;
+  if (!isCommonUser) return () => {};
+
+  const userBtn = document.getElementById('header-user-btn');
+  const userModal = document.getElementById('header-user-modal');
+  const currentInput = document.getElementById('hum-current');
+  const newInput = document.getElementById('hum-new');
+  const confirmInput = document.getElementById('hum-confirm');
+  const errorEl = document.getElementById('hum-error');
+  const cancelBtn = document.getElementById('hum-cancel');
+  const confirmBtn = document.getElementById('hum-confirm-btn');
+
+  if (!userBtn || !userModal) return () => {};
+
+  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+
+  function showError(msg) {
+    if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }
+  }
+  function clearError() {
+    if (errorEl) { errorEl.textContent = ''; errorEl.hidden = true; }
+  }
+  function resetForm() {
+    if (currentInput) currentInput.value = '';
+    if (newInput) newInput.value = '';
+    if (confirmInput) confirmInput.value = '';
+    clearError();
+    if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = 'Confirmar'; }
+  }
+  function openModal() {
+    resetForm();
+    userModal.hidden = false;
+    userBtn.setAttribute('aria-expanded', 'true');
+    setTimeout(() => currentInput?.focus(), 50);
+  }
+  function closeModal() {
+    userModal.hidden = true;
+    userBtn.setAttribute('aria-expanded', 'false');
+    resetForm();
+  }
+
+  const onUserBtnClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    userModal.hidden ? openModal() : closeModal();
+  };
+
+  const onCancelClick = () => closeModal();
+
+  const onConfirmClick = async () => {
+    clearError();
+    const currentPassword = currentInput?.value || '';
+    const newPassword = newInput?.value || '';
+    const confirmPassword = confirmInput?.value || '';
+
+    if (!currentPassword) { showError('Informe a senha atual.'); return; }
+    if (newPassword.length < 6) { showError('A nova senha deve ter no mínimo 6 caracteres.'); return; }
+    if (newPassword !== confirmPassword) { showError('A confirmação da nova senha não confere.'); return; }
+
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Aguarde...';
+
+    try {
+      const token = sessionStorage.getItem('authToken') || '';
+      const res = await fetch(`${API_BASE_URL}/auth/change-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ currentPassword, newPassword }),
+      });
+      const payload = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        const msg = payload?.message || 'Erro ao alterar senha.';
+        showError(msg.includes('atual') || res.status === 401 ? 'Senha atual incorreta.' : msg);
+        return;
+      }
+      closeModal();
+      window.alert('Senha alterada com sucesso!');
+    } catch {
+      showError('Erro de conexão. Tente novamente.');
+    } finally {
+      if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = 'Confirmar'; }
+    }
+  };
+
+  const onDocumentClick = (e) => {
+    if (!e.target?.closest?.('#header-user-wrapper')) closeModal();
+  };
+  const onEscape = (e) => { if (e.key === 'Escape') closeModal(); };
+
+  userBtn.addEventListener('click', onUserBtnClick);
+  cancelBtn?.addEventListener('click', onCancelClick);
+  confirmBtn?.addEventListener('click', onConfirmClick);
+  document.addEventListener('click', onDocumentClick);
+  document.addEventListener('keydown', onEscape);
+
+  return () => {
+    userBtn.removeEventListener('click', onUserBtnClick);
+    cancelBtn?.removeEventListener('click', onCancelClick);
+    confirmBtn?.removeEventListener('click', onConfirmClick);
+    document.removeEventListener('click', onDocumentClick);
+    document.removeEventListener('keydown', onEscape);
+  };
+}
+
+function setupAdminPasswordModal() {
+  const modal = document.getElementById('header-admin-senha-modal');
+  const userSelect = document.getElementById('hasm-user-select');
+  const newInput = document.getElementById('hasm-new');
+  const confirmInput = document.getElementById('hasm-confirm');
+  const errorEl = document.getElementById('hasm-error');
+  const cancelBtn = document.getElementById('hasm-cancel');
+  const confirmBtn = document.getElementById('hasm-confirm-btn');
+
+  if (!modal) return () => {};
+
+  const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
+
+  function showError(msg) {
+    if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }
+  }
+  function clearError() {
+    if (errorEl) { errorEl.textContent = ''; errorEl.hidden = true; }
+  }
+  function resetForm() {
+    if (userSelect) userSelect.value = '';
+    if (newInput) newInput.value = '';
+    if (confirmInput) confirmInput.value = '';
+    clearError();
+    if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = 'Confirmar'; }
+  }
+
+  async function loadUsers() {
+    if (!userSelect) return;
+    userSelect.innerHTML = '<option value="">Carregando...</option>';
+    try {
+      const token = sessionStorage.getItem('authToken') || '';
+      const res = await fetch(`${API_BASE_URL}/auth/admin/users`, {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const payload = await res.json().catch(() => ({}));
+      const rows = Array.isArray(payload?.data) ? payload.data : [];
+      userSelect.innerHTML = '<option value="">Selecione um usuário...</option>' +
+        rows.map((u) => `<option value="${u.id}">${u.nome || u.email}</option>`).join('');
+    } catch {
+      userSelect.innerHTML = '<option value="">Erro ao carregar usuários</option>';
+    }
+  }
+
+  async function openModal() {
+    resetForm();
+    await loadUsers();
+    modal.hidden = false;
+    userSelect?.focus();
+  }
+
+  function closeModal() {
+    modal.hidden = true;
+    resetForm();
+  }
+
+  const onOpenEvent = () => openModal();
+  const onCancelClick = () => closeModal();
+
+  const onConfirmClick = async () => {
+    clearError();
+    const targetUserId = Number(userSelect?.value);
+    const newPassword = newInput?.value || '';
+    const confirmPassword = confirmInput?.value || '';
+
+    if (!targetUserId) { showError('Selecione um usuário.'); return; }
+    if (newPassword.length < 8) { showError('A nova senha deve ter no mínimo 8 caracteres.'); return; }
+    if (newPassword !== confirmPassword) { showError('A confirmação da nova senha não confere.'); return; }
+
+    confirmBtn.disabled = true;
+    confirmBtn.textContent = 'Aguarde...';
+
+    try {
+      const token = sessionStorage.getItem('authToken') || '';
+      const res = await fetch(`${API_BASE_URL}/auth/admin/set-password`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
+        body: JSON.stringify({ targetUserId, newPassword }),
+      });
+      const payload = await res.json().catch(() => ({}));
+      if (!res.ok) {
+        showError(payload?.message || 'Erro ao alterar senha.');
+        return;
+      }
+      closeModal();
+      window.alert('Senha alterada com sucesso!');
+    } catch {
+      showError('Erro de conexão. Tente novamente.');
+    } finally {
+      if (confirmBtn) { confirmBtn.disabled = false; confirmBtn.textContent = 'Confirmar'; }
+    }
+  };
+
+  const onDocumentClick = (e) => {
+    if (!e.target?.closest?.('#header-settings-wrapper')) closeModal();
+  };
+  const onEscape = (e) => { if (e.key === 'Escape') closeModal(); };
+
+  window.addEventListener('header:open-admin-senha-modal', onOpenEvent);
+  cancelBtn?.addEventListener('click', onCancelClick);
+  confirmBtn?.addEventListener('click', onConfirmClick);
+  document.addEventListener('click', onDocumentClick);
+  document.addEventListener('keydown', onEscape);
+
+  return () => {
+    window.removeEventListener('header:open-admin-senha-modal', onOpenEvent);
+    cancelBtn?.removeEventListener('click', onCancelClick);
+    confirmBtn?.removeEventListener('click', onConfirmClick);
     document.removeEventListener('click', onDocumentClick);
     document.removeEventListener('keydown', onEscape);
   };

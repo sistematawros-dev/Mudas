@@ -27,7 +27,7 @@ API REST em Fastify/TypeScript para cadastros, autenticação, integrações e a
 - Rate limit, CORS, Helmet, soft delete, auditoria.
 
 ## 3. URL Base e Ambientes
-- Local: `http://192.168.15.26:3000`
+- Local: `http://192.168.15.10:3000`
 - Prefixo: `/api/v1`
 - Swagger: `/docs`
 - OpenAPI: `/openapi.json`
@@ -84,7 +84,7 @@ Fluxo: login -> bearer -> refresh -> logout/revoke -> me.
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -115,7 +115,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -163,7 +163,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/audit' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/errors' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/errors' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -194,7 +194,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/errors' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/errors' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -242,7 +242,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/errors' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/metrics' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/metrics' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -273,7 +273,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/metrics' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/metrics' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -321,7 +321,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/metrics' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -352,7 +352,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -400,7 +400,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/permissions' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/sessions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/sessions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -431,7 +431,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/sessions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/sessions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -479,7 +479,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/sessions' -H 'accept: appl
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -510,7 +510,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/admin/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -557,7 +557,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/admin/users' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/change-password' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/change-password' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -588,7 +588,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/change-password' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/change-password' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -635,7 +635,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/change-password' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/forgot-password' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/forgot-password' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -666,7 +666,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/forgot-password' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/forgot-password' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -714,7 +714,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/forgot-password' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/login' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/login' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -745,7 +745,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/login' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/login' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -792,7 +792,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/login' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/logout' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/logout' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -823,7 +823,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/logout' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/logout' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -871,7 +871,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/logout' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/auth/me' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/auth/me' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -902,7 +902,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/auth/me' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/auth/me' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -949,7 +949,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/auth/me' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/refresh' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/refresh' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -980,7 +980,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/refresh' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/refresh' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1027,7 +1027,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/refresh' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/reset-password' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/reset-password' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1058,7 +1058,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/reset-password' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/reset-password' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1105,7 +1105,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/reset-password' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/revoke' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/revoke' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1136,7 +1136,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/revoke' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/auth/revoke' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1189,7 +1189,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/auth/revoke' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1220,7 +1220,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1267,7 +1267,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1298,7 +1298,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1346,7 +1346,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1377,7 +1377,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1424,7 +1424,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1455,7 +1455,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1502,7 +1502,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1533,7 +1533,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1581,7 +1581,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1612,7 +1612,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1661,7 +1661,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1692,7 +1692,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1740,7 +1740,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/ramo
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1771,7 +1771,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1818,7 +1818,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/audi
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1849,7 +1849,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1896,7 +1896,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/1/res
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -1927,7 +1927,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -1974,7 +1974,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2005,7 +2005,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2052,7 +2052,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bul
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2083,7 +2083,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2130,7 +2130,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2161,7 +2161,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2210,7 +2210,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/bulk-
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2241,7 +2241,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/categorias-pessoa-empresa/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2294,7 +2294,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/categorias-pessoa-empresa/by-ext
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2325,7 +2325,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2372,7 +2372,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2403,7 +2403,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2451,7 +2451,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2482,7 +2482,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2529,7 +2529,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2560,7 +2560,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2607,7 +2607,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2638,7 +2638,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2686,7 +2686,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2717,7 +2717,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2766,7 +2766,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2797,7 +2797,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2845,7 +2845,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/ramos
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2876,7 +2876,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -2923,7 +2923,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/audit
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -2954,7 +2954,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3001,7 +3001,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/1/rest
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3032,7 +3032,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3079,7 +3079,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-c
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3110,7 +3110,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3157,7 +3157,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3188,7 +3188,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3235,7 +3235,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3266,7 +3266,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3315,7 +3315,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/bulk-u
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3346,7 +3346,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-categorias/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3399,7 +3399,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-categorias/by-exte
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3430,7 +3430,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3477,7 +3477,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3508,7 +3508,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3556,7 +3556,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3587,7 +3587,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3634,7 +3634,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3665,7 +3665,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3712,7 +3712,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3743,7 +3743,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3791,7 +3791,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3822,7 +3822,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3871,7 +3871,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3902,7 +3902,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -3950,7 +3950,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/ramos' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -3981,7 +3981,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4028,7 +4028,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/audit' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4059,7 +4059,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4106,7 +4106,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/1/restore
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4137,7 +4137,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4184,7 +4184,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-crea
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4215,7 +4215,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4262,7 +4262,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-de
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4293,7 +4293,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4340,7 +4340,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-upd
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4371,7 +4371,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-classes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4420,7 +4420,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-classes/bulk-upse
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4451,7 +4451,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-classes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4504,7 +4504,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-classes/by-externa
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4535,7 +4535,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4582,7 +4582,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4613,7 +4613,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4661,7 +4661,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4692,7 +4692,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4739,7 +4739,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4770,7 +4770,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4817,7 +4817,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4848,7 +4848,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4896,7 +4896,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -4927,7 +4927,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -4976,7 +4976,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5007,7 +5007,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5055,7 +5055,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/ramos' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5086,7 +5086,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5133,7 +5133,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/audit' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5164,7 +5164,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5211,7 +5211,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/1/restore'
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5242,7 +5242,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5289,7 +5289,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-creat
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5320,7 +5320,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5367,7 +5367,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-del
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5398,7 +5398,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5445,7 +5445,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-upda
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5476,7 +5476,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5525,7 +5525,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/bulk-upser
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5556,7 +5556,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/classificacao-grupos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5609,7 +5609,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/classificacao-grupos/by-external
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5640,7 +5640,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5687,7 +5687,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens' -H 'accept: applicat
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5718,7 +5718,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5766,7 +5766,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5797,7 +5797,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5844,7 +5844,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5875,7 +5875,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -5922,7 +5922,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -5953,7 +5953,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6001,7 +6001,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: appl
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6032,7 +6032,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/embalagens/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6081,7 +6081,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/embalagens/1' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6112,7 +6112,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6160,7 +6160,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1/ramos' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6191,7 +6191,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6238,7 +6238,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/1/audit' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6269,7 +6269,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6316,7 +6316,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/1/restore' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6347,7 +6347,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6394,7 +6394,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-create' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6425,7 +6425,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6472,7 +6472,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-delete' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6503,7 +6503,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6550,7 +6550,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-update' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6581,7 +6581,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/embalagens/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6630,7 +6630,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/embalagens/bulk-upsert' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6661,7 +6661,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/embalagens/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6709,7 +6709,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/embalagens/by-external' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6740,7 +6740,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6793,7 +6793,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/export/pessoas-empresas' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6824,7 +6824,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6871,7 +6871,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6902,7 +6902,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -6950,7 +6950,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -6981,7 +6981,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7028,7 +7028,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7059,7 +7059,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7106,7 +7106,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7137,7 +7137,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7185,7 +7185,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7216,7 +7216,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7265,7 +7265,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/fabricantes/1' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7296,7 +7296,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7344,7 +7344,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1/ramos' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7375,7 +7375,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7422,7 +7422,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/1/audit' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7453,7 +7453,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7500,7 +7500,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/1/restore' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7531,7 +7531,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7578,7 +7578,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-create' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7609,7 +7609,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7656,7 +7656,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-delete' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7687,7 +7687,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7734,7 +7734,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-update' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7765,7 +7765,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7814,7 +7814,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/fabricantes/bulk-upsert' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7845,7 +7845,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7898,7 +7898,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/fabricantes/by-external' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -7929,7 +7929,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -7976,7 +7976,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8007,7 +8007,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8055,7 +8055,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8086,7 +8086,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8133,7 +8133,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8164,7 +8164,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8211,7 +8211,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8242,7 +8242,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8290,7 +8290,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8321,7 +8321,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8370,7 +8370,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8401,7 +8401,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8449,7 +8449,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/ramos' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8480,7 +8480,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8527,7 +8527,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/audit' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8558,7 +8558,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8605,7 +8605,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/1/restore' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8636,7 +8636,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8683,7 +8683,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-create
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8714,7 +8714,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8761,7 +8761,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-dele
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8792,7 +8792,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8839,7 +8839,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-updat
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8870,7 +8870,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -8919,7 +8919,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/bulk-upsert
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -8950,7 +8950,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/grupos-empresariais/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9003,7 +9003,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/grupos-empresariais/by-external'
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/health' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/health' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9034,7 +9034,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/health' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/health' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9082,7 +9082,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/health' -H 'accept: application/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/delta' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/delta' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9113,7 +9113,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/delta' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/delta' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9161,7 +9161,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/de
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/pull' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/pull' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9192,7 +9192,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/pull' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/pull' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9239,7 +9239,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/pu
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/push' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/push' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9270,7 +9270,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/push' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/push' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9317,7 +9317,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/p
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9348,7 +9348,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/pessoas-empresas/upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9396,7 +9396,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/pessoas-empresas/u
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9427,7 +9427,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/export/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9474,7 +9474,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/export/pessoas-empr
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/import/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/import/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9505,7 +9505,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/import/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/import/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9553,7 +9553,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/import/pessoas-emp
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/status' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/status' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9584,7 +9584,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/status' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/integrations/status' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9631,7 +9631,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/integrations/status' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/webhooks/pedido-criado' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/webhooks/pedido-criado' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9662,7 +9662,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/webhooks/pedido-criado' -H 'accept: application/json'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/integrations/webhooks/pedido-criado' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9715,7 +9715,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/integrations/webhooks/pedido-cr
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/liveness' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/liveness' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9746,7 +9746,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/liveness' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/liveness' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9794,7 +9794,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/liveness' -H 'accept: applicatio
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/lookups/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/lookups/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9825,7 +9825,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/lookups/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/lookups/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9878,7 +9878,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/lookups/pessoas-empresas' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9909,7 +9909,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -9956,7 +9956,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas' -H 'accept: application/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -9987,7 +9987,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10035,7 +10035,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10066,7 +10066,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10113,7 +10113,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: applicatio
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10144,7 +10144,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10191,7 +10191,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: applicatio
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10222,7 +10222,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10270,7 +10270,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: applicat
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10301,7 +10301,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10350,7 +10350,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/marcas/1' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10381,7 +10381,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10429,7 +10429,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1/ramos' -H 'accept: appl
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10460,7 +10460,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10507,7 +10507,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/1/audit' -H 'accept: appl
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10538,7 +10538,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10585,7 +10585,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/1/restore' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10616,7 +10616,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10663,7 +10663,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/bulk-create' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10694,7 +10694,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10741,7 +10741,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/marcas/bulk-delete' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10772,7 +10772,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10819,7 +10819,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/marcas/bulk-update' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10850,7 +10850,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10899,7 +10899,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/marcas/bulk-upsert' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -10930,7 +10930,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -10983,7 +10983,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/marcas/by-external' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11014,7 +11014,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11061,7 +11061,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11092,7 +11092,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11140,7 +11140,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11171,7 +11171,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11218,7 +11218,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11249,7 +11249,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11296,7 +11296,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11327,7 +11327,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11375,7 +11375,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11406,7 +11406,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/permissions/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11455,7 +11455,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/permissions/1' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11486,7 +11486,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11534,7 +11534,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1/ramos' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11565,7 +11565,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11612,7 +11612,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/1/audit' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11643,7 +11643,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11690,7 +11690,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/1/restore' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11721,7 +11721,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11768,7 +11768,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/bulk-create' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/permissions/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/permissions/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11799,7 +11799,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/permissions/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/permissions/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11846,7 +11846,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/permissions/bulk-delete' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/permissions/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/permissions/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11877,7 +11877,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/permissions/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/permissions/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -11924,7 +11924,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/permissions/bulk-update' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -11955,7 +11955,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/permissions/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12004,7 +12004,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/permissions/bulk-upsert' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12035,7 +12035,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/permissions/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12088,7 +12088,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/permissions/by-external' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12119,7 +12119,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12166,7 +12166,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12197,7 +12197,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12245,7 +12245,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12276,7 +12276,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12323,7 +12323,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12354,7 +12354,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12401,7 +12401,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12432,7 +12432,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12480,7 +12480,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12511,7 +12511,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12560,7 +12560,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12591,7 +12591,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12639,7 +12639,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/ramos' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12670,7 +12670,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12717,7 +12717,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/audit' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12748,7 +12748,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12795,7 +12795,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/1/restore' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12826,7 +12826,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12873,7 +12873,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-create' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12904,7 +12904,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -12951,7 +12951,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-delete'
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -12982,7 +12982,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13029,7 +13029,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-update' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13060,7 +13060,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13109,7 +13109,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/bulk-upsert' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13140,7 +13140,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13193,7 +13193,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas/by-external' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13224,7 +13224,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13271,7 +13271,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13302,7 +13302,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13350,7 +13350,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13381,7 +13381,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13428,7 +13428,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13459,7 +13459,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13506,7 +13506,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13537,7 +13537,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13585,7 +13585,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13616,7 +13616,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13665,7 +13665,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13696,7 +13696,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13744,7 +13744,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/ramos' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13775,7 +13775,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13822,7 +13822,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/audit' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13853,7 +13853,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13900,7 +13900,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/1/restor
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -13931,7 +13931,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -13978,7 +13978,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-cre
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14009,7 +14009,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14056,7 +14056,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-d
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14087,7 +14087,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14134,7 +14134,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-up
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14165,7 +14165,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14214,7 +14214,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/bulk-ups
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14245,7 +14245,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/pessoas-empresas-ramos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14298,7 +14298,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/pessoas-empresas-ramos/by-extern
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14329,7 +14329,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14376,7 +14376,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14407,7 +14407,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14455,7 +14455,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14486,7 +14486,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14533,7 +14533,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14564,7 +14564,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14611,7 +14611,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14642,7 +14642,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14690,7 +14690,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14721,7 +14721,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14770,7 +14770,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14801,7 +14801,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14849,7 +14849,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/ramos' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14880,7 +14880,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -14927,7 +14927,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/audit' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -14958,7 +14958,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15005,7 +15005,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/1/restore' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15036,7 +15036,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15083,7 +15083,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-create' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15114,7 +15114,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15161,7 +15161,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-delete
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15192,7 +15192,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15239,7 +15239,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-update'
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15270,7 +15270,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15319,7 +15319,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos/bulk-upsert' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15350,7 +15350,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15403,7 +15403,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos/by-external' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15434,7 +15434,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15481,7 +15481,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15512,7 +15512,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15560,7 +15560,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15591,7 +15591,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15638,7 +15638,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1'
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15669,7 +15669,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15716,7 +15716,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1'
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15747,7 +15747,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15795,7 +15795,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15826,7 +15826,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15875,7 +15875,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15906,7 +15906,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -15954,7 +15954,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -15985,7 +15985,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16032,7 +16032,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16063,7 +16063,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16110,7 +16110,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/1
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16141,7 +16141,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16188,7 +16188,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/b
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16219,7 +16219,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16266,7 +16266,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16297,7 +16297,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16344,7 +16344,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16375,7 +16375,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16424,7 +16424,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/b
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16455,7 +16455,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-fabricantes/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16508,7 +16508,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-fabricantes/by
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16539,7 +16539,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16586,7 +16586,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas' -H 'ac
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16617,7 +16617,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16665,7 +16665,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas' -H 'a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16696,7 +16696,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16743,7 +16743,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16774,7 +16774,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16821,7 +16821,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16852,7 +16852,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16900,7 +16900,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -16931,7 +16931,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -16980,7 +16980,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17011,7 +17011,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17059,7 +17059,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/ramos
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17090,7 +17090,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17137,7 +17137,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/audit
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17168,7 +17168,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17215,7 +17215,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/1/rest
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17246,7 +17246,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17293,7 +17293,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-c
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17324,7 +17324,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17371,7 +17371,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17402,7 +17402,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17449,7 +17449,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17480,7 +17480,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17529,7 +17529,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/bulk-u
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17560,7 +17560,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/produtos-servicos-marcas/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17613,7 +17613,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/produtos-servicos-marcas/by-exte
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17644,7 +17644,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17691,7 +17691,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17722,7 +17722,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17770,7 +17770,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17801,7 +17801,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17848,7 +17848,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17879,7 +17879,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -17926,7 +17926,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -17957,7 +17957,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18005,7 +18005,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18036,7 +18036,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18085,7 +18085,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18116,7 +18116,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18164,7 +18164,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/ramos' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18195,7 +18195,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18242,7 +18242,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/audit' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18273,7 +18273,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18320,7 +18320,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/1/restore' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18351,7 +18351,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18398,7 +18398,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-create' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18429,7 +18429,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18476,7 +18476,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-delete' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18507,7 +18507,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18554,7 +18554,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-update' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18585,7 +18585,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/ramos-atividade/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18634,7 +18634,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/ramos-atividade/bulk-upsert' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18665,7 +18665,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/ramos-atividade/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18718,7 +18718,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/ramos-atividade/by-external' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/readiness' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/readiness' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18749,7 +18749,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/readiness' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/readiness' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18802,7 +18802,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/readiness' -H 'accept: applicati
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18833,7 +18833,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18880,7 +18880,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles' -H 'accept: application/j
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18911,7 +18911,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -18959,7 +18959,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles' -H 'accept: application/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -18990,7 +18990,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19037,7 +19037,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19068,7 +19068,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19115,7 +19115,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19146,7 +19146,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19194,7 +19194,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: applicati
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19225,7 +19225,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/roles/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19274,7 +19274,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/roles/1' -H 'accept: applicat
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19305,7 +19305,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19353,7 +19353,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1/ramos' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19384,7 +19384,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19431,7 +19431,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/1/audit' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19462,7 +19462,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19509,7 +19509,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/1/restore' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19540,7 +19540,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19587,7 +19587,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/bulk-create' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/roles/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/roles/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19618,7 +19618,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/roles/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/roles/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19665,7 +19665,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/roles/bulk-delete' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/roles/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/roles/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19696,7 +19696,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/roles/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/roles/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19743,7 +19743,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/roles/bulk-update' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19774,7 +19774,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/roles/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19823,7 +19823,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/roles/bulk-upsert' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19854,7 +19854,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/roles/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19902,7 +19902,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/roles/by-external' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/search/global' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/search/global' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -19933,7 +19933,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/search/global' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/search/global' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -19986,7 +19986,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/search/global' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20017,7 +20017,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20064,7 +20064,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20095,7 +20095,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20143,7 +20143,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores' -H 'accept: applicatio
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20174,7 +20174,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20221,7 +20221,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: applicati
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20252,7 +20252,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20299,7 +20299,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: applicati
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20330,7 +20330,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20378,7 +20378,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: applica
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20409,7 +20409,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/setores/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20458,7 +20458,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/setores/1' -H 'accept: applic
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20489,7 +20489,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20537,7 +20537,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1/ramos' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20568,7 +20568,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20615,7 +20615,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/1/audit' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20646,7 +20646,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20693,7 +20693,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/1/restore' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20724,7 +20724,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20771,7 +20771,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/bulk-create' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/setores/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/setores/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20802,7 +20802,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/setores/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/setores/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20849,7 +20849,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/setores/bulk-delete' -H 'acce
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/setores/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/setores/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20880,7 +20880,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/setores/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/setores/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -20927,7 +20927,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/setores/bulk-update' -H 'accep
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -20958,7 +20958,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/setores/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21007,7 +21007,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/setores/bulk-upsert' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21038,7 +21038,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/setores/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21091,7 +21091,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/setores/by-external' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21122,7 +21122,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21169,7 +21169,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida' -H 'accept: app
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21200,7 +21200,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21248,7 +21248,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21279,7 +21279,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21326,7 +21326,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21357,7 +21357,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21404,7 +21404,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21435,7 +21435,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21483,7 +21483,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21514,7 +21514,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/unidades-medida/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21563,7 +21563,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/unidades-medida/1' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21594,7 +21594,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21642,7 +21642,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/ramos' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21673,7 +21673,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21720,7 +21720,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/audit' -H 'acc
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21751,7 +21751,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21798,7 +21798,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/1/restore' -H '
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21829,7 +21829,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21876,7 +21876,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-create' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21907,7 +21907,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -21954,7 +21954,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-delete' 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -21985,7 +21985,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22032,7 +22032,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-update' -
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22063,7 +22063,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/unidades-medida/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22112,7 +22112,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/unidades-medida/bulk-upsert' -H
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22143,7 +22143,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/unidades-medida/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22196,7 +22196,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/unidades-medida/by-external' -H 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22227,7 +22227,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22274,7 +22274,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users' -H 'accept: application/j
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22305,7 +22305,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22353,7 +22353,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users' -H 'accept: application/
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22384,7 +22384,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22431,7 +22431,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22462,7 +22462,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PUT' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22509,7 +22509,7 @@ curl -X 'PUT' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22540,7 +22540,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22588,7 +22588,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: applicati
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22619,7 +22619,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/users/1' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22668,7 +22668,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/users/1' -H 'accept: applicat
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22699,7 +22699,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/1/ramos' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22747,7 +22747,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1/ramos' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22778,7 +22778,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/1/audit' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22825,7 +22825,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/1/audit' -H 'accept: appli
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22856,7 +22856,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users/1/restore' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22903,7 +22903,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/1/restore' -H 'accept: ap
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -22934,7 +22934,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users/bulk-create' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -22981,7 +22981,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/bulk-create' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/users/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/users/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -23012,7 +23012,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/users/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'DELETE' 'http://192.168.15.10:3000/api/v1/users/bulk-delete' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -23059,7 +23059,7 @@ curl -X 'DELETE' 'http://192.168.15.26:3000/api/v1/users/bulk-delete' -H 'accept
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/users/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/users/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -23090,7 +23090,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/users/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'PATCH' 'http://192.168.15.10:3000/api/v1/users/bulk-update' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -23137,7 +23137,7 @@ curl -X 'PATCH' 'http://192.168.15.26:3000/api/v1/users/bulk-update' -H 'accept:
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -23168,7 +23168,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'POST' 'http://192.168.15.10:3000/api/v1/users/bulk-upsert' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -23217,7 +23217,7 @@ curl -X 'POST' 'http://192.168.15.26:3000/api/v1/users/bulk-upsert' -H 'accept: 
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -23248,7 +23248,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/users/by-external' -H 'accept: application/json' -H 'Authorization: Bearer <ACCESS_TOKEN>'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -23301,7 +23301,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/users/by-external' -H 'accept: a
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/version' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/version' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -23332,7 +23332,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/api/v1/version' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/api/v1/version' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia
@@ -23380,7 +23380,7 @@ curl -X 'GET' 'http://192.168.15.26:3000/api/v1/version' -H 'accept: application
 Swagger: /docs -> Try it out -> Execute.
 curl:
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/openapi.json' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/openapi.json' -H 'accept: application/json'
 ```
 Postman/Insomnia: método + URL + headers + body conforme seções.
 
@@ -23411,7 +23411,7 @@ Postman/Insomnia: método + URL + headers + body conforme seções.
 
 ### 11. Como testar via curl
 ```bash
-curl -X 'GET' 'http://192.168.15.26:3000/openapi.json' -H 'accept: application/json'
+curl -X 'GET' 'http://192.168.15.10:3000/openapi.json' -H 'accept: application/json'
 ```
 
 ### 12. Como testar no Postman/Insomnia

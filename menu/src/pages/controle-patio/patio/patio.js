@@ -1,15 +1,15 @@
 import * as Checkbox from '../../../components/checkbox/checkbox.js';
 import * as Input from '../../../components/input/input.js';
 import * as Modal from '../../../components/modal/modal.js';
-import { createPatioState, createPatioVehicleForm, patioModalIds } from './patio.data.js';
+import { createPatioState, createPatioEntryForm, patioModalIds } from './patio.data.js';
 import { renderPatioBoard } from './patio.templates.js';
-import { initPatioVehicleDrawer } from './vehicle-drawer.js';
+import { initPatioEntryDrawer } from './entry-drawer.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 const state = createPatioState();
 let cleanupInputs = null;
 let cleanupModal = null;
-let vehicleDrawer = null;
+let entryDrawer = null;
 let activeController = null;
 
 function getAccessToken() {
@@ -31,6 +31,7 @@ function parseApiResponse(payload) {
   if (payload?.data && Array.isArray(payload.data.rows)) return payload.data.rows;
   return [];
 }
+
 
 async function refreshAccessToken() {
   const refreshToken = getRefreshToken();
@@ -63,6 +64,8 @@ async function apiRequest(path, { method = 'GET', query, body, auth = true, retr
   if (auth) {
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
   }
 
   const response = await fetch(url.toString(), {
@@ -308,25 +311,25 @@ function openFinishModal(page, cardId) {
   renderPage(page, { keepModalOpen: true });
 }
 
-function openVehicleDrawer(triggerEl = null) {
-  state.vehicleDrawer.isOpen = true;
-  state.vehicleDrawer.form = createPatioVehicleForm();
-  vehicleDrawer?.open({
+function openEntryDrawer(triggerEl = null) {
+  state.entryDrawer.isOpen = true;
+  state.entryDrawer.form = createPatioEntryForm();
+  entryDrawer?.open({
     triggerEl,
-    form: state.vehicleDrawer.form,
-    groupOptions: state.vehicleDrawer.groupOptions,
-    lookups: state.vehicleDrawer.lookups,
+    form: state.entryDrawer.form,
+    options: state.entryDrawer.lookups,
   });
 }
 
-function closeVehicleDrawer() {
-  state.vehicleDrawer.isOpen = false;
-  vehicleDrawer?.close();
+function closeEntryDrawer() {
+  state.entryDrawer.isOpen = false;
+  entryDrawer?.close();
 }
 
 function resetModalState() {
   state.modal.selectedCardId = null;
   state.modal.data = null;
+  state.modal.postponeCardId = null;
 }
 
 function toggleBale(rowId, baleNumber, page) {
@@ -419,7 +422,6 @@ function mapColumns(rows, lookups) {
         ...baseCard,
         actions: [
           { id: 'check-in-today', label: 'Check-in Hoje', variant: 'dark', style: 'solid' },
-          { id: 'postpone', label: 'Postergar', variant: 'dark', style: 'outline' },
         ],
       });
       return;
@@ -443,7 +445,6 @@ function mapColumns(rows, lookups) {
       loading.push({
         ...baseCard,
         actions: [
-          { id: 'edit', label: 'Editar', variant: 'dark', style: 'outline' },
           { id: 'finish', label: 'Finalizar', variant: 'primary', style: 'solid' },
         ],
       });
@@ -471,7 +472,7 @@ function mapColumns(rows, lookups) {
   return [
     { id: 'future', title: 'Aguardando (Futuro)', tone: 'future', toggleControlled: true, items: future },
     { id: 'waiting', title: 'Aguardando Chegada', items: waiting },
-    { id: 'queue', title: 'Fila de Ptio', items: queue },
+    { id: 'queue', title: 'Fila de Pátio', items: queue },
     { id: 'loading', title: 'Carregando', items: loading },
     { id: 'finished', title: 'Finalizados', items: finished },
   ];
@@ -531,6 +532,32 @@ async function patchInstructionFromCard(cardId, payload, page) {
 }
 
 function handleModalConfirm(modalId) {
+  if (modalId === patioModalIds.postpone) {
+    const cardId = state.modal.postponeCardId;
+    const dateInput = document.getElementById('postponeDate');
+    const selectedDate = dateInput?.value?.trim();
+    const page = document.querySelector('.patio-board-page');
+    resetModalState();
+    if (!cardId || !selectedDate || !page) return;
+    const tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    if (selectedDate < tomorrow.toISOString().slice(0, 10)) {
+      alert('A data deve ser posterior à data atual.');
+      return;
+    }
+    patchInstructionFromCard(cardId, {
+      data_agendamento: selectedDate,
+      patio_fase: 'aguardando_chegada',
+      chegada_em: null,
+      chamado_em: null,
+      entrada_em: null,
+      ordem_fila: null,
+    }, page).catch((error) => {
+      console.error('[controle-patio/patio] falha ao postergar', error);
+    });
+    return;
+  }
+
   if (modalId !== patioModalIds.finishLoading) return;
   const selectedCardId = state.modal.selectedCardId;
   const modalData = state.modal.data;
@@ -556,7 +583,7 @@ function handleModalConfirm(modalId) {
 }
 
 function handleModalDismiss(modalId) {
-  if (modalId && modalId !== patioModalIds.finishLoading) return;
+  if (modalId && modalId !== patioModalIds.finishLoading && modalId !== patioModalIds.postpone) return;
   resetModalState();
 
   const page = document.querySelector('.patio-board-page');
@@ -582,7 +609,7 @@ async function handleClick(event) {
   }
 
   if (action === 'register-entry') {
-    openVehicleDrawer(trigger);
+    openEntryDrawer(trigger);
     return;
   }
 
@@ -655,19 +682,9 @@ async function handleClick(event) {
   }
 
   if (action === 'card-action' && cardId && cardAction === 'postpone') {
-    const tomorrow = new Date();
-    tomorrow.setDate(tomorrow.getDate() + 1);
-    const nextDate = tomorrow.toISOString().slice(0, 10);
-    patchInstructionFromCard(cardId, {
-      data_agendamento: nextDate,
-      patio_fase: 'aguardando_chegada',
-      chegada_em: null,
-      chamado_em: null,
-      entrada_em: null,
-      ordem_fila: null,
-    }, page).catch((error) => {
-      console.error('[controle-patio/patio] falha ao postergar', error);
-    });
+    state.modal.postponeCardId = cardId;
+    renderPage(page, { keepModalOpen: true });
+    Modal.open(patioModalIds.postpone);
     return;
   }
 
@@ -756,22 +773,16 @@ export function init() {
   if (activeController) activeController.abort();
   activeController = new AbortController();
 
-  vehicleDrawer = initPatioVehicleDrawer({
+  entryDrawer = initPatioEntryDrawer({
     onClose: () => {
-      state.vehicleDrawer.isOpen = false;
-    },
-    onChange: (form) => {
-      state.vehicleDrawer.form = {
-        ...state.vehicleDrawer.form,
-        ...form,
-      };
+      state.entryDrawer.isOpen = false;
     },
     onSave: (form) => {
-      state.vehicleDrawer.form = {
-        ...state.vehicleDrawer.form,
+      state.entryDrawer.form = {
+        ...state.entryDrawer.form,
         ...form,
       };
-      closeVehicleDrawer();
+      closeEntryDrawer();
     },
   });
 
@@ -793,8 +804,8 @@ export function init() {
     cleanupInputs = null;
     cleanupModal?.();
     cleanupModal = null;
-    vehicleDrawer?.cleanup?.();
-    vehicleDrawer = null;
+    entryDrawer?.cleanup?.();
+    entryDrawer = null;
     Modal.closeAll();
     Modal.resetModalStack();
     if (activeController) {

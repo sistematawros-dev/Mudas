@@ -1,14 +1,11 @@
-/**
- * Login Page
- * Handles authentication form validation and submission
- */
+import { startSession, initSessionManager, generateSessionKey } from '../../app/session.js';
 
 // State
 let isSubmitting = false;
 let activeController = null;
 let loginPhase = 'form'; // 'form' | 'filial'
 let authData = null; // { token, refreshToken, user }
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 
 // DOM Elements (initialized in init())
 let loginForm;
@@ -22,17 +19,11 @@ let submitButton;
 let passwordToggle;
 let loginForgot;
 
-/**
- * Validate email format
- */
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   return emailRegex.test(email);
 }
 
-/**
- * Show field error
- */
 function showFieldError(errorElement, message) {
   if (errorElement) {
     errorElement.textContent = message;
@@ -40,9 +31,6 @@ function showFieldError(errorElement, message) {
   }
 }
 
-/**
- * Clear field error
- */
 function clearFieldError(errorElement) {
   if (errorElement) {
     errorElement.textContent = '';
@@ -50,9 +38,6 @@ function clearFieldError(errorElement) {
   }
 }
 
-/**
- * Show form error message
- */
 function showFormError(message) {
   if (loginFormError) {
     loginFormError.textContent = message;
@@ -60,19 +45,14 @@ function showFormError(message) {
   }
 }
 
-/**
- * Hide form error message
- */
 function hideFormError() {
   if (loginFormError) {
     loginFormError.textContent = '';
+    loginFormError.innerHTML = '';
     loginFormError.hidden = true;
   }
 }
 
-/**
- * Set loading state
- */
 function setLoadingState(loading) {
   isSubmitting = loading;
 
@@ -81,26 +61,19 @@ function setLoadingState(loading) {
     submitButton.dataset.loading = String(loading);
   }
 
-  // Na fase 'filial' o loginInput fica sempre desabilitado
   if (loginInput) loginInput.disabled = loading || loginPhase === 'filial';
   if (loginPhase === 'form' && passwordInput) passwordInput.disabled = loading;
 }
 
-/**
- * Transforma o campo de senha em um select de filiais
- */
 function showFilialSelect(filiais) {
   loginPhase = 'filial';
 
-  // Desabilita o campo login e oculta "Esqueci minha senha"
   if (loginInput) loginInput.disabled = true;
   if (loginForgot) loginForgot.hidden = true;
 
-  // Troca a label
   const label = passwordField?.querySelector('.login-form-label');
   if (label) label.innerHTML = 'Filial<span class="login-form-required">*</span>';
 
-  // Substitui o wrapper de senha pelo select
   const wrapper = passwordField?.querySelector('.login-form-password-wrapper');
   if (wrapper) {
     const select = document.createElement('select');
@@ -124,14 +97,10 @@ function showFilialSelect(filiais) {
     wrapper.replaceWith(select);
   }
 
-  // Troca o botão para "Acessar"
   const submitText = submitButton?.querySelector('.login-form-submit-text');
   if (submitText) submitText.textContent = 'Acessar';
 }
 
-/**
- * Finaliza o acesso com a filial selecionada
- */
 function finishAccess(filialId, filialNome, filialCodigo) {
   sessionStorage.setItem('authToken', authData.token);
   sessionStorage.setItem('refreshToken', authData.refreshToken || '');
@@ -139,12 +108,52 @@ function finishAccess(filialId, filialNome, filialCodigo) {
   sessionStorage.setItem('filialId', String(filialId ?? ''));
   sessionStorage.setItem('filialNome', String(filialNome ?? ''));
   sessionStorage.setItem('filialCodigo', String(filialCodigo ?? ''));
+  initSessionManager();
   window.location.hash = '#/dashboard';
 }
 
-/**
- * Validate form fields
- */
+function proceedToFilialOrDashboard() {
+  const filiais = Array.isArray(authData.user?.filiais) ? authData.user.filiais : [];
+  if (filiais.length > 1) {
+    showFilialSelect(filiais);
+  } else {
+    const filial = filiais[0] || null;
+    finishAccess(filial?.id ?? '', filial?.nome ?? '', filial?.codigo ?? '');
+  }
+}
+
+function showAlreadyActiveWarning(count) {
+  if (!loginFormError) return;
+
+  const plural = count > 1 ? `${count} sessões ativas` : 'uma sessão ativa';
+  loginFormError.innerHTML = `
+    <span>Este usuário já possui ${plural} em outro dispositivo ou aba.</span>
+    <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap;">
+      <button type="button" id="loginForceYes" style="padding:6px 14px;background:#0066cc;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px;">Sim, desconectar e entrar</button>
+      <button type="button" id="loginForceNo" style="padding:6px 14px;background:transparent;color:inherit;border:1px solid currentColor;border-radius:6px;cursor:pointer;font-size:13px;">Cancelar</button>
+    </div>
+  `;
+  loginFormError.hidden = false;
+
+  document.getElementById('loginForceYes')?.addEventListener('click', async () => {
+    hideFormError();
+    setLoadingState(true);
+    try {
+      await startSession(authData.token, true);
+      proceedToFilialOrDashboard();
+    } catch (err) {
+      showFormError(err?.message || 'Erro ao forçar desconexão. Tente novamente.');
+    } finally {
+      setLoadingState(false);
+    }
+  });
+
+  document.getElementById('loginForceNo')?.addEventListener('click', () => {
+    hideFormError();
+    authData = null;
+  });
+}
+
 function validateForm() {
   let isValid = true;
 
@@ -200,9 +209,6 @@ async function authenticate(login, password) {
   };
 }
 
-/**
- * Handle form submission
- */
 async function handleSubmit(event) {
   event.preventDefault();
 
@@ -239,16 +245,16 @@ async function handleSubmit(event) {
     }
 
     authData = response;
-    const filiais = Array.isArray(response.user?.filiais) ? response.user.filiais : [];
 
-    if (filiais.length > 1) {
-      // Mais de uma filial: mostrar select
-      showFilialSelect(filiais);
-    } else {
-      // Uma filial ou nenhuma: entrar direto
-      const filial = filiais[0] || null;
-      finishAccess(filial?.id ?? '', filial?.nome ?? '', filial?.codigo ?? '');
+    // Verifica sessão ativa antes de prosseguir
+    const sessionResult = await startSession(response.token, false);
+
+    if (sessionResult.status === 'already_active') {
+      showAlreadyActiveWarning(sessionResult.count || 1);
+      return;
     }
+
+    proceedToFilialOrDashboard();
   } catch (error) {
     if (error?.name === 'AbortError') return;
     showFormError(error?.message || 'Erro ao fazer login. Tente novamente.');
@@ -257,9 +263,6 @@ async function handleSubmit(event) {
   }
 }
 
-/**
- * Toggle password visibility
- */
 function togglePasswordVisibility() {
   if (!passwordInput) return;
 
@@ -270,9 +273,6 @@ function togglePasswordVisibility() {
   passwordToggle?.setAttribute('aria-label', label);
 }
 
-/**
- * Clear errors on input
- */
 function setupInputListeners() {
   const onLoginInput = () => {
     clearFieldError(loginError);
@@ -293,9 +293,20 @@ function setupInputListeners() {
   };
 }
 
-/**
- * Initialize
- */
+function blockLoginBackNavigation() {
+  // Substitui a entrada atual e empurra uma entrada extra para "absorver" o back
+  history.replaceState({ page: 'login' }, '', window.location.href);
+  history.pushState({ page: 'login' }, '', window.location.href);
+
+  const handlePopState = () => {
+    // Sempre que o usuário tentar voltar, reempurra o estado de login
+    history.pushState({ page: 'login' }, '', window.location.href);
+  };
+
+  window.addEventListener('popstate', handlePopState);
+  return () => window.removeEventListener('popstate', handlePopState);
+}
+
 function init() {
   loginForm = document.getElementById('loginForm');
   loginInput = document.getElementById('loginInput');
@@ -312,6 +323,7 @@ function init() {
 
   if (!loginForm) return;
 
+  const cleanupBackBlock = blockLoginBackNavigation();
   const inputCleanup = setupInputListeners();
   loginForm.addEventListener('submit', handleSubmit);
   passwordToggle?.addEventListener('click', togglePasswordVisibility);
@@ -319,6 +331,7 @@ function init() {
   loginInput?.focus();
 
   return () => {
+    cleanupBackBlock();
     if (activeController) {
       activeController.abort();
       activeController = null;

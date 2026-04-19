@@ -32,11 +32,11 @@ function getGrupoEmpresasContent(state = {}) {
               placeholder="Buscar por: Razão Social, CNPJ, Cidade..."
               data-cpe-grupo-search
               value="${searchValue}"
-            />
+            ${isSaving ? 'disabled' : ''} />
             <span class="cadastros-search__icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none">
-                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" />
-                <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" />
+                <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8" ${isSaving ? 'disabled' : ''} />
+                <path d="M20 20L16.5 16.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" ${isSaving ? 'disabled' : ''} />
               </svg>
             </span>
           </div>
@@ -62,8 +62,8 @@ function getGrupoEmpresasContent(state = {}) {
                   <td class="cadastros-actions">
                     <button type="button" class="cadastros-link" data-action="view" data-cpe-grupo-view="${row.id || row.codigo || ''}">Ver
                       <svg viewBox="0 0 16 16" fill="none">
-                        <path d="M1.5 8S4 3.5 8 3.5S14.5 8 14.5 8S12 12.5 8 12.5S1.5 8 1.5 8Z" stroke="currentColor" stroke-width="1.3" />
-                        <circle cx="8" cy="8" r="1.6" stroke="currentColor" stroke-width="1.3" />
+                        <path d="M1.5 8S4 3.5 8 3.5S14.5 8 14.5 8S12 12.5 8 12.5S1.5 8 1.5 8Z" stroke="currentColor" stroke-width="1.3" ${isSaving ? 'disabled' : ''} />
+                        <circle cx="8" cy="8" r="1.6" stroke="currentColor" stroke-width="1.3" ${isSaving ? 'disabled' : ''} />
                       </svg>
                     </button>
                   </td>
@@ -82,7 +82,7 @@ function getGrupoEmpresasContent(state = {}) {
           <div class="cadastros-table-footer__left">
             <button type="button" class="cadastros-entries-btn">10 Entradas
               <svg viewBox="0 0 12 8" fill="none">
-                <path d="M2 2L6 6L10 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M2 2L6 6L10 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" ${isSaving ? 'disabled' : ''} />
               </svg>
             </button>
             <span class="cadastros-table-info">Mostrando 0 a 0 de 0 entradas.</span>
@@ -91,13 +91,13 @@ function getGrupoEmpresasContent(state = {}) {
           <nav class="cadastros-pagination" aria-label="Paginação">
             <button type="button" class="cadastros-pagination__btn" aria-label="Página anterior">
               <svg viewBox="0 0 16 16" fill="none">
-                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" ${isSaving ? 'disabled' : ''} />
               </svg>
             </button>
             <button type="button" class="cadastros-pagination__number is-active">1</button>
             <button type="button" class="cadastros-pagination__btn" aria-label="Próxima página">
               <svg viewBox="0 0 16 16" fill="none">
-                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" ${isSaving ? 'disabled' : ''} />
               </svg>
             </button>
           </nav>
@@ -137,6 +137,7 @@ function getPessoasEmpresasContent(state = {}) {
   const isComplementaresOpen = Boolean(state.isComplementaresOpen);
   const saveError = state.saveError || '';
   const ramoChips = Array.isArray(state.ramoChips) ? state.ramoChips : [];
+  const emailChips = Array.isArray(state.emailChips) ? state.emailChips : [];
   const form = state.form || {};
   const grupoOptions = Array.isArray(state.grupoOptions) ? state.grupoOptions : [];
   const categoriaOptions = Array.isArray(state.categoriaOptions) ? state.categoriaOptions : [];
@@ -153,7 +154,7 @@ function getPessoasEmpresasContent(state = {}) {
             id="cadastro-pessoa-empresa-ativo"
             ${isAtivo ? 'checked' : ''}
             ${isSaving ? 'disabled' : ''}
-          />
+          ${isSaving ? 'disabled' : ''} />
           <span class="toggle-track"><span class="toggle-thumb"></span></span>
           <span class="toggle-label">Ativo</span>
         </label>
@@ -256,32 +257,32 @@ function getPessoasEmpresasContent(state = {}) {
           <div class="cadastro-pessoa-empresa__row cadastro-pessoa-empresa__row--3">
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-cnpj">${isTipoPessoa ? 'CPF' : 'CNPJ'}</label>
-              <input id="cpe-cnpj" class="cadastro-pessoa-empresa__input" type="text" placeholder="${isTipoPessoa ? '000.000.000-00' : '00.000.000/0000-00'}" data-cpe-field="cnpj" value="${form.cnpj || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-cnpj" class="cadastro-pessoa-empresa__input" type="text" placeholder="${isTipoPessoa ? '000.000.000-00' : '00.000.000/0000-00'}" data-cpe-field="cnpj" value="${form.cnpj || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-razao-social">${isTipoPessoa ? 'Nome Completo' : 'Razão Social'}</label>
-              <input id="cpe-razao-social" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="razaoSocial" value="${form.razaoSocial || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-razao-social" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="razaoSocial" value="${form.razaoSocial || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-nome-fantasia">${isTipoPessoa ? 'Apelido' : 'Nome Fantasia'}</label>
-              <input id="cpe-nome-fantasia" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="nomeFantasia" value="${form.nomeFantasia || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-nome-fantasia" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="nomeFantasia" value="${form.nomeFantasia || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
           </div>
           <div class="cadastro-pessoa-empresa__row cadastro-pessoa-empresa__row--3 cadastro-pessoa-empresa__row--dados-secundaria">
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-inscricao-estadual">Inscrição Estadual</label>
-              <input id="cpe-inscricao-estadual" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="inscricaoEstadual" value="${form.inscricaoEstadual || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-inscricao-estadual" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="inscricaoEstadual" value="${form.inscricaoEstadual || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-inscricao-municipal">Inscrição Municipal</label>
-              <input id="cpe-inscricao-municipal" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="inscricaoMunicipal" value="${form.inscricaoMunicipal || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-inscricao-municipal" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="inscricaoMunicipal" value="${form.inscricaoMunicipal || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field cadastro-pessoa-empresa__field--checkbox">
               <label class="checkbox checkbox--sm">
-                <input type="checkbox" class="checkbox-input" data-cpe-field="produtorRural" ${form.produtorRural ? 'checked' : ''} ${isSaving ? 'disabled' : ''} />
+                <input type="checkbox" class="checkbox-input" data-cpe-field="produtorRural" ${form.produtorRural ? 'checked' : ''}  ${isSaving ? 'disabled' : ''} />
                 <span class="checkbox-box" aria-hidden="true">
                   <svg viewBox="0 0 16 16" fill="none">
-                    <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M3.5 8.5L6.5 11.5L12.5 4.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" ${isSaving ? 'disabled' : ''} />
                   </svg>
                 </span>
                 <span class="checkbox-label">Produtor Rural</span>
@@ -296,33 +297,33 @@ function getPessoasEmpresasContent(state = {}) {
           <div class="cadastro-pessoa-empresa__row cadastro-pessoa-empresa__row--address-1">
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-cep">CEP</label>
-              <input id="cpe-cep" class="cadastro-pessoa-empresa__input" type="text" placeholder="00000-000" data-cpe-field="cep" value="${form.cep || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-cep" class="cadastro-pessoa-empresa__input" type="text" placeholder="00000-000" data-cpe-field="cep" value="${form.cep || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-logradouro">Logradouro</label>
-              <input id="cpe-logradouro" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="logradouro" value="${form.logradouro || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-logradouro" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="logradouro" value="${form.logradouro || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field cadastro-pessoa-empresa__field--number">
               <label class="cadastro-pessoa-empresa__label" for="cpe-numero">Número</label>
-              <input id="cpe-numero" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="numero" value="${form.numero || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-numero" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="numero" value="${form.numero || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
           </div>
           <div class="cadastro-pessoa-empresa__row cadastro-pessoa-empresa__row--address-2">
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-complemento">Complemento</label>
-              <input id="cpe-complemento" class="cadastro-pessoa-empresa__input" type="text" placeholder="Sala, Andar" data-cpe-field="complemento" value="${form.complemento || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-complemento" class="cadastro-pessoa-empresa__input" type="text" placeholder="Sala, Andar" data-cpe-field="complemento" value="${form.complemento || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-bairro">Bairro</label>
-              <input id="cpe-bairro" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="bairro" value="${form.bairro || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-bairro" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="bairro" value="${form.bairro || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-cidade">Cidade</label>
-              <input id="cpe-cidade" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="cidade" value="${form.cidade || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-cidade" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="cidade" value="${form.cidade || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field cadastro-pessoa-empresa__field--uf">
               <label class="cadastro-pessoa-empresa__label" for="cpe-uf">UF</label>
-              <input id="cpe-uf" class="cadastro-pessoa-empresa__input" type="text" placeholder="SP" maxlength="2" data-cpe-field="uf" value="${form.uf || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-uf" class="cadastro-pessoa-empresa__input" type="text" placeholder="SP" maxlength="2" data-cpe-field="uf" value="${form.uf || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
           </div>
         </div>
@@ -333,21 +334,32 @@ function getPessoasEmpresasContent(state = {}) {
           <div class="cadastro-pessoa-empresa__row cadastro-pessoa-empresa__row--3">
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-responsavel">Nome do Responsável</label>
-              <input id="cpe-responsavel" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="nomeResponsavel" value="${form.nomeResponsavel || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-responsavel" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="nomeResponsavel" value="${form.nomeResponsavel || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-celular">Celular / WhatsApp</label>
-              <input id="cpe-celular" class="cadastro-pessoa-empresa__input" type="text" placeholder="(00) 00000-0000" data-cpe-field="celular" value="${form.celular || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-celular" class="cadastro-pessoa-empresa__input" type="text" placeholder="(00) 00000-0000" data-cpe-field="celular" value="${form.celular || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-telefone-fixo">Telefone Fixo</label>
-              <input id="cpe-telefone-fixo" class="cadastro-pessoa-empresa__input" type="text" placeholder="(00) 0000-0000" data-cpe-field="telefoneFixo" value="${form.telefoneFixo || ''}" ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-telefone-fixo" class="cadastro-pessoa-empresa__input" type="text" placeholder="(00) 0000-0000" data-cpe-field="telefoneFixo" value="${form.telefoneFixo || ''}"  ${isSaving ? 'disabled' : ''} />
             </div>
           </div>
           <div class="cadastro-pessoa-empresa__row cadastro-pessoa-empresa__row--email">
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-email">E-mail</label>
-              <input id="cpe-email" class="cadastro-pessoa-empresa__input" type="email" placeholder="contato@empresa.com" data-cpe-field="email" value="${form.email || ''}" ${isSaving ? 'disabled' : ''} />
+              <div class="cpe-email-chips-wrapper ${isSaving ? 'cpe-email-chips-wrapper--disabled' : ''}">
+                <div class="cpe-email-chips">
+                  ${emailChips.map((email) => `
+                    <span class="cpe-email-chip">
+                      <span>${email}</span>
+                      <button type="button" class="cpe-email-chip__remove" data-cpe-remove-email="${email}" aria-label="Remover e-mail ${email}" ${isSaving ? 'disabled' : ''}>×</button>
+                    </span>
+                  `).join('')}
+                  <input id="cpe-email" class="cpe-email-chips-input" type="email" placeholder="contato@empresa.com" data-cpe-email-input ${isSaving ? 'disabled' : ''} />
+                </div>
+              </div>
+              <span class="cpe-email-chips-hint">Aperte Enter para adicionar o e-mail</span>
             </div>
           </div>
         </div>
@@ -367,7 +379,7 @@ function getPessoasEmpresasContent(state = {}) {
           <span>Informações complementares</span>
           <span class="cadastro-pessoa-empresa__accordion-arrow ${isComplementaresOpen ? 'is-open' : ''}" aria-hidden="true">
             <svg viewBox="0 0 16 16" fill="none">
-              <path d="M3.5 6L8 10L12.5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+              <path d="M3.5 6L8 10L12.5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" ${isSaving ? 'disabled' : ''} />
             </svg>
           </span>
         </button>
@@ -404,7 +416,7 @@ function getPessoasEmpresasContent(state = {}) {
                       <span class="chip-label">${chip}</span>
                       <span class="chip-close" data-cpe-remove-ramo="${chip}">
                         <svg viewBox="0 0 16 16" fill="none">
-                          <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                          <path d="M4 4L12 12M12 4L4 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" ${isSaving ? 'disabled' : ''} />
                         </svg>
                       </span>
                     </button>

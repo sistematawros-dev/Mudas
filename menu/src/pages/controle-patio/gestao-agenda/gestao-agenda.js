@@ -4,7 +4,7 @@ import * as Segmented from '../../../components/segmented/segmented.js';
 import { createGestaoAgendaState, gestaoAgendaModalIds } from './gestao-agenda.data.js';
 import { renderGestaoAgenda } from './gestao-agenda.templates.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 const state = createGestaoAgendaState();
 let cleanupInputs = null;
 let cleanupModal = null;
@@ -190,6 +190,8 @@ async function apiRequest(path, { method = 'GET', query, body, auth = true, retr
   if (auth) {
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
   }
 
   const response = await fetch(url.toString(), {
@@ -277,6 +279,33 @@ function resetModalState() {
   state.modal.blockReason = '';
 }
 
+function getOperadorPatio() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    return Boolean(parsed?.operadorPatio);
+  } catch {
+    return false;
+  }
+}
+
+function getUserFiliais() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return [];
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed?.filiais) ? parsed.filiais : [];
+  } catch {
+    return [];
+  }
+}
+
+function getLoggedFilialId() {
+  const id = Number(sessionStorage.getItem('filialId') || '');
+  return Number.isFinite(id) && id > 0 ? id : null;
+}
+
 function resolveFilialIdFromRows(filiaisRows) {
   if (!Array.isArray(filiaisRows) || !filiaisRows.length) return null;
   const first = filiaisRows.find((row) => row?.ativo !== false) || filiaisRows[0];
@@ -324,18 +353,20 @@ function buildOccupancyMap(instrucoesRows) {
 }
 
 async function loadData(page) {
-  const [filiaisRes, agendaRes, instrucoesRes] = await Promise.all([
-    apiRequest('/filiais', { query: { page: 1, limit: 200 } }),
-    apiRequestAgenda('/agenda-disponibilidade', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
-    apiRequest('/instrucoes', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
+  const filialId = state.selectedFilialId;
+  const agendaQuery = { page: 1, limit: 5000 };
+  const instrucoesQuery = { page: 1, limit: 5000 };
+  if (filialId) {
+    agendaQuery['filter[filial_id][eq]'] = filialId;
+    instrucoesQuery['filter[filial_id][eq]'] = filialId;
+  }
+
+  const [agendaRes, instrucoesRes] = await Promise.all([
+    apiRequestAgenda('/agenda-disponibilidade', { query: agendaQuery }).catch(() => ({ data: [] })),
+    apiRequest('/instrucoes', { query: instrucoesQuery }).catch(() => ({ data: [] })),
   ]);
 
-  const filiais = parseApiResponse(filiaisRes);
-  state.filters.filialId = state.filters.filialId || resolveFilialIdFromRows(filiais);
-
-  const agendaRows = parseApiResponse(agendaRes)
-    .filter((row) => !state.filters.filialId || Number(row?.filial_id) === Number(state.filters.filialId));
-
+  const agendaRows = parseApiResponse(agendaRes);
   const occupancy = buildOccupancyMap(parseApiResponse(instrucoesRes));
   state.cards = mapCards(agendaRows, occupancy);
   state.allCards = state.cards.map((card) => ({ ...card }));
@@ -378,8 +409,8 @@ function getDateRangeFromForm() {
 }
 
 async function releaseSlots(page) {
-  const filialId = Number(state.filters.filialId || 0);
-  if (!Number.isFinite(filialId) || filialId <= 0) throw new Error('Filial não identificada para liberar vagas.');
+  const filialId = Number(state.selectedFilialId || 0);
+  if (!Number.isFinite(filialId) || filialId <= 0) throw new Error('Selecione uma empresa para liberar vagas.');
 
   const tipoProduto = normalizeProduto(state.form.productType.value);
   if (!tipoProduto) throw new Error('Selecione o Tipo de Produto.');
@@ -450,6 +481,7 @@ function renderPage(page) {
     allCards: state.cards,
     cards: getVisibleCards(),
     calendar: getVisibleCalendar(),
+    operadorPatio: getOperadorPatio(),
   });
 
   cleanupInputs?.();
@@ -529,6 +561,11 @@ function shiftCurrentMonth(delta) {
   buildCalendar(state.cards);
 }
 
+const WRITE_ACTIONS = new Set([
+  'open-block-inline', 'confirm-block-inline', 'unblock-card', 'release-slots',
+  'open-cancel-modal', 'confirm-cancel', 'confirm-scheduling',
+]);
+
 function handleClick(event) {
   const page = event.currentTarget;
   const button = event.target.closest('[data-action]');
@@ -536,8 +573,37 @@ function handleClick(event) {
 
   const { action, cardId, view } = button.dataset;
 
-  if (action === 'open-block-modal' && cardId) {
-    openModal(page, gestaoAgendaModalIds.block, cardId);
+  if (WRITE_ACTIONS.has(action) && !getOperadorPatio()) {
+    alert('Você não tem permissão para modificar a gestão de agenda. Apenas operadores de pátio, administradores ou usuários tawros podem realizar alterações.');
+    return;
+  }
+
+  if (action === 'open-block-inline' && cardId) {
+    state.blockingCardId = cardId;
+    state.blockingReason = '';
+    renderPage(page);
+    return;
+  }
+  if (action === 'cancel-block-inline') {
+    state.blockingCardId = null;
+    state.blockingReason = '';
+    renderPage(page);
+    return;
+  }
+  if (action === 'confirm-block-inline' && cardId) {
+    const card = getCard(cardId);
+    if (!card) return;
+    apiRequest(`/agenda-disponibilidade/${card.id}`, {
+      method: 'PATCH',
+      body: {
+        status: 'blocked',
+        mensagem_bloqueio: state.blockingReason.trim() || 'Agenda bloqueada temporariamente.',
+      },
+    }).then(() => {
+      state.blockingCardId = null;
+      state.blockingReason = '';
+      loadData(page).catch((error) => alert(error?.message || 'Falha ao bloquear agenda.'));
+    }).catch((error) => alert(error?.message || 'Falha ao bloquear agenda.'));
     return;
   }
   if (action === 'open-cancel-modal' && cardId) {
@@ -580,6 +646,7 @@ function handleInput(event) {
   if (target.id === 'agendaStatusFilter') state.filters.status = target.value;
   if (target.id === 'agendaProductFilter') state.filters.product = target.value;
   if (target.id === 'gestaoAgendaBlockReason') state.modal.blockReason = target.value;
+  if (target.dataset.action === 'block-reason-input') state.blockingReason = target.value;
 }
 
 function handleChange(event) {
@@ -587,6 +654,14 @@ function handleChange(event) {
   if (!(target instanceof HTMLInputElement || target instanceof HTMLSelectElement)) return;
   if (target.id === 'agendaStatusFilter' || target.id === 'agendaProductFilter') {
     renderPage(event.currentTarget);
+  }
+  if (target.id === 'gestaoAgendaFilialSelect') {
+    const page = event.currentTarget;
+    state.selectedFilialId = Number(target.value) || null;
+    state.filters.currentMonthDate = new Date();
+    state.cards = [];
+    state.allCards = [];
+    loadData(page).catch((error) => alert(error?.message || 'Falha ao carregar dados da empresa.'));
   }
 }
 
@@ -596,6 +671,17 @@ export function init() {
 
   if (activeController) activeController.abort();
   activeController = new AbortController();
+
+  const userFiliais = getUserFiliais();
+  state.filiais = userFiliais;
+  const loggedFilialId = getLoggedFilialId();
+  const validIds = new Set(userFiliais.map((f) => f.id));
+  if (loggedFilialId && validIds.has(loggedFilialId)) {
+    state.selectedFilialId = loggedFilialId;
+  } else if (userFiliais.length > 0 && !validIds.has(state.selectedFilialId)) {
+    state.selectedFilialId = Number(userFiliais[0].id) || null;
+  }
+
   setCurrentRangeLabel();
   renderPage(page);
   loadData(page).catch((error) => {

@@ -203,9 +203,18 @@ async function renderRoute(root) {
   }
 }
 
+function isAuthenticated() {
+  return Boolean(sessionStorage.getItem("authToken"));
+}
+
 function resolveAllowedPath(path) {
-  if (!ADMIN_ONLY_ROUTE_PATHS.includes(path)) return path;
-  return isAdminUser() ? path : "/dashboard";
+  // Rotas públicas dispensam autenticação
+  if (path === "/login" || path === "/recuperar-senha") return path;
+  // Qualquer outra rota exige token
+  if (!isAuthenticated()) return "/login";
+  // Rotas restritas a administradores
+  if (ADMIN_ONLY_ROUTE_PATHS.includes(path)) return isAdminUser() ? path : "/dashboard";
+  return path;
 }
 
 function isAdminUser() {
@@ -238,5 +247,13 @@ function getCurrentUserTawros() {
 
 export function initRouter(root) {
   window.addEventListener("hashchange", () => renderRoute(root));
+
+  // Bloqueia botão "Voltar" do browser quando o usuário não está autenticado
+  window.addEventListener("popstate", () => {
+    if (!isAuthenticated()) {
+      history.pushState(null, "", "#/login");
+    }
+  });
+
   renderRoute(root);
 }

@@ -73,9 +73,9 @@ Exemplo (criar pessoa/empresa):
 
 ### Endereços padrão
 - Frontend: `http://localhost:5173`
-- API: `http://192.168.15.26:3000`
-- Swagger: `http://192.168.15.26:3000/docs`
-- OpenAPI JSON: `http://192.168.15.26:3000/openapi.json`
+- API: `http://192.168.15.10:3000`
+- Swagger: `http://192.168.15.10:3000/docs`
+- OpenAPI JSON: `http://192.168.15.10:3000/openapi.json`
 
 ### Comandos úteis
 
@@ -100,8 +100,8 @@ npm run test:integracao
 
 ### Como validar que os serviços estão no ar
 ```powershell
-curl http://192.168.15.26:3000/api/v1/health
-curl http://192.168.15.26:3000/api/v1/readiness
+curl http://192.168.15.10:3000/api/v1/health
+curl http://192.168.15.10:3000/api/v1/readiness
 ```
 Esperado: HTTP `200` e `data.status = "ok"` (health).
 
@@ -138,7 +138,7 @@ psql -h localhost -p 5432 -U postgres -d tawros
 
 ### Exemplo de login (curl)
 ```bash
-curl -X POST "http://192.168.15.26:3000/api/v1/auth/login" \
+curl -X POST "http://192.168.15.10:3000/api/v1/auth/login" \
   -H "Content-Type: application/json" \
   -d "{\"email\":\"admin@tawros.local\",\"password\":\"Admin@123\"}"
 ```
@@ -621,7 +621,7 @@ Exibir indicadores visuais e componentes analíticos.
 ## 7. Como Validar o Resultado na API
 
 ### Swagger
-1. Abrir `http://192.168.15.26:3000/docs`.
+1. Abrir `http://192.168.15.10:3000/docs`.
 2. Fazer login pelo endpoint `/api/v1/auth/login`.
 3. Copiar `accessToken`.
 4. Clicar em `Authorize` e informar `Bearer <token>`.
@@ -637,12 +637,12 @@ Exibir indicadores visuais e componentes analíticos.
 #### Listagem
 ```bash
 curl -H "Authorization: Bearer <TOKEN>" \
-  "http://192.168.15.26:3000/api/v1/pessoas-empresas?page=1&limit=20&q=empresa"
+  "http://192.168.15.10:3000/api/v1/pessoas-empresas?page=1&limit=20&q=empresa"
 ```
 
 #### Criação
 ```bash
-curl -X POST "http://192.168.15.26:3000/api/v1/embalagens" \
+curl -X POST "http://192.168.15.10:3000/api/v1/embalagens" \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d "{\"codigo\":\"EMB-900\",\"unidade_equivalencia_id\":1,\"valor_conversao\":1.5,\"descricao\":\"Embalagem Teste\",\"sigla\":\"CX\",\"ativo\":true}"
@@ -650,7 +650,7 @@ curl -X POST "http://192.168.15.26:3000/api/v1/embalagens" \
 
 #### Restore (atenção ao Content-Type)
 ```bash
-curl -X POST "http://192.168.15.26:3000/api/v1/pessoas-empresas/10/restore" \
+curl -X POST "http://192.168.15.10:3000/api/v1/pessoas-empresas/10/restore" \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d "{}"

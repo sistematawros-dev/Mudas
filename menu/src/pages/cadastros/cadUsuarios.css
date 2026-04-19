@@ -83,6 +83,11 @@
   color: var(--color-content-primary);
 }
 
+.cad-usuarios-multiselect-item--exhausted {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
 .cad-usuarios-toggle-line {
   margin-top: var(--space-3);
   display: inline-flex;

@@ -6,7 +6,7 @@ import {
 } from './veiculos.data.js';
 import { renderVehiclesPage } from './veiculos.templates.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 const state = createVehiclesState();
 let vehicleDrawer = null;
 let activeController = null;
@@ -66,6 +66,8 @@ async function apiRequest(path, { method = 'GET', query, body, auth = true, retr
   if (auth) {
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
   }
 
   const response = await fetch(url.toString(), {

@@ -326,6 +326,40 @@ function renderFinishModalBody(data) {
   `;
 }
 
+function renderPostponeModal(postponeCardId) {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  const minDate = tomorrow.toISOString().slice(0, 10);
+
+  const body = `
+    <div class="patio-postpone-modal__body">
+      ${Input.create({
+        id: 'postponeDate',
+        label: 'Nova data de agendamento',
+        type: 'date',
+        min: minDate,
+        required: true,
+      })}
+    </div>
+  `;
+
+  const footer = `
+    <div class="patio-finish-modal__footer-actions">
+      ${Button.create({ text: 'Cancelar', variant: 'dark', style: 'outline', size: 'sm' }).replace('<button ', '<button data-modal-close ')}
+      ${Button.create({ text: 'Confirmar', variant: 'primary', size: 'sm' }).replace('<button ', '<button data-modal-confirm ')}
+    </div>
+  `;
+
+  return Modal.create({
+    id: patioModalIds.postpone,
+    title: 'Postergar Agendamento',
+    description: 'Selecione a nova data. Não é permitido data atual ou anterior.',
+    body,
+    footer,
+    size: 'sm',
+  });
+}
+
 function renderFinishModal(data) {
   if (!data) return '';
 
@@ -355,6 +389,7 @@ export function renderPatioBoard(state) {
         ${state.columns.map((column) => renderColumn(column)).join('')}
       </section>
       ${renderFinishModal(state.modal.data)}
+      ${renderPostponeModal(state.modal.postponeCardId)}
     </div>
   `;
 }

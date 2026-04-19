@@ -22,7 +22,7 @@
     "test:integracao:com-unit": "powershell -ExecutionPolicy Bypass -File scripts/test-integracao-completa.ps1 -RunUnitTests",
     "smoke": "node scripts/smoke.mjs",
     "db:audit": "tsx scripts/db-audit.ts",
-    "perf:autocannon": "autocannon -c 100 -d 20 http://192.168.15.26:3000/api/v1/health"
+    "perf:autocannon": "autocannon -c 100 -d 20 http://192.168.15.10:3000/api/v1/health"
   },
   "dependencies": {
     "@fastify/cors": "^11.2.0",

@@ -20,6 +20,38 @@
         <img src="/assets/notification-bell.png" alt="Notificações" width="18" height="18">
       </button>
 
+      <!-- Troca de senha: visível apenas para usuários comuns (não admin/tawros) -->
+      <div class="header-dropdown" id="header-user-wrapper" hidden>
+        <button class="header-icon-btn" aria-label="Minha conta" id="header-user-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="12" cy="7" r="4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <div class="header-user-modal" id="header-user-modal" hidden>
+          <p class="header-user-modal__title">Alterar senha</p>
+          <div class="header-user-modal__fields">
+            <label class="header-user-modal__label">
+              Senha atual
+              <input type="password" id="hum-current" class="header-user-modal__input" autocomplete="current-password" />
+            </label>
+            <label class="header-user-modal__label">
+              Nova senha
+              <input type="password" id="hum-new" class="header-user-modal__input" autocomplete="new-password" />
+            </label>
+            <label class="header-user-modal__label">
+              Confirmar nova senha
+              <input type="password" id="hum-confirm" class="header-user-modal__input" autocomplete="new-password" />
+            </label>
+          </div>
+          <p class="header-user-modal__error" id="hum-error" hidden></p>
+          <div class="header-user-modal__actions">
+            <button type="button" class="header-user-modal__btn header-user-modal__btn--cancel" id="hum-cancel">Cancelar</button>
+            <button type="button" class="header-user-modal__btn header-user-modal__btn--confirm" id="hum-confirm-btn">Confirmar</button>
+          </div>
+        </div>
+      </div>
+
       <!-- Settings: oculto por padrão, revelado via JS apenas para admin/tawros -->
       <div class="header-dropdown header-dropdown--settings" id="header-settings-wrapper" hidden>
         <button class="header-icon-btn" aria-label="Configurações" id="header-settings-btn" aria-expanded="false" aria-haspopup="menu">
@@ -30,11 +62,40 @@
             Filial
           </button>
           <button type="button" class="header-settings-menu__item" role="menuitem" data-header-settings-action="licencas-modulos">
-            Licenças por módulo
+            Licenças
           </button>
           <button type="button" class="header-settings-menu__item" role="menuitem" data-header-settings-action="usuarios-cadastro">
             Usuários
           </button>
+          <button type="button" class="header-settings-menu__item" role="menuitem" data-header-settings-action="senha" id="header-settings-senha-item">
+            Senha
+          </button>
+        </div>
+
+        <!-- Modal alterar senha (admin) -->
+        <div class="header-user-modal header-admin-senha-modal" id="header-admin-senha-modal" hidden>
+          <p class="header-user-modal__title">Alterar senha</p>
+          <div class="header-user-modal__fields">
+            <label class="header-user-modal__label">
+              Usuário
+              <select id="hasm-user-select" class="header-user-modal__input header-user-modal__select">
+                <option value="">Carregando...</option>
+              </select>
+            </label>
+            <label class="header-user-modal__label">
+              Nova senha
+              <input type="password" id="hasm-new" class="header-user-modal__input" autocomplete="new-password" />
+            </label>
+            <label class="header-user-modal__label">
+              Confirmar nova senha
+              <input type="password" id="hasm-confirm" class="header-user-modal__input" autocomplete="new-password" />
+            </label>
+          </div>
+          <p class="header-user-modal__error" id="hasm-error" hidden></p>
+          <div class="header-user-modal__actions">
+            <button type="button" class="header-user-modal__btn header-user-modal__btn--cancel" id="hasm-cancel">Cancelar</button>
+            <button type="button" class="header-user-modal__btn header-user-modal__btn--confirm" id="hasm-confirm-btn">Confirmar</button>
+          </div>
         </div>
       </div>
 

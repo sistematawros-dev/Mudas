@@ -51,6 +51,12 @@
   min-height: 116px;
 }
 
+.patio-scheduling__section--disabled {
+  opacity: 0.55;
+  pointer-events: none;
+  user-select: none;
+}
+
 .patio-scheduling__section-header {
   display: flex;
   align-items: center;
@@ -610,4 +616,111 @@
   .patio-scheduling__cargo-summary {
     gap: 8px;
   }
+}
+
+/* ── Mini-calendário de agendamentos ────────────────────────────────────────── */
+.sched-cal {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  user-select: none;
+}
+
+.sched-cal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.sched-cal__nav {
+  background: none;
+  border: none;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--color-content-primary);
+  padding: 2px 8px;
+  border-radius: var(--radius-xs, 4px);
+}
+.sched-cal__nav:hover {
+  background: var(--color-surface-secondary);
+}
+
+.sched-cal__month-label {
+  font-size: var(--font-size-s);
+  font-weight: 600;
+  color: var(--color-content-primary);
+}
+
+.sched-cal__table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.sched-cal__weekday {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-content-secondary);
+  text-align: center;
+  padding: 4px 0;
+}
+
+.sched-cal__cell {
+  text-align: center;
+  padding: 5px 2px;
+  font-size: var(--font-size-s);
+  border-radius: 4px;
+  cursor: pointer;
+  color: var(--color-content-primary);
+  position: relative;
+}
+
+.sched-cal__cell--empty {
+  cursor: default;
+}
+
+.sched-cal__cell:not(.sched-cal__cell--empty):hover {
+  outline: 2px solid var(--color-primary, #4a90e2);
+  outline-offset: -2px;
+}
+
+.sched-cal__cell--today {
+  font-weight: 700;
+}
+
+.sched-cal__cell--selected {
+  background: var(--color-primary, #4a90e2) !important;
+  color: #fff !important;
+  font-weight: 700;
+}
+
+/* Verde: data disponível com vagas */
+.sched-cal__cell--green {
+  background: #c8f5d0;
+  color: #1a5e2a;
+}
+
+/* Amarelo: data disponível mas sem vagas */
+.sched-cal__cell--yellow {
+  background: #fff3cd;
+  color: #7d5a00;
+}
+
+/* Vermelho: data bloqueada */
+.sched-cal__cell--red {
+  background: #ffd6d6;
+  color: #8b0000;
+  cursor: not-allowed;
+}
+.sched-cal__cell--red:hover {
+  outline: 2px solid #c00 !important;
+}
+
+.sched-cal__selected-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-content-secondary);
+  margin: 0;
+  text-align: center;
 }

@@ -10,7 +10,7 @@ function normalizeApiBase(value) {
   return String(value).replace(/\/+$/, '');
 }
 
-const apiFixa = normalizeApiBase(import.meta.env.VITE_API_BASE_URL || 'http://192.168.15.26:3000/api/v1');
+const apiFixa = normalizeApiBase('http://192.168.15.10:3000/api/v1');
 window.localStorage.setItem('TAWROS_API_URL', apiFixa);
 window.TAWROS_API_URL = apiFixa;
 

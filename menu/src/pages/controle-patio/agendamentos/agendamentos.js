@@ -14,11 +14,13 @@ import {
 } from './agendamentos.templates.js';
 import { initControlePatioTabs, renderControlePatioTabs } from '../shared/controle-patio-tabs.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.26:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'http://192.168.15.10:3000/api/v1';
 const state = createAgendamentosState();
 state.vehicleCatalog = [];
 state.motoristaCategoryId = null;
 state.agendaCatalog = [];
+const today = new Date();
+state.calendarMonth = { year: today.getFullYear(), month: today.getMonth() };
 let vehicleLookupTimer = null;
 let driverLookupTimer = null;
 let suppressVehicleLookupOnce = false;
@@ -45,6 +47,18 @@ function parseApiResponse(payload) {
   if (Array.isArray(payload?.data)) return payload.data;
   if (payload?.data && Array.isArray(payload.data.rows)) return payload.data.rows;
   return [];
+}
+
+
+function getPodeConfigurarCarga() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    return Boolean(parsed?.podeConfigurarCarga);
+  } catch {
+    return false;
+  }
 }
 
 function parseNumber(input) {
@@ -102,6 +116,8 @@ async function apiRequest(path, { method = 'GET', query, body, auth = true, retr
   if (auth) {
     const token = getAccessToken();
     if (token) headers.Authorization = `Bearer ${token}`;
+    const filialId = sessionStorage.getItem('filialId');
+    if (filialId) headers['X-Filial-Id'] = filialId;
   }
 
   const response = await fetch(url.toString(), {
@@ -191,27 +207,32 @@ function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstru
         return createPlumaBlockFromApi(bloco, fardos);
       });
     } else {
-      const transportes = transportesByInstrucao[id] || [];
-      if (transportes.length) {
-        blocks = transportes.map((item, index) => createKgBlockFromApi(item, index));
-      } else {
-        blocks = [createKgBlockFromApi({
-          id: `instrucao-${id}`,
-          nome_transportadora: 'Carga',
-          quantidade: Number(row?.quantidade_total || 0),
-          unidade: 'quilogramas',
-        }, 0)];
-      }
+      const quantidadeTotal = Math.max(0, Number(row?.quantidade_total || 0));
+      const quantidadeAgendada = Math.max(0, Number(row?.quantidade_agendada || 0));
+      const remaining = Math.max(0, quantidadeTotal - quantidadeAgendada);
+      blocks = [createKgBlockFromApi({
+        id: `instrucao-${id}`,
+        nome_transportadora: 'Carga',
+        quantidade: remaining,
+        unidade: 'quilogramas',
+      }, 0)];
+      acc[id] = { quantificationType, blocks, quantidadeTotal, quantidadeAgendada, remaining };
+      return acc;
     }
 
-    acc[id] = { quantificationType, blocks };
+    acc[id] = { quantificationType, blocks, quantidadeTotal: 0, quantidadeAgendada: 0, remaining: Infinity };
     return acc;
   }, {});
 }
 
 function mapAvailableContracts(rows, lookups, contractDetails) {
   return rows
-    .filter((row) => row.status === 'aprovado' && !row.data_agendamento)
+    .filter((row) => {
+      if (row.status !== 'aprovado') return false;
+      const details = contractDetails[String(row.id)];
+      if (details?.quantificationType === 'kg') return (details.remaining ?? 0) > 0;
+      return !row.data_agendamento;
+    })
     .map((row) => {
       const id = String(row.id);
       const produtor = lookups.pessoas[String(row.produtor_id)] || row.nome_vendedor_produtor || '-';
@@ -226,6 +247,8 @@ function mapAvailableContracts(rows, lookups, contractDetails) {
     });
 }
 
+const CANCELLABLE_PATIO_FASES = new Set(['aguardando_futuro', 'aguardando_chegada', 'fila_patio', '']);
+
 function mapScheduledRows(rows, lookups) {
   return rows
     .filter((row) => row.data_agendamento)
@@ -238,6 +261,7 @@ function mapScheduledRows(rows, lookups) {
       branch: lookups.filiais[String(row.filial_id)] || '-',
       driver: row.nome_motorista || '-',
       truck: row.placa_veiculo || '-',
+      canCancel: CANCELLABLE_PATIO_FASES.has(row.patio_fase ?? '') && getPodeConfigurarCarga(),
     }));
 }
 
@@ -302,7 +326,7 @@ function findAgendaDisponibilidade(dataAgendamentoIso, tipoProduto) {
   const targetDate = String(dataAgendamentoIso).trim();
   const targetProduct = normalizeProduto(tipoProduto);
   return state.agendaCatalog.find((item) => (
-    String(item?.data_carregamento || '') === targetDate
+    String(item?.data_carregamento || '').slice(0, 10) === targetDate
     && normalizeProduto(item?.tipo_produto) === targetProduct
     && normalizeText(item?.status) !== 'blocked'
   )) || null;
@@ -428,6 +452,7 @@ function applyVehiclePlateSelection(page, value) {
   if (!selectedPlate) return;
 
   plateInput.value = selectedPlate;
+  plateInput.dataset.confirmedValue = selectedPlate;
   const driverField = state.driverFields.find((field) => field.id === 'vehiclePlate');
   if (driverField) {
     driverField.value = selectedPlate;
@@ -519,6 +544,7 @@ function applyDriverSelection(page, value) {
   if (!selectedName) return;
 
   driverInput.value = selectedName;
+  driverInput.dataset.confirmedValue = selectedName;
   const driverField = state.driverFields.find((field) => field.id === 'driverName');
   if (driverField) {
     driverField.value = selectedName;
@@ -563,8 +589,9 @@ function renderSections() {
   const tableContainer = document.getElementById('patio-scheduling-table');
 
   if (driverContainer) driverContainer.innerHTML = renderDriverSection(state.driverFields);
-  if (dateContainer) dateContainer.innerHTML = renderDateSection(state.appointmentDate);
-  if (contractsContainer) contractsContainer.innerHTML = renderContractsSection(state);
+  const selectedProduct = state.driverFields.find((f) => f.id === 'productType')?.value || '';
+  if (dateContainer) dateContainer.innerHTML = renderDateSection(state.appointmentDate, state.agendaCatalog, selectedProduct, state.calendarMonth);
+  if (contractsContainer) contractsContainer.innerHTML = renderContractsSection(state, getPodeConfigurarCarga());
   if (tableContainer) tableContainer.innerHTML = renderTableSection(state.scheduleRows, state.pagination);
 }
 
@@ -742,6 +769,8 @@ async function persistScheduling(page) {
       const id = Number(contract?.id);
       if (!Number.isFinite(id) || id <= 0) return null;
       const quantidadeTotalKg = await persistContractQuantities(contract);
+      const details = state.contractDetails[String(contract.id)];
+      const novaQtdAgendada = Math.max(0, (details?.quantidadeAgendada ?? 0) + (quantidadeTotalKg ?? 0));
       return apiRequest(`/instrucoes/${id}`, {
         method: 'PATCH',
         body: {
@@ -749,7 +778,7 @@ async function persistScheduling(page) {
           nome_motorista: driver,
           placa_veiculo: truck,
           status: 'aprovado',
-          ...(isPositiveNumber(quantidadeTotalKg) ? { quantidade_total: quantidadeTotalKg } : {}),
+          ...(quantidadeTotalKg != null ? { quantidade_agendada: novaQtdAgendada } : {}),
           patio_fase: 'aguardando_chegada',
           chegada_em: null,
           chamado_em: null,
@@ -764,6 +793,14 @@ async function persistScheduling(page) {
   if (!updates.length) return;
   await Promise.all(updates);
   await atualizarOcupacaoAgenda(agenda.id, state.cargoContracts.length);
+
+  state.driverFields.forEach((field) => {
+    field.value = '';
+    if (Array.isArray(field.suggestions)) field.suggestions = [];
+  });
+  state.appointmentDate.value = '';
+  state.cargoContracts = [];
+
   await loadSchedulingData(page);
 }
 
@@ -811,6 +848,35 @@ async function handleClick(event) {
     return;
   }
 
+  const calendarDay = event.target.closest('[data-action="calendar-day"]');
+  if (calendarDay) {
+    if (calendarDay.classList.contains('sched-cal__cell--red')) return;
+    const iso = calendarDay.getAttribute('data-date');
+    if (iso) {
+      state.appointmentDate.value = iso;
+      renderPage(page);
+    }
+    return;
+  }
+
+  if (event.target.closest('[data-action="calendar-prev-month"]')) {
+    let { year, month } = state.calendarMonth;
+    month -= 1;
+    if (month < 0) { month = 11; year -= 1; }
+    state.calendarMonth = { year, month };
+    renderPage(page);
+    return;
+  }
+
+  if (event.target.closest('[data-action="calendar-next-month"]')) {
+    let { year, month } = state.calendarMonth;
+    month += 1;
+    if (month > 11) { month = 0; year += 1; }
+    state.calendarMonth = { year, month };
+    renderPage(page);
+    return;
+  }
+
   const addContractButton = event.target.closest('[data-action="add-contract"]');
   if (addContractButton) {
     addContractToCargo(addContractButton.dataset.contractId, page);
@@ -843,6 +909,7 @@ async function handleClick(event) {
 
   const primaryButton = event.target.closest('[data-action="confirm-scheduling"]');
   if (primaryButton) {
+    if (!getPodeConfigurarCarga()) return;
     persistScheduling(page).catch((error) => {
       console.error('[controle-patio/agendamentos] falha ao confirmar agendamento', error);
       alert(error?.message || 'Nao foi possivel confirmar o agendamento.');
@@ -852,6 +919,7 @@ async function handleClick(event) {
 
   const tableAction = event.target.closest('[data-action="loading-order"], [data-action="cancel-scheduling"]');
   if (tableAction && tableAction.dataset.action === 'cancel-scheduling') {
+    if (!getPodeConfigurarCarga()) return;
     cancelScheduling(tableAction.dataset.rowId, page).catch((error) => {
       console.error('[controle-patio/agendamentos] falha ao cancelar agendamento', error);
       alert(error?.message || 'Nao foi possivel cancelar o agendamento.');
@@ -870,12 +938,27 @@ function handleInput(event) {
   }
 
   if (target.matches('[data-action="update-block-quantity"], [data-action="update-kg-quantity"]')) {
-    updateBlockQuantity(target.dataset.contractId, target.dataset.blockId, target.value, page);
+    const contractId = target.dataset.contractId;
+    const blockId = target.dataset.blockId;
+    const action = target.dataset.action;
+    const selStart = target.selectionStart;
+    const selEnd = target.selectionEnd;
+    updateBlockQuantity(contractId, blockId, target.value, page);
+    const newTarget = page.querySelector(`[data-action="${action}"][data-contract-id="${contractId}"][data-block-id="${blockId}"]`);
+    if (newTarget) {
+      newTarget.focus();
+      try { newTarget.setSelectionRange(selStart, selEnd); } catch (_) { }
+    }
   }
 
   const driverField = state.driverFields.find((field) => field.id === target.id);
   const isDriverNameField = target.id === 'driverName' || target.name === 'driverName';
   const isVehiclePlateField = target.id === 'vehiclePlate' || target.name === 'vehiclePlate';
+
+  if (event.isTrusted) {
+    if (isDriverNameField) delete target.dataset.confirmedValue;
+    if (isVehiclePlateField) delete target.dataset.confirmedValue;
+  }
 
   if (isDriverNameField && !driverField) {
     if (suppressDriverLookupOnce) {
@@ -966,6 +1049,12 @@ export function init() {
   if (activeController) activeController.abort();
   activeController = new AbortController();
 
+  const fresh = createAgendamentosState();
+  state.driverFields = fresh.driverFields;
+  state.appointmentDate = fresh.appointmentDate;
+  state.cargoContracts = [];
+  state.availableContracts = [];
+
   cleanupTabs = initControlePatioTabs(page);
   renderPage(page);
 
@@ -976,6 +1065,32 @@ export function init() {
   page.addEventListener('click', handleClick);
   page.addEventListener('input', handleInput);
   page.addEventListener('change', handleChange);
+  page.addEventListener('blur', (event) => {
+    const target = event.target;
+    if (!(target instanceof HTMLInputElement)) return;
+    if (target.id === 'vehiclePlate') {
+      setTimeout(() => {
+        if (target.dataset.confirmedValue === undefined || target.value !== target.dataset.confirmedValue) {
+          target.value = '';
+          delete target.dataset.confirmedValue;
+          const field = state.driverFields.find((f) => f.id === 'vehiclePlate');
+          if (field) { field.value = ''; field.suggestions = []; }
+          renderVehiclePlateSuggestionsInDom(page);
+        }
+      }, 200);
+    }
+    if (target.id === 'driverName') {
+      setTimeout(() => {
+        if (target.dataset.confirmedValue === undefined || target.value !== target.dataset.confirmedValue) {
+          target.value = '';
+          delete target.dataset.confirmedValue;
+          const field = state.driverFields.find((f) => f.id === 'driverName');
+          if (field) { field.value = ''; field.suggestions = []; }
+          renderDriverSuggestionsInDom(page);
+        }
+      }, 200);
+    }
+  }, true);
 
   return () => {
     page.removeEventListener('click', handleClick);

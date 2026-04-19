@@ -286,16 +286,125 @@ export function renderDriverSection(driverFields) {
   );
 }
 
-export function renderDateSection(dateField) {
+const WEEKDAYS_SHORT = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+const MONTHS_PT = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
+
+function buildAgendaMap(agendaCatalog, selectedProduct) {
+  const map = {};
+  if (!selectedProduct || !Array.isArray(agendaCatalog)) return map;
+  const prod = String(selectedProduct).trim().toLowerCase();
+  agendaCatalog.forEach((item) => {
+    const itemProd = String(item?.tipo_produto || '').trim().toLowerCase();
+    if (itemProd !== prod) return;
+    const dateKey = String(item?.data_carregamento || '').slice(0, 10);
+    if (!dateKey) return;
+    const vagasTotal = Number(item?.vagas_total ?? 0);
+    const vagasOcupadas = Number(item?.vagas_ocupadas ?? 0);
+    const status = String(item?.status || '').toLowerCase();
+    if (status === 'blocked') {
+      map[dateKey] = { color: 'red', tooltip: String(item?.mensagem_bloqueio || 'Bloqueado') };
+    } else if (vagasTotal > 0 && vagasOcupadas >= vagasTotal) {
+      map[dateKey] = { color: 'yellow', tooltip: `${vagasOcupadas}/${vagasTotal} vagas ocupadas` };
+    } else if (vagasTotal > 0) {
+      map[dateKey] = { color: 'green', tooltip: `${vagasTotal - vagasOcupadas} vaga(s) disponível(is)` };
+    }
+  });
+  return map;
+}
+
+function renderMiniCalendar(dateField, agendaCatalog, selectedProduct, calendarMonth) {
+  const today = new Date();
+  const year = calendarMonth?.year ?? today.getFullYear();
+  const month = calendarMonth?.month ?? today.getMonth();
+  const agendaMap = buildAgendaMap(agendaCatalog, selectedProduct);
+  const selectedIso = String(dateField.value || '');
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+  const startDow = firstDay.getDay();
+
+  const days = [];
+  for (let i = 0; i < startDow; i++) days.push(null);
+  for (let d = 1; d <= lastDay.getDate(); d++) days.push(d);
+  while (days.length % 7 !== 0) days.push(null);
+
+  const pad = (n) => String(n).padStart(2, '0');
+  const rows = [];
+  for (let w = 0; w < days.length / 7; w++) {
+    const cells = days.slice(w * 7, w * 7 + 7).map((d) => {
+      if (!d) return '<td class="sched-cal__cell sched-cal__cell--empty"></td>';
+      const iso = `${year}-${pad(month + 1)}-${pad(d)}`;
+      const info = agendaMap[iso];
+      const colorClass = info ? `sched-cal__cell--${info.color}` : '';
+      const todayClass = (iso === `${today.getFullYear()}-${pad(today.getMonth() + 1)}-${pad(today.getDate())}`) ? 'sched-cal__cell--today' : '';
+      const selectedClass = iso === selectedIso ? 'sched-cal__cell--selected' : '';
+      const tooltip = info?.tooltip ? `title="${info.tooltip.replace(/"/g, '&quot;')}"` : '';
+      return `<td class="sched-cal__cell ${colorClass} ${todayClass} ${selectedClass}" data-action="calendar-day" data-date="${iso}" ${tooltip}>${d}</td>`;
+    }).join('');
+    rows.push(`<tr>${cells}</tr>`);
+  }
+
+  return `
+    <div class="sched-cal">
+      <div class="sched-cal__header">
+        <button type="button" class="sched-cal__nav" data-action="calendar-prev-month" aria-label="Mês anterior">&#8249;</button>
+        <span class="sched-cal__month-label">${MONTHS_PT[month]} ${year}</span>
+        <button type="button" class="sched-cal__nav" data-action="calendar-next-month" aria-label="Próximo mês">&#8250;</button>
+      </div>
+      <table class="sched-cal__table">
+        <thead>
+          <tr>${WEEKDAYS_SHORT.map((d) => `<th class="sched-cal__weekday">${d}</th>`).join('')}</tr>
+        </thead>
+        <tbody>${rows.join('')}</tbody>
+      </table>
+      ${selectedIso ? `<p class="sched-cal__selected-label">Selecionado: <strong>${selectedIso.split('-').reverse().join('/')}</strong></p>` : ''}
+    </div>
+    <input type="hidden" id="${dateField.id}" name="${dateField.id}" value="${selectedIso}" />
+  `;
+}
+
+export function renderDateSection(dateField, agendaCatalog = [], selectedProduct = '', calendarMonth = null) {
   return renderSection(
     2,
     'Escolher Data',
-    `<div class="patio-scheduling__date-field-wrap">${renderDateField(dateField)}</div>`,
+    `<div class="patio-scheduling__date-field-wrap">${renderMiniCalendar(dateField, agendaCatalog, selectedProduct, calendarMonth)}</div>`,
     'patio-scheduling__section--compact patio-scheduling__section--date',
   );
 }
 
-export function renderContractsSection(state) {
+export function renderContractsSection(state, podeConfigurarCarga = false) {
+  if (!podeConfigurarCarga) {
+    const content = '<p class="patio-scheduling__panel-empty">Você não tem permissão para configurar carga. Esta ação é restrita a usuários vinculados como transportadora.</p>';
+    return renderSection(3, 'Selecionar Contrato e Configurar Carga', content, 'patio-scheduling__section--disabled');
+  }
+  const selectedProduct = state.driverFields?.find((f) => f.id === 'productType')?.value;
+
+  if (!selectedProduct) {
+    const placeholder = '<p class="patio-scheduling__panel-empty">Selecione o tipo de produto para visualizar os contratos disponíveis.</p>';
+    const content = `
+      <div class="patio-scheduling__contracts-grid">
+        <section class="patio-scheduling__panel patio-scheduling__panel--available">
+          <header class="patio-scheduling__panel-header">
+            <h3 class="patio-scheduling__panel-title">1. Contratos Disponiveis</h3>
+            <span class="patio-scheduling__panel-count">0</span>
+          </header>
+          <div class="patio-scheduling__panel-body patio-scheduling__panel-body--list">${placeholder}</div>
+        </section>
+        <section class="patio-scheduling__panel patio-scheduling__panel--cargo">
+          <header class="patio-scheduling__panel-header">
+            <h3 class="patio-scheduling__panel-title">2. Contratos na Carga</h3>
+            <span class="patio-scheduling__panel-count">0</span>
+          </header>
+          <div class="patio-scheduling__panel-body patio-scheduling__panel-body--cargo">${placeholder}</div>
+          <div class="patio-scheduling__confirm-action">
+            ${Button.create({ text: 'Confirmar Agendamento', variant: 'primary', size: 'sm' }).replace('<button ', '<button data-action="confirm-scheduling" ')}
+          </div>
+        </section>
+      </div>
+    `;
+    return renderSection(3, 'Selecionar Contrato e Configurar Carga', content);
+  }
+
   const availableContent = state.availableContracts.length
     ? state.availableContracts.map((contract) => renderAvailableContract(contract)).join('')
     : '<p class="patio-scheduling__panel-empty">Nenhum contrato disponivel para o filtro atual.</p>';
@@ -358,7 +467,7 @@ export function renderTableSection(rows, pagination) {
         <td>
           <div class="patio-scheduling__table-actions">
             <button type="button" class="patio-scheduling__table-link" data-action="loading-order" data-row-id="${row.id}">Ordem de Carregamento</button>
-            <button type="button" class="patio-scheduling__table-link patio-scheduling__table-link--danger" data-action="cancel-scheduling" data-row-id="${row.id}">Cancelar</button>
+            ${row.canCancel ? `<button type="button" class="patio-scheduling__table-link patio-scheduling__table-link--danger" data-action="cancel-scheduling" data-row-id="${row.id}">Cancelar</button>` : ''}
           </div>
         </td>
       </tr>

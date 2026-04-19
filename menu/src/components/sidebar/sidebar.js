@@ -10,6 +10,7 @@ export function init() {
   hideControlePatioMenus();
   setupToggleHandlers();
   setupSearchHandler();
+  setupSearchActivation();
   const cleanupQrWarning = setupQrCodeWarning();
   const cleanupDisabledLinks = setupDisabledLinks();
   const cleanupToggle = setupSidebarToggle();
@@ -24,6 +25,27 @@ export function init() {
     if (typeof cleanupToggle === 'function') cleanupToggle();
     if (typeof cleanupIntegrity === 'function') cleanupIntegrity();
   };
+}
+
+function setupSearchActivation() {
+  const searchInput = document.querySelector('.sidebar-search-input');
+  if (!searchInput) return;
+
+  const activate = () => {
+    searchInput.removeAttribute('readonly');
+    searchInput.removeAttribute('tabindex');
+    searchInput.value = '';
+    searchInput.focus();
+  };
+
+  const deactivate = () => {
+    searchInput.value = '';
+    searchInput.setAttribute('readonly', '');
+    searchInput.setAttribute('tabindex', '-1');
+  };
+
+  searchInput.addEventListener('click', activate);
+  searchInput.addEventListener('blur', deactivate);
 }
 
 function getUserLicencas() {
@@ -195,11 +217,12 @@ function setupSearchHandler() {
     const menuItems = document.querySelectorAll('.sidebar-item');
 
     if (!searchTerm) {
-      // Reset: show all items and collapse all
       menuItems.forEach(item => {
         item.style.display = '';
         item.classList.remove('sidebar-item--expanded');
       });
+      applyLicencaMenuVisibility();
+      hideControlePatioMenus();
       return;
     }
 

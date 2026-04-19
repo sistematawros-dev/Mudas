@@ -8,10 +8,12 @@ export const patioQuickFilters = [
 
 export const patioModalIds = {
   finishLoading: 'patio-finish-loading-modal',
+  postpone: 'patio-postpone-modal',
 };
 
 export const patioDrawerIds = {
   vehicleEntry: 'patio-vehicle-entry-drawer',
+  entryManual: 'patio-entry-manual-drawer',
 };
 
 export const patioVehicleGroupOptions = [
@@ -35,6 +37,19 @@ export function createPatioVehicleForm() {
     vinculoTipo: 'transportadoras',
     vinculoIds: [],
     documentoFiles: [],
+  };
+}
+
+export function createPatioEntryForm() {
+  return {
+    instrucao: '',
+    comprador: '',
+    produtor: '',
+    contrato: '',
+    produto: '',
+    transportadora: '',
+    caminhao: '',
+    motorista: '',
   };
 }
 
@@ -106,6 +121,20 @@ export function createPatioState() {
       form: createPatioVehicleForm(),
       groupOptions: patioVehicleGroupOptions,
       lookups: patioVehicleLinkLookups,
+    },
+    entryDrawer: {
+      isOpen: false,
+      form: createPatioEntryForm(),
+      lookups: {
+        instrucoes: [],
+        compradores: [],
+        produtores: [],
+        contratos: [],
+        produtos: [],
+        transportadoras: [],
+        caminhoes: [],
+        motoristas: [],
+      },
     },
     columns: patioColumns.map((column) => ({
       ...column,
