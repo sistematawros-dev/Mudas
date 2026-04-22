@@ -14,17 +14,25 @@ import {
 } from './agendamentos.templates.js';
 import { initControlePatioTabs, renderControlePatioTabs } from '../shared/controle-patio-tabs.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 const state = createAgendamentosState();
 state.vehicleCatalog = [];
 state.motoristaCategoryId = null;
+state.transportadoraCategoryId = null;
+state.transportesByInstrucao = {};
 state.agendaCatalog = [];
+state.instrucoesRaw = [];
+state.blocosByInstrucao = {};
+state.fardosByBloco = {};
+state.lookupsCache = null;
 const today = new Date();
 state.calendarMonth = { year: today.getFullYear(), month: today.getMonth() };
 let vehicleLookupTimer = null;
 let driverLookupTimer = null;
+let carrierLookupTimer = null;
 let suppressVehicleLookupOnce = false;
 let suppressDriverLookupOnce = false;
+let suppressCarrierLookupOnce = false;
 let cleanupTabs = null;
 let cleanupInputs = null;
 let activeController = null;
@@ -58,6 +66,21 @@ function getPodeConfigurarCarga() {
     return Boolean(parsed?.podeConfigurarCarga);
   } catch {
     return false;
+  }
+}
+
+function getCarrierAutoFill() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    const isTawros = Number(parsed?.tawros ?? 0) === 1;
+    const isAdmin = parsed?.roles?.some((r) => String(r).toLowerCase() === 'admin') ?? false;
+    if (isTawros || isAdmin) return null;
+    if (!parsed?.podeConfigurarCarga) return null;
+    return String(parsed?.pessoaNome || '').trim() || null;
+  } catch {
+    return null;
   }
 }
 
@@ -192,7 +215,7 @@ function mapFardosByBlocoId(rows) {
   }, {});
 }
 
-function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstrucao, fardosByBloco) {
+function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstrucao, fardosByBloco, selectedCarrier) {
   return instrucoes.reduce((acc, row) => {
     const id = String(row?.id || '');
     if (!id) return acc;
@@ -207,9 +230,22 @@ function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstru
         return createPlumaBlockFromApi(bloco, fardos);
       });
     } else {
-      const quantidadeTotal = Math.max(0, Number(row?.quantidade_total || 0));
       const quantidadeAgendada = Math.max(0, Number(row?.quantidade_agendada || 0));
-      const remaining = Math.max(0, quantidadeTotal - quantidadeAgendada);
+      let remaining;
+      let quantidadeTotal;
+
+      if (selectedCarrier) {
+        const transportes = transportesByInstrucao[id] || [];
+        const carrierTransporte = transportes.find(
+          (t) => normalizeText(t?.nome_transportadora || '') === normalizeText(selectedCarrier),
+        );
+        quantidadeTotal = Math.max(0, Number(carrierTransporte?.quantidade || 0));
+        remaining = Math.max(0, quantidadeTotal - quantidadeAgendada);
+      } else {
+        quantidadeTotal = Math.max(0, Number(row?.quantidade_total || 0));
+        remaining = Math.max(0, quantidadeTotal - quantidadeAgendada);
+      }
+
       blocks = [createKgBlockFromApi({
         id: `instrucao-${id}`,
         nome_transportadora: 'Carga',
@@ -225,12 +261,23 @@ function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstru
   }, {});
 }
 
-function mapAvailableContracts(rows, lookups, contractDetails) {
+function mapAvailableContracts(rows, lookups, contractDetails, transportesByInstrucao, selectedCarrier) {
   return rows
     .filter((row) => {
       if (row.status !== 'aprovado') return false;
-      const details = contractDetails[String(row.id)];
-      if (details?.quantificationType === 'kg') return (details.remaining ?? 0) > 0;
+      const id = String(row.id);
+      const details = contractDetails[id];
+
+      if (details?.quantificationType === 'kg') {
+        if (selectedCarrier) {
+          const transportes = transportesByInstrucao[id] || [];
+          const hasAllocation = transportes.some(
+            (t) => normalizeText(t?.nome_transportadora || '') === normalizeText(selectedCarrier),
+          );
+          if (!hasAllocation) return false;
+        }
+        return (details.remaining ?? 0) > 0;
+      }
       return !row.data_agendamento;
     })
     .map((row) => {
@@ -249,20 +296,24 @@ function mapAvailableContracts(rows, lookups, contractDetails) {
 
 const CANCELLABLE_PATIO_FASES = new Set(['aguardando_futuro', 'aguardando_chegada', 'fila_patio', '']);
 
-function mapScheduledRows(rows, lookups) {
-  return rows
-    .filter((row) => row.data_agendamento)
-    .map((row) => ({
-      id: String(row.id),
-      code: row.numero_instrucao || `INS-${row.id}`,
-      producer: lookups.pessoas[String(row.produtor_id)] || row.nome_vendedor_produtor || '-',
-      buyer: lookups.pessoas[String(row.comprador_id)] || '-',
-      appointmentDate: formatDisplayDate(row.data_agendamento),
-      branch: lookups.filiais[String(row.filial_id)] || '-',
-      driver: row.nome_motorista || '-',
-      truck: row.placa_veiculo || '-',
-      canCancel: CANCELLABLE_PATIO_FASES.has(row.patio_fase ?? '') && getPodeConfigurarCarga(),
-    }));
+function mapScheduledRows(agendamentos, instrucoesMap, lookups) {
+  return agendamentos.map((agendamento) => {
+    const instrucao = instrucoesMap[String(agendamento.instrucao_id)];
+    if (!instrucao) return null;
+    return {
+      id: String(agendamento.id),
+      instrucaoId: String(agendamento.instrucao_id),
+      code: instrucao.numero_instrucao || `INS-${instrucao.id}`,
+      producer: lookups.pessoas[String(instrucao.produtor_id)] || instrucao.nome_vendedor_produtor || '-',
+      buyer: lookups.pessoas[String(instrucao.comprador_id)] || '-',
+      appointmentDate: formatDisplayDate(agendamento.data_agendamento),
+      branch: lookups.filiais[String(instrucao.filial_id)] || '-',
+      driver: agendamento.nome_motorista || '-',
+      truck: agendamento.placa_veiculo || '-',
+      quantidade: Number(agendamento.quantidade || 0),
+      canCancel: CANCELLABLE_PATIO_FASES.has(instrucao.patio_fase ?? '') && getPodeConfigurarCarga(),
+    };
+  }).filter(Boolean);
 }
 
 function matchesProductType(contract, selectedType) {
@@ -283,7 +334,7 @@ function applyProductTypeFilter() {
 }
 
 async function loadSchedulingData(page) {
-  const [instrucoesRes, pessoasRes, filiaisRes, transportesRes, blocosRes, fardosRes, veiculosRes, categoriasRes, agendaRes] = await Promise.all([
+  const [instrucoesRes, pessoasRes, filiaisRes, transportesRes, blocosRes, fardosRes, veiculosRes, categoriasRes, agendaRes, agendamentosRes] = await Promise.all([
     apiRequest('/instrucoes', { query: { page: 1, limit: 400, sort: 'created_at', order: 'desc' } }),
     apiRequest('/lookups/pessoas-empresas', { query: { limit: 500 } })
       .catch(() => apiRequest('/pessoas-empresas', { query: { limit: 500 } })),
@@ -295,6 +346,7 @@ async function loadSchedulingData(page) {
     apiRequest('/veiculos', { query: { page: 1, limit: 1000 } }).catch(() => ({ data: [] })),
     apiRequest('/categorias-pessoa-empresa', { query: { page: 1, limit: 500 } }).catch(() => ({ data: [] })),
     apiRequest('/agenda-disponibilidade', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
+    apiRequest('/instrucoes-agendamentos', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
   ]);
 
   const instrucoes = parseApiResponse(instrucoesRes);
@@ -309,11 +361,23 @@ async function loadSchedulingData(page) {
   const categorias = parseApiResponse(categoriasRes);
   const motorista = categorias.find((item) => normalizeText(item?.nome).includes('motorista'));
   state.motoristaCategoryId = motorista?.id ? Number(motorista.id) : null;
+  const transportadora = categorias.find((item) => normalizeText(item?.nome).includes('transportadora'));
+  state.transportadoraCategoryId = transportadora?.id ? Number(transportadora.id) : null;
+  state.transportesByInstrucao = transportesByInstrucao;
   state.agendaCatalog = parseApiResponse(agendaRes);
 
-  state.contractDetails = buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstrucao, fardosByBloco);
-  state.allContracts = mapAvailableContracts(instrucoes, lookups, state.contractDetails);
-  state.scheduleRows = mapScheduledRows(instrucoes, lookups);
+  const agendamentos = parseApiResponse(agendamentosRes).filter((a) => !a.deleted_at);
+  const instrucoesMap = Object.fromEntries(instrucoes.map((i) => [String(i.id), i]));
+
+  state.instrucoesRaw = instrucoes;
+  state.blocosByInstrucao = blocosByInstrucao;
+  state.fardosByBloco = fardosByBloco;
+  state.lookupsCache = lookups;
+
+  const selectedCarrier = String(state.driverFields.find((f) => f.id === 'carrierName')?.value || '').trim();
+  state.contractDetails = buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstrucao, fardosByBloco, selectedCarrier || null);
+  state.allContracts = mapAvailableContracts(instrucoes, lookups, state.contractDetails, transportesByInstrucao, selectedCarrier || null);
+  state.scheduleRows = mapScheduledRows(agendamentos, instrucoesMap, lookups);
   state.pagination.totalPages = Math.max(1, Math.ceil(Math.max(1, state.scheduleRows.length) / Math.max(1, state.pagination.itemsPerPage)));
   state.pagination.currentPage = Math.min(state.pagination.currentPage, state.pagination.totalPages);
 
@@ -507,6 +571,113 @@ async function fetchDriverSuggestionsFromApi(searchTerm) {
   driverField.suggestions = suggestions;
 }
 
+async function fetchCarrierSuggestionsFromApi(searchTerm) {
+  const carrierField = state.driverFields.find((field) => field.id === 'carrierName');
+  if (!carrierField) return;
+
+  const term = normalizeText(searchTerm);
+  if (!term || term.length < 3) {
+    carrierField.suggestions = [];
+    return;
+  }
+
+  const query = { q: searchTerm, search: searchTerm, limit: 50 };
+  if (state.transportadoraCategoryId) {
+    query['filter[categoria_id][eq]'] = state.transportadoraCategoryId;
+  }
+
+  const payload = await apiRequest('/pessoas-empresas', { query });
+  const rows = parseApiResponse(payload);
+  const filtered = state.transportadoraCategoryId
+    ? rows.filter((row) => String(row?.categoria_id ?? '') === String(state.transportadoraCategoryId))
+    : rows;
+
+  const suggestions = Array.from(new Set(filtered
+    .map((row) => String(row?.razao_social || row?.nome_fantasia || row?.nome_responsavel || '').trim())
+    .filter((name) => name && normalizeText(name).includes(term))
+  ))
+    .slice(0, 10)
+    .map((name) => ({ value: name, label: name }));
+
+  carrierField.suggestions = suggestions;
+}
+
+function renderCarrierSuggestionsInDom(page) {
+  const carrierInput = page.querySelector('#carrierName');
+  const wrapper = carrierInput?.closest('.input-wrapper');
+  if (!carrierInput || !wrapper) return;
+
+  let suggestionsContainer = wrapper.querySelector('[data-suggestions]');
+  if (!suggestionsContainer) {
+    suggestionsContainer = document.createElement('div');
+    suggestionsContainer.className = 'input-suggestions';
+    suggestionsContainer.setAttribute('data-suggestions', '');
+    wrapper.appendChild(suggestionsContainer);
+  }
+
+  const carrierField = state.driverFields.find((field) => field.id === 'carrierName');
+  const suggestions = Array.isArray(carrierField?.suggestions) ? carrierField.suggestions : [];
+  suggestionsContainer.innerHTML = suggestions
+    .map((item, index) => `<div class="input-suggestion" data-action="carrier-name-suggestion" data-value="${item.value}" data-index="${index}">${item.label}</div>`)
+    .join('');
+  if (suggestions.length) suggestionsContainer.classList.add('is-visible');
+  else suggestionsContainer.classList.remove('is-visible');
+
+  suggestionsContainer.querySelectorAll('[data-action="carrier-name-suggestion"]').forEach((item) => {
+    item.addEventListener('mousedown', (event) => {
+      event.preventDefault();
+      applyCarrierSelection(page, item.getAttribute('data-value'));
+    });
+  });
+}
+
+function applyCarrierSelection(page, value) {
+  const carrierInput = page.querySelector('#carrierName');
+  if (!carrierInput) return;
+
+  const selectedName = String(value || '').trim();
+  carrierInput.value = selectedName;
+  carrierInput.dataset.confirmedValue = selectedName;
+  const carrierField = state.driverFields.find((field) => field.id === 'carrierName');
+  if (carrierField) {
+    carrierField.value = selectedName;
+    carrierField.suggestions = [];
+  }
+  suppressCarrierLookupOnce = true;
+
+  const suggestionsContainer = carrierInput.closest('.input-wrapper')?.querySelector('[data-suggestions]');
+  if (suggestionsContainer) {
+    suggestionsContainer.classList.remove('is-visible');
+    suggestionsContainer.innerHTML = '';
+  }
+
+  recomputeContractsByCarrier(page);
+}
+
+function recomputeContractsByCarrier(page) {
+  const selectedCarrier = String(state.driverFields.find((f) => f.id === 'carrierName')?.value || '').trim();
+  if (!state.instrucoesRaw.length || !state.lookupsCache) {
+    renderPage(page);
+    return;
+  }
+  state.contractDetails = buildContractDetails(
+    state.instrucoesRaw,
+    state.transportesByInstrucao,
+    state.blocosByInstrucao,
+    state.fardosByBloco,
+    selectedCarrier || null,
+  );
+  state.allContracts = mapAvailableContracts(
+    state.instrucoesRaw,
+    state.lookupsCache,
+    state.contractDetails,
+    state.transportesByInstrucao,
+    selectedCarrier || null,
+  );
+  applyProductTypeFilter();
+  renderPage(page);
+}
+
 function renderDriverSuggestionsInDom(page) {
   const driverInput = page.querySelector('#driverName');
   const wrapper = driverInput?.closest('.input-wrapper');
@@ -605,6 +776,21 @@ function renderPage(page) {
   renderTabs();
   renderSections();
   hydrateInputs(page);
+  applyCarrierLock(page);
+}
+
+function applyCarrierLock(page) {
+  const autoFill = getCarrierAutoFill();
+  if (!autoFill) return;
+  const input = page?.querySelector('#carrierName');
+  if (!input) return;
+  input.value = autoFill;
+  input.setAttribute('readonly', '');
+  input.style.background = 'var(--color-surface-secondary, #f5f5f5)';
+  input.style.cursor = 'not-allowed';
+  input.style.color = 'var(--color-content-secondary)';
+  const carrierField = state.driverFields.find((f) => f.id === 'carrierName');
+  if (carrierField) carrierField.value = autoFill;
 }
 
 function addContractToCargo(contractId, page) {
@@ -613,7 +799,8 @@ function addContractToCargo(contractId, page) {
 
   const [contract] = state.availableContracts.splice(contractIndex, 1);
   const detail = state.contractDetails[String(contractId)] || { quantificationType: contract.quantificationType, blocks: [] };
-  state.cargoContracts.push(createCargoContract(contract, detail));
+  const detailCopy = { ...detail, blocks: detail.blocks.map((b) => ({ ...b })) };
+  state.cargoContracts.push(createCargoContract(contract, detailCopy));
   renderPage(page);
 }
 
@@ -742,6 +929,7 @@ async function persistContractQuantities(contract) {
 
 async function persistScheduling(page) {
   const apiDate = toApiDate(state.appointmentDate.value);
+  const carrier = String(state.driverFields.find((field) => field.id === 'carrierName')?.value || '').trim();
   const driver = String(state.driverFields.find((field) => field.id === 'driverName')?.value || '').trim();
   const truck = String(state.driverFields.find((field) => field.id === 'vehiclePlate')?.value || '').trim().toUpperCase();
   const selectedType = normalizeProduto(state.driverFields.find((field) => field.id === 'productType')?.value);
@@ -771,20 +959,26 @@ async function persistScheduling(page) {
       const quantidadeTotalKg = await persistContractQuantities(contract);
       const details = state.contractDetails[String(contract.id)];
       const novaQtdAgendada = Math.max(0, (details?.quantidadeAgendada ?? 0) + (quantidadeTotalKg ?? 0));
-      return apiRequest(`/instrucoes/${id}`, {
-        method: 'PATCH',
+
+      await apiRequest('/instrucoes-agendamentos', {
+        method: 'POST',
         body: {
+          instrucao_id: id,
           data_agendamento: apiDate,
           nome_motorista: driver,
           placa_veiculo: truck,
-          status: 'aprovado',
+          quantidade: quantidadeTotalKg ?? 0,
+          ...(carrier ? { nome_transportadora: carrier } : {}),
+        },
+      });
+
+      return apiRequest(`/instrucoes/${id}`, {
+        method: 'PATCH',
+        body: {
           ...(quantidadeTotalKg != null ? { quantidade_agendada: novaQtdAgendada } : {}),
-          patio_fase: 'aguardando_chegada',
-          chegada_em: null,
-          chamado_em: null,
-          entrada_em: null,
-          finalizado_em: null,
-          ordem_fila: null,
+          data_agendamento: apiDate,
+          nome_motorista: driver,
+          placa_veiculo: truck,
         },
       });
     })
@@ -804,35 +998,49 @@ async function persistScheduling(page) {
   await loadSchedulingData(page);
 }
 
-async function cancelScheduling(rowId, page) {
-  const id = Number(rowId);
+async function cancelScheduling(agendamentoId, page) {
+  const id = Number(agendamentoId);
   if (!Number.isFinite(id) || id <= 0) return;
-  const instrucao = await apiRequest(`/instrucoes/${id}`);
-  const instrucaoData = instrucao?.data || instrucao;
-  await apiRequest(`/instrucoes/${id}`, {
+
+  const agendamentoRes = await apiRequest(`/instrucoes-agendamentos/${id}`);
+  const agendamento = agendamentoRes?.data || agendamentoRes;
+  const instrucaoId = Number(agendamento?.instrucao_id);
+  const quantidadeCancelada = Math.max(0, Number(agendamento?.quantidade || 0));
+
+  await apiRequest(`/instrucoes-agendamentos/${id}`, {
     method: 'PATCH',
-    body: {
-      status: 'aprovado',
-      data_agendamento: null,
-      nome_motorista: null,
-      placa_veiculo: null,
-      patio_fase: 'aguardando_chegada',
-      chegada_em: null,
-      chamado_em: null,
-      entrada_em: null,
-      finalizado_em: null,
-      ordem_fila: null,
-    },
+    body: { deleted_at: new Date().toISOString() },
   });
-  const agenda = findAgendaDisponibilidade(instrucaoData?.data_agendamento, instrucaoData?.tipo_produto);
-  if (agenda?.id) {
-    await atualizarOcupacaoAgenda(agenda.id, -1);
+
+  if (instrucaoId > 0) {
+    const instruRes = await apiRequest(`/instrucoes/${instrucaoId}`);
+    const instrucao = instruRes?.data || instruRes;
+    const currentAgendada = Math.max(0, Number(instrucao?.quantidade_agendada || 0));
+    const novaAgendada = Math.max(0, currentAgendada - quantidadeCancelada);
+
+    await apiRequest(`/instrucoes/${instrucaoId}`, {
+      method: 'PATCH',
+      body: { quantidade_agendada: novaAgendada },
+    });
+
+    const agenda = findAgendaDisponibilidade(agendamento?.data_agendamento, instrucao?.tipo_produto);
+    if (agenda?.id) {
+      await atualizarOcupacaoAgenda(agenda.id, -1);
+    }
   }
+
   await loadSchedulingData(page);
 }
 
 async function handleClick(event) {
   const page = event.currentTarget;
+
+  const carrierSuggestion = event.target.closest('[data-action="carrier-name-suggestion"]');
+  if (carrierSuggestion) {
+    event.preventDefault();
+    applyCarrierSelection(page, carrierSuggestion.getAttribute('data-value'));
+    return;
+  }
 
   const driverSuggestion = event.target.closest('[data-action="driver-name-suggestion"]');
   if (driverSuggestion) {
@@ -952,12 +1160,31 @@ function handleInput(event) {
   }
 
   const driverField = state.driverFields.find((field) => field.id === target.id);
+  const isCarrierNameField = target.id === 'carrierName' || target.name === 'carrierName';
   const isDriverNameField = target.id === 'driverName' || target.name === 'driverName';
   const isVehiclePlateField = target.id === 'vehiclePlate' || target.name === 'vehiclePlate';
 
   if (event.isTrusted) {
+    if (isCarrierNameField) delete target.dataset.confirmedValue;
     if (isDriverNameField) delete target.dataset.confirmedValue;
     if (isVehiclePlateField) delete target.dataset.confirmedValue;
+  }
+
+  if (isCarrierNameField) {
+    if (getCarrierAutoFill()) return;
+    if (driverField) driverField.value = target.value;
+    if (suppressCarrierLookupOnce) {
+      suppressCarrierLookupOnce = false;
+      return;
+    }
+    if (carrierLookupTimer) clearTimeout(carrierLookupTimer);
+    const typedValue = target.value;
+    carrierLookupTimer = setTimeout(() => {
+      fetchCarrierSuggestionsFromApi(typedValue)
+        .then(() => renderCarrierSuggestionsInDom(page))
+        .catch(() => renderCarrierSuggestionsInDom(page));
+    }, 220);
+    return;
   }
 
   if (isDriverNameField && !driverField) {
@@ -1055,6 +1282,15 @@ export function init() {
   state.cargoContracts = [];
   state.availableContracts = [];
 
+  const autoFillCarrier = getCarrierAutoFill();
+  if (autoFillCarrier) {
+    const carrierField = state.driverFields.find((f) => f.id === 'carrierName');
+    if (carrierField) {
+      carrierField.value = autoFillCarrier;
+      carrierField.required = false;
+    }
+  }
+
   cleanupTabs = initControlePatioTabs(page);
   renderPage(page);
 
@@ -1090,6 +1326,19 @@ export function init() {
         }
       }, 200);
     }
+    if (target.id === 'carrierName') {
+      if (getCarrierAutoFill()) return;
+      setTimeout(() => {
+        const field = state.driverFields.find((f) => f.id === 'carrierName');
+        if (target.dataset.confirmedValue === undefined || target.value !== target.dataset.confirmedValue) {
+          target.value = '';
+          delete target.dataset.confirmedValue;
+          if (field) { field.value = ''; field.suggestions = []; }
+          renderCarrierSuggestionsInDom(page);
+          recomputeContractsByCarrier(page);
+        }
+      }, 200);
+    }
   }, true);
 
   return () => {
@@ -1105,6 +1354,10 @@ export function init() {
     if (driverLookupTimer) {
       clearTimeout(driverLookupTimer);
       driverLookupTimer = null;
+    }
+    if (carrierLookupTimer) {
+      clearTimeout(carrierLookupTimer);
+      carrierLookupTimer = null;
     }
     if (activeController) {
       activeController.abort();

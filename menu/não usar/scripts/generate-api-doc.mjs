@@ -156,7 +156,7 @@ function curlExample(method, p, auth) {
   const ct = m !== 'GET' ? '  -H "Content-Type: application/json" \\\n' : '';
   let body = '';
   if (m !== 'GET' && !(m === 'DELETE' && !p.endsWith('/bulk-delete'))) body = "  -d '{\"codigo\":\"COD-001\",\"nome\":\"Exemplo\"}'";
-  return `\`\`\`bash\ncurl -X '${m}' \\\n  'http://192.168.15.10:3000${p.replace('{id}', '1').replace('{resource}', 'pessoas-empresas').replace('{relation}', 'ramos').replace('{event}', 'pedido-criado')}' \\\n  -H 'accept: application/json' \\\n${tokenHeader}${ct}${body}\n\`\`\``;
+  return `\`\`\`bash\ncurl -X '${m}' \\\n  'http://192.168.15.21:3000${p.replace('{id}', '1').replace('{resource}', 'pessoas-empresas').replace('{relation}', 'ramos').replace('{event}', 'pedido-criado')}' \\\n  -H 'accept: application/json' \\\n${tokenHeader}${ct}${body}\n\`\`\``;
 }
 
 function postmanGuide(method, p, auth) {
@@ -165,7 +165,7 @@ function postmanGuide(method, p, auth) {
     : '- Headers: `accept: application/json` e `Content-Type: application/json`';
   return [
     `- Método: \`${method.toUpperCase()}\``,
-    `- URL: \`http://192.168.15.10:3000${p}\``,
+    `- URL: \`http://192.168.15.21:3000${p}\``,
     headerLine,
     `- Auth: ${auth === 'Sim' ? 'Bearer Token' : 'Sem auth'}`,
     '- Body: JSON conforme seção anterior',
@@ -257,7 +257,7 @@ ${postmanGuide(method, p, auth[0])}
 
 fetch/axios (frontend):
 \`\`\`ts
-const res = await fetch('http://192.168.15.10:3000${p.replace('{id}', '1').replace('{resource}', 'pessoas-empresas').replace('{relation}', 'ramos').replace('{event}', 'pedido-criado')}', {
+const res = await fetch('http://192.168.15.21:3000${p.replace('{id}', '1').replace('{resource}', 'pessoas-empresas').replace('{relation}', 'ramos').replace('{event}', 'pedido-criado')}', {
   method: '${m}',
   headers: {
     'Accept': 'application/json',
@@ -285,7 +285,7 @@ ${statusTable(p)}
 - Observar: `requestId`, status code, tempo de resposta e consistência dos campos.
 
 ### 10. Como testar no Swagger
-- Abrir `http://192.168.15.10:3000/docs`.
+- Abrir `http://192.168.15.21:3000/docs`.
       - Se rota autenticada, usar botão ** Authorize ** com`Bearer <accessToken>`.
 - Executar com payload de exemplo e conferir status + response body.
 
@@ -341,7 +341,7 @@ API REST desenvolvida em Node.js + Fastify + TypeScript para atender frontend, i
 - Soft delete, auditoria e integração por`external_source/external_id`.
 
 ## 3. URL Base e Ambientes
-    - Base local: `http://192.168.15.10:3000`
+    - Base local: `http://192.168.15.21:3000`
       - Prefixo funcional: `/api/v1`
         - Docs: `/docs`
           - Contrato: `/openapi.json`
@@ -391,10 +391,10 @@ Formato padrão de erro Fastify:
 
 ### 7.2 Exemplos
 \`\`\`bash
-curl "http://192.168.15.10:3000/api/v1/pessoas-empresas?page=1&limit=20&sort=id&order=desc&q=acme"
+curl "https://api.sistemas.tawros.com.br:3000/api/v1/pessoas-empresas?page=1&limit=20&sort=id&order=desc&q=acme"
 \`\`\`
 \`\`\`bash
-curl "http://192.168.15.10:3000/api/v1/produtos-servicos?withDeleted=false&externalSource=erp&externalId=A-100"
+curl "https://api.sistemas.tawros.com.br:3000/api/v1/produtos-servicos?withDeleted=false&externalSource=erp&externalId=A-100"
 \`\`\`
 
 ## 8. Documentação Endpoint por Endpoint

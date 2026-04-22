@@ -1,0 +1,56 @@
+<main class="aprovacoes-page">
+  <div class="aprovacoes">
+    <section class="aprovacoes__topbar" aria-label="Cabeçalho">
+      <div class="aprovacoes__title-wrap">
+        <h1 class="aprovacoes__title">Aprovações de Carregamento</h1>
+        <p class="aprovacoes__subtitle" id="aprovacoes-subtitle"></p>
+      </div>
+      <div class="aprovacoes__actions">
+        <div id="aprovacoes-search"></div>
+      </div>
+    </section>
+
+    <section class="aprovacoes__filters" id="aprovacoes-filters" aria-label="Filtros por status"></section>
+
+    <section class="aprovacoes__calendar-section" aria-label="Calendário de agendamentos">
+      <div class="aprovacoes__calendar-header">
+        <button class="aprovacoes__cal-nav" data-action="cal-prev">&#8249;</button>
+        <h2 class="aprovacoes__cal-title" id="aprovacoes-cal-title"></h2>
+        <button class="aprovacoes__cal-nav" data-action="cal-next">&#8250;</button>
+      </div>
+      <div class="aprovacoes__calendar-grid" id="aprovacoes-calendar-grid"></div>
+      <div class="aprovacoes__cal-legend">
+        <span class="aprovacoes__cal-dot aprovacoes__cal-dot--pendente"></span><span>Pendente</span>
+        <span class="aprovacoes__cal-dot aprovacoes__cal-dot--aprovado"></span><span>Aprovado</span>
+        <span class="aprovacoes__cal-dot aprovacoes__cal-dot--recusado"></span><span>Recusado</span>
+      </div>
+    </section>
+
+    <section class="aprovacoes__content" aria-label="Ordens de carregamento pendentes">
+      <div class="aprovacoes__table-wrap">
+        <table class="aprovacoes__table" aria-label="Ordens de carregamento">
+          <thead>
+            <tr>
+              <th>Instrução</th>
+              <th>Produto</th>
+              <th>Transportadora</th>
+              <th>Motorista</th>
+              <th>Placa</th>
+              <th>Data Agend.</th>
+              <th>Quantidade</th>
+              <th>Aprovação</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="aprovacoes-tbody">
+            <tr class="aprovacoes__loading-row">
+              <td colspan="9">Carregando...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="aprovacoes__pagination" id="aprovacoes-pagination"></div>
+    </section>
+  </div>
+</main>

@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -f \"C:/Users/desen/AppData/Local/Temp/patio_fase_fix.sql\")",
+      "Bash(xargs -I{} powershell.exe -Command \"Stop-Process -Id {} -Force\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"\\\\d app.instrucoes_transportes\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT column_name FROM information_schema.columns WHERE table_schema='auth' AND table_name='users' ORDER BY ordinal_position;\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT column_name FROM information_schema.columns WHERE table_schema='auth' AND table_name='users' AND column_name IN \\('pessoa_id','pessoaId','vincular_pessoa'\\);\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT id, name, email, vincular_pessoa FROM auth.users;\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"\\\\d auth.users\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -f \"C:/Users/desen/AppData/Local/Temp/instrucoes_visibilidade.sql\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT id, razao_social FROM app.pessoas_empresas LIMIT 10;\")",
+      "Bash(psql postgresql://postgres:masterkey@localhost:5432/tawros -c ' *)",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -f \"C:/Users/desen/AppData/Local/Temp/seed_test.sql\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT id, produtor_id, comprador_id FROM app.instrucoes;\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT instrucao_id, nome_transportadora FROM app.instrucoes_transportes WHERE deleted_at IS NULL;\")",
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT app.usuario_pode_ver_instrucao\\(1, 4, 'Transportadora 1'\\) AS pode_ver_ins1, app.usuario_pode_ver_instrucao\\(2, 4, 'Transportadora 1'\\) AS pode_ver_ins2;\")"
+    ]
+  }
+}

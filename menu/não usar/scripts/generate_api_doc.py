@@ -225,7 +225,7 @@ def curl_example(method: str, p: str, auth_required: str) -> str:
     route = p.replace('{id}', '1').replace('{resource}', 'pessoas-empresas').replace('{relation}', 'ramos').replace('{event}', 'pedido-criado')
     lines = [
         f"curl -X '{method.upper()}' \\",
-        f"  'http://192.168.15.10:3000{route}' \\",
+        f"  'http://192.168.15.21:3000{route}' \\",
         "  -H 'accept: application/json' \\",
     ]
     if auth_required == 'sim':
@@ -242,7 +242,7 @@ def curl_example(method: str, p: str, auth_required: str) -> str:
 def postman_guide(method: str, p: str, auth_required: str) -> str:
     lines = [
         f"- Método: `{method.upper()}`",
-        f"- URL: `http://192.168.15.10:3000{p}`",
+        f"- URL: `http://192.168.15.21:3000{p}`",
         "- Headers: `accept: application/json`" + (" e `Content-Type: application/json`" if method != 'get' else ""),
         f"- Auth: {'Bearer Token' if auth_required == 'sim' else 'Sem auth'}",
         "- Body: JSON conforme seção anterior",
@@ -351,7 +351,7 @@ Postman/Insomnia:
 
 fetch/axios (frontend):
 ```ts
-const res = await fetch('http://192.168.15.10:3000{route}', {{
+const res = await fetch('http://192.168.15.21:3000{route}', {{
   method: '{method.upper()}',
   headers: {{
     'Accept': 'application/json',{"\n    'Authorization': 'Bearer <ACCESS_TOKEN>'," if aut[0]=='sim' else ''}{"\n    'Content-Type': 'application/json'" if method != 'get' else ''}
@@ -377,7 +377,7 @@ Campos da resposta:
 - Validar efeito no banco para operações mutáveis.
 
 ### 10. Como testar no Swagger
-- Abrir `http://192.168.15.10:3000/docs`.
+- Abrir `http://192.168.15.21:3000/docs`.
 - Se necessário, clicar em **Authorize** e informar `Bearer <token>`.
 - Executar endpoint e validar retorno.
 
@@ -428,7 +428,7 @@ API REST em Fastify/TypeScript para operações de cadastros, autenticação, in
 - Rate limit, CORS, Helmet, soft delete, auditoria.
 
 ## 3. URL Base e Ambientes
-- Local: `http://192.168.15.10:3000`
+- Local: `http://192.168.15.21:3000`
 - Prefixo funcional: `/api/v1`
 - Swagger: `/docs`
 - OpenAPI: `/openapi.json`
@@ -467,10 +467,10 @@ API REST em Fastify/TypeScript para operações de cadastros, autenticação, in
 
 Exemplos:
 ```bash
-curl "http://192.168.15.10:3000/api/v1/pessoas-empresas?page=1&limit=20&sort=id&order=desc&q=acme"
+curl "https://api.sistemas.tawros.com.br:3000/api/v1/pessoas-empresas?page=1&limit=20&sort=id&order=desc&q=acme"
 ```
 ```bash
-curl "http://192.168.15.10:3000/api/v1/produtos-servicos?withDeleted=false&externalSource=erp&externalId=A-100"
+curl "https://api.sistemas.tawros.com.br:3000/api/v1/produtos-servicos?withDeleted=false&externalSource=erp&externalId=A-100"
 ```
 
 ## 8. Documentação Endpoint por Endpoint

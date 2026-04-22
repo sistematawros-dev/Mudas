@@ -28,6 +28,19 @@ function renderSection(number, title, content, className = '') {
 }
 
 function renderDriverField(field) {
+  if (field.id === 'carrierName') {
+    return Input.createAutocomplete({
+      id: field.id,
+      label: field.label,
+      value: field.value,
+      required: field.required,
+      size: 'sm',
+      className: 'patio-scheduling__field',
+      suggestions: Array.isArray(field.suggestions) ? field.suggestions : [],
+      placeholder: 'Digite ao menos 3 caracteres',
+    });
+  }
+
   if (field.id === 'vehiclePlate') {
     return Input.createAutocomplete({
       id: field.id,

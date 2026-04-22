@@ -1,4 +1,4 @@
-﻿const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+﻿const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 
 const state = {
   rows: [],
@@ -80,8 +80,8 @@ async function apiRequest(path, { method = 'GET', query, body, retryOnUnauthoriz
   if (body !== undefined) headers['Content-Type'] = 'application/json';
   const token = getAccessToken();
   if (token) headers.Authorization = `Bearer ${token}`;
-    const filialId = sessionStorage.getItem('filialId');
-    if (filialId) headers['X-Filial-Id'] = filialId;
+  const filialId = sessionStorage.getItem('filialId');
+  if (filialId) headers['X-Filial-Id'] = filialId;
 
   const response = await fetch(url.toString(), {
     method,

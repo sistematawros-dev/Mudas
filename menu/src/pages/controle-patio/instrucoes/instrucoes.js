@@ -9,7 +9,7 @@ import {
   scheduleFilterOptions,
 } from './instrucoes.data.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 let activeController = null;
 
 function getPodeNovaInstrucao() {
@@ -223,6 +223,26 @@ function formatInstructionUnit(tipoProduto, unidade) {
   return raw.charAt(0).toUpperCase() + raw.slice(1);
 }
 
+function getCurrentUserPessoaNome() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return null;
+    const parsed = JSON.parse(raw);
+    return parsed?.pessoaNome || null;
+  } catch { return null; }
+}
+
+function isTransportadoraUser() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    const isAdmin = parsed?.roles?.some((r) => String(r).toLowerCase() === 'admin') ?? false;
+    const isTawros = Number(parsed?.tawros ?? 0) === 1;
+    return !isAdmin && !isTawros && Boolean(parsed?.podeConfigurarCarga);
+  } catch { return false; }
+}
+
 function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
   const buyer = lookups.pessoas?.[String(row.comprador_id)] || '-';
   const producer = lookups.pessoas?.[String(row.produtor_id)] || row.nome_vendedor_produtor || '-';
@@ -231,11 +251,26 @@ function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
   const transportes = transportesByInstrucao[String(row.id)] || [];
   const isPlumaRow = String(row.tipo_produto || '').toLowerCase() === 'pluma';
   const unidade = isPlumaRow ? 'Fardos' : 'Quilogramas';
-  const quantidadeFinal = isPlumaRow
-    ? Number(row.quantidade_total || 0)
-    : transportes.length
+
+  // Para transportadora: mostrar somente a quantidade alocada para ela
+  const pessoaNome = getCurrentUserPessoaNome();
+  const isTransportadora = isTransportadoraUser();
+  let quantidadeFinal;
+  if (isTransportadora && pessoaNome && transportes.length) {
+    const meuTransporte = transportes.find((t) => String(t.nome_transportadora || '').toLowerCase().trim() === pessoaNome.toLowerCase().trim());
+    quantidadeFinal = meuTransporte ? Number(meuTransporte.quantidade || 0) : 0;
+  } else if (isPlumaRow) {
+    quantidadeFinal = Number(row.quantidade_total || 0);
+  } else {
+    quantidadeFinal = transportes.length
       ? transportes.reduce((sum, t) => sum + toKg(t.quantidade, t.unidade), 0)
       : Number(row.quantidade_total || 0);
+  }
+
+  // Saldos
+  const qtdAgendada = Math.max(0, Number(row.quantidade_agendada || 0));
+  const qtdCarregada = Math.max(0, Number(row.quantidade_real || 0));
+  const qtdPendente = Math.max(0, quantidadeFinal - qtdAgendada - qtdCarregada);
 
   const transportesMapped = transportes.map((t) => ({
     name: t.nome_transportadora || 'Transportadora',
@@ -243,6 +278,13 @@ function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
     unidade: formatInstructionUnit(row.tipo_produto, t.unidade),
     quantityLabel: `${Number(t.quantidade || 0).toLocaleString('pt-BR')} ${formatInstructionUnit(row.tipo_produto, t.unidade)}`,
   }));
+
+  const saldosLabel = !isPlumaRow ? [
+    `Total: ${quantidadeFinal.toLocaleString('pt-BR')} ${unidade}`,
+    `Agendado: ${qtdAgendada.toLocaleString('pt-BR')}`,
+    `Pendente: ${qtdPendente.toLocaleString('pt-BR')}`,
+    `Carregado: ${qtdCarregada.toLocaleString('pt-BR')}`,
+  ].join(' | ') : null;
 
   return {
     id: String(row.id),
@@ -264,12 +306,24 @@ function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
     quantityLabel: transportesMapped.length ? transportesMapped[0].quantityLabel : `${quantidadeFinal.toLocaleString('pt-BR')} ${unidade}`,
     transportes: transportesMapped,
     documents: [],
+    qtdTotal: quantidadeFinal,
+    qtdAgendada,
+    qtdPendente,
+    qtdCarregada,
+    unidade,
+    saldosLabel,
+    isPlumaRow,
   };
+}
+
+function buildInstrucoesQuery() {
+  // Escopo de visibilidade gerenciado pela API via resolveAllowedInstrucaoIds
+  return { page: 1, limit: 200, sort: 'created_at', order: 'desc' };
 }
 
 async function loadInstructions() {
   const [instructionsRes, pessoasRes, filiaisRes, transportesRes] = await Promise.all([
-    apiRequest('/instrucoes', { query: { page: 1, limit: 200, sort: 'created_at', order: 'desc' } }),
+    apiRequest('/instrucoes', { query: buildInstrucoesQuery() }),
     apiRequest('/lookups/pessoas-empresas', { query: { limit: 500 } }),
     apiRequest('/lookups/filiais', { query: { limit: 200 } }),
     apiRequest('/instrucoes-transportes', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
@@ -410,6 +464,8 @@ function getVisibleInstructions() {
 function getInstructionButtons(item, mode = 'list') {
   const buttons = [];
 
+  if (isTransportadoraUser()) return buttons;
+
   if (item.status === 'pending' && getPodeAprovarRejeitar()) {
     buttons.push({ key: 'reject', text: 'Rejeitar', variant: 'error', style: 'outline' });
     buttons.push({ key: 'approve', text: 'Aprovar', variant: 'success', style: 'solid' });
@@ -459,6 +515,16 @@ function renderListView(items) {
                   <dt>${itemIcons.product}<span>Produto:</span></dt>
                   <dd>${item.product}</dd>
                 </div>
+                ${!item.isPlumaRow ? `
+                <div class="patio-instruction-card__meta-item">
+                  <dt>Agendado:</dt><dd>${item.qtdAgendada.toLocaleString('pt-BR')} ${item.unidade}</dd>
+                </div>
+                <div class="patio-instruction-card__meta-item">
+                  <dt>Pendente:</dt><dd>${item.qtdPendente.toLocaleString('pt-BR')} ${item.unidade}</dd>
+                </div>
+                <div class="patio-instruction-card__meta-item">
+                  <dt>Carregado:</dt><dd>${item.qtdCarregada.toLocaleString('pt-BR')} ${item.unidade}</dd>
+                </div>` : ''}
                 <div class="patio-instruction-card__meta-item patio-instruction-card__meta-item--icon">
                   <dt>${itemIcons.block}<span>Blocos:</span></dt>
                   <dd>${item.blocks}</dd>
@@ -504,6 +570,10 @@ function renderKanbanCard(item) {
           <span class="patio-instruction-kanban-card__icon">${itemIcons.product}</span>
           <span>${item.productCompact}</span>
         </div>
+        ${!item.isPlumaRow ? `
+        <div class="patio-instruction-kanban-card__line" style="font-size:0.75rem;color:var(--color-content-secondary);flex-direction:column;align-items:flex-start;gap:2px;">
+          <span>Agendado: <b>${item.qtdAgendada.toLocaleString('pt-BR')}</b> | Pendente: <b>${item.qtdPendente.toLocaleString('pt-BR')}</b> | Carregado: <b>${item.qtdCarregada.toLocaleString('pt-BR')}</b> ${item.unidade}</span>
+        </div>` : ''}
         <div class="patio-instruction-kanban-card__line">
           <span class="patio-instruction-kanban-card__icon">${itemIcons.block}</span>
           <span>Bloco: ${item.blocks}</span>

@@ -1,4 +1,5 @@
 const driverFields = [
+  { id: 'carrierName', label: 'Transportadora', value: '', required: false, suggestions: [] },
   { id: 'vehiclePlate', label: 'Placa do Veiculo', value: '', required: true, suggestions: [] },
   { id: 'driverName', label: 'Nome do Motorista', value: '', required: true, suggestions: [] },
   { id: 'productType', label: 'Tipo de Produto', value: '', required: true },
@@ -70,7 +71,7 @@ export function createKgBlockFromApi(row, index) {
     title: row?.nome_transportadora || `Carga ${index + 1}`,
     availableKgLabel: `${quantidade.toLocaleString('pt-BR')} ${unidade}`,
     quantityLabel: 'Quantidade',
-    quantityValue: '',
+    quantityValue: quantidade > 0 ? quantidade.toLocaleString('pt-BR') : '',
     quantificationType: 'kg',
     max: quantidade,
     unidade,

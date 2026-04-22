@@ -45,7 +45,7 @@ npm run test:integracao
 ```
 
 ```powershell
-curl http://192.168.15.10:3000/api/v1/health
+curl https://api.sistemas.tawros.com.br:3000/api/v1/health
 ```
 
 ## 8) Conclusão

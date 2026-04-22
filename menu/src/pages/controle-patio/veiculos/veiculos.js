@@ -6,7 +6,7 @@ import {
 } from './veiculos.data.js';
 import { renderVehiclesPage } from './veiculos.templates.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 const state = createVehiclesState();
 let vehicleDrawer = null;
 let activeController = null;

@@ -19,7 +19,7 @@ export const options = {
   }
 };
 
-const baseUrl = __ENV.BASE_URL || 'http://192.168.15.10:3000';
+const baseUrl = __ENV.BASE_URL || 'http://192.168.15.21:3000';
 
 export default function () {
   http.get(`${baseUrl}/api/v1/health`);

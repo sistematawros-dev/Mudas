@@ -32,7 +32,7 @@ const blockIcon = `
 const closeIcon = Button.getIcon('close');
 const PLUMA_EDIT_MODAL_ID = 'patio-pluma-edit-modal';
 const STANDARD_EDIT_MODAL_ID = 'patio-standard-edit-modal';
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 let activeController = null;
 let cleanupInput = null;
 let cleanupStandardEditModal = () => { };
@@ -2573,6 +2573,14 @@ function handleInteraction(event) {
 export function init() {
   if (activeController) activeController.abort();
   activeController = new AbortController();
+
+  // Reset module-level caches and flags
+  buyerOptionsCache = [];
+  sellerOptionsCache = [];
+  producerDocOptionsCache = [];
+  isSavingInstruction = false;
+  standardEditModalState = null;
+  plumaEditModalState = null;
 
   state.formValues = { ...initialFormValues };
   state.standardLogisticsItems = initialStandardLogisticsItems.map((item) => ({ ...item }));

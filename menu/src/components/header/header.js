@@ -31,7 +31,7 @@ export function init() {
 function setupSettingsMenu() {
   const settingsBtn = document.getElementById('header-settings-btn');
   const settingsMenu = document.getElementById('header-settings-menu');
-  if (!settingsBtn || !settingsMenu) return () => {};
+  if (!settingsBtn || !settingsMenu) return () => { };
   const licencasItem = settingsMenu.querySelector('[data-header-settings-action="licencas-modulos"]');
   const usuariosItem = settingsMenu.querySelector('[data-header-settings-action="usuarios-cadastro"]');
   const senhaItem = settingsMenu.querySelector('[data-header-settings-action="senha"]');
@@ -129,7 +129,7 @@ function setupUserMenu() {
 
   const userWrapper = document.getElementById('header-user-wrapper');
   if (userWrapper instanceof HTMLElement) userWrapper.hidden = !isCommonUser;
-  if (!isCommonUser) return () => {};
+  if (!isCommonUser) return () => { };
 
   const userBtn = document.getElementById('header-user-btn');
   const userModal = document.getElementById('header-user-modal');
@@ -140,9 +140,9 @@ function setupUserMenu() {
   const cancelBtn = document.getElementById('hum-cancel');
   const confirmBtn = document.getElementById('hum-confirm-btn');
 
-  if (!userBtn || !userModal) return () => {};
+  if (!userBtn || !userModal) return () => { };
 
-  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 
   function showError(msg) {
     if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }
@@ -241,9 +241,9 @@ function setupAdminPasswordModal() {
   const cancelBtn = document.getElementById('hasm-cancel');
   const confirmBtn = document.getElementById('hasm-confirm-btn');
 
-  if (!modal) return () => {};
+  if (!modal) return () => { };
 
-  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+  const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 
   function showError(msg) {
     if (errorEl) { errorEl.textContent = msg; errorEl.hidden = false; }

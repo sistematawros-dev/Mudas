@@ -91,12 +91,56 @@ function applyLicencaMenuVisibility() {
   }
 }
 
+function getUserPermissions() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return {};
+    return JSON.parse(raw) || {};
+  } catch {
+    return {};
+  }
+}
+
 function hideControlePatioMenus() {
-  const hiddenLabels = new Set(['Veículos', 'Minhas Instruções', 'Aprovações']);
+  // Veículos sempre oculto independente do perfil
+  const submenuAll = document.querySelectorAll('.sidebar-submenu[data-submenu="controle-patio"] > .sidebar-item');
+  submenuAll.forEach((item) => {
+    const text = item.querySelector('.sidebar-text')?.textContent?.trim() || '';
+    if (text === 'Veículos') item.style.display = 'none';
+  });
+
+  if (isTawrosUser()) return;
+
+  const perms = getUserPermissions();
+  const podeNovaInstrucao = Boolean(perms?.podeNovaInstrucao);
+  const podeAprovarRejeitar = Boolean(perms?.podeAprovarRejeitar);
+  const podeConfigurarCarga = Boolean(perms?.podeConfigurarCarga);
+  const operadorPatio = Boolean(perms?.operadorPatio);
+
+  // Detecta perfil
+  const isProdutor = podeAprovarRejeitar && !podeNovaInstrucao && !podeConfigurarCarga;
+  const isComprador = podeNovaInstrucao && !podeAprovarRejeitar && !podeConfigurarCarga;
+  const isTransportadora = podeConfigurarCarga && !podeAprovarRejeitar;
+  const isOperadorPatio = operadorPatio && !podeAprovarRejeitar && !podeConfigurarCarga;
+
+  // Labels que cada perfil NÃO pode ver no submenu controle-patio
+  const hiddenForProdutor = new Set(['Gestão Agenda', 'Agendamentos', 'Pátio', 'Minhas Instruções', 'Veículos']);
+  const hiddenForComprador = new Set(['Gestão Agenda', 'Agendamentos', 'Pátio', 'Aprovações', 'Minhas Instruções', 'Veículos']);
+  const hiddenForTransportadora = new Set(['Gestão Agenda', 'Pátio', 'Aprovações', 'Veículos']);
+  const hiddenForOperadorPatio = new Set(['Aprovações', 'Minhas Instruções', 'Veículos']);
+  const hiddenDefault = new Set(['Veículos', 'Minhas Instruções', 'Aprovações']);
+
+  let hiddenSet;
+  if (isProdutor) hiddenSet = hiddenForProdutor;
+  else if (isComprador) hiddenSet = hiddenForComprador;
+  else if (isTransportadora) hiddenSet = hiddenForTransportadora;
+  else if (isOperadorPatio) hiddenSet = hiddenForOperadorPatio;
+  else hiddenSet = hiddenDefault;
+
   const submenuItems = document.querySelectorAll('.sidebar-submenu[data-submenu="controle-patio"] > .sidebar-item');
   submenuItems.forEach((item) => {
     const text = item.querySelector('.sidebar-text')?.textContent?.trim() || '';
-    if (hiddenLabels.has(text)) item.style.display = 'none';
+    item.style.display = hiddenSet.has(text) ? 'none' : '';
   });
 }
 

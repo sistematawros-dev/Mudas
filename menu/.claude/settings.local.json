@@ -11,7 +11,7 @@
       "Bash(PGPASSWORD=masterkey psql -U postgres -h localhost -p 5432 -d tawros -c \"SELECT * FROM app.filiais LIMIT 10;\")",
       "Bash(echo \"exit: $?\")",
       "Bash(PGPASSWORD=masterkey psql -U postgres -h localhost -p 5432 -d tawros -c \"SELECT id, codigo, nome, ativo FROM app.filiais ORDER BY id;\")",
-      "Bash(curl -s http://192.168.15.10:3000/api/v1/lookups/filiais -H \"Accept: application/json\")",
+      "Bash(curl -s https://api.sistemas.tawros.com.br:3000/api/v1/lookups/filiais -H \"Accept: application/json\")",
       "Bash(node -e ':*)",
       "Bash(npx tsx -e ':*)",
       "Bash(netstat -ano)",

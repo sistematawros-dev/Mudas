@@ -1,0 +1,203 @@
+.minhas-instrucoes-page {
+  flex: 1;
+  overflow-y: auto;
+  background: var(--color-surface-secondary);
+}
+
+.minhas-instrucoes {
+  padding: var(--space-6) var(--space-8);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.minhas-instrucoes__topbar {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: var(--space-6);
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+.minhas-instrucoes__title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.minhas-instrucoes__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-content-primary);
+  margin: 0;
+}
+
+.minhas-instrucoes__subtitle {
+  font-size: var(--font-size-s);
+  color: var(--color-content-secondary);
+  margin: 0;
+}
+
+.minhas-instrucoes__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.minhas-instrucoes__search-wrap {
+  min-width: 240px;
+}
+
+.minhas-instrucoes__filters {
+  display: flex;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.minhas-instrucoes__filter-btn {
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-full);
+  background: var(--color-surface-primary);
+  color: var(--color-content-secondary);
+  font-size: var(--font-size-s);
+  font-family: var(--font-family-body);
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.minhas-instrucoes__filter-btn:hover,
+.minhas-instrucoes__filter-btn--active {
+  background: var(--color-primary);
+  color: var(--white);
+  border-color: var(--color-primary);
+}
+
+.minhas-instrucoes__content {
+  background: var(--color-surface-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.minhas-instrucoes__table-wrap {
+  overflow-x: auto;
+}
+
+.minhas-instrucoes__table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-s);
+}
+
+.minhas-instrucoes__table thead tr {
+  background: var(--color-surface-secondary);
+  border-bottom: 1px solid var(--color-border-primary);
+}
+
+.minhas-instrucoes__table th {
+  padding: var(--space-3) var(--space-4);
+  text-align: left;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-content-secondary);
+  white-space: nowrap;
+  font-size: var(--font-size-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.minhas-instrucoes__table td {
+  padding: var(--space-3) var(--space-4);
+  color: var(--color-content-primary);
+  border-bottom: 1px solid var(--color-border-primary);
+  vertical-align: middle;
+}
+
+.minhas-instrucoes__table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.minhas-instrucoes__table tbody tr:hover td {
+  background: var(--color-surface-hover);
+}
+
+.minhas-instrucoes__code {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+}
+
+.minhas-instrucoes__loading-row td,
+.minhas-instrucoes__empty-row td {
+  text-align: center;
+  color: var(--color-content-secondary);
+  padding: var(--space-12) var(--space-4);
+}
+
+.minhas-instrucoes__pagination {
+  padding: var(--space-3) var(--space-4);
+  border-top: 1px solid var(--color-border-primary);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.minhas-instrucoes__pag-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.minhas-instrucoes__pag-btn {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-primary);
+  cursor: pointer;
+  font-size: var(--font-size-m);
+  color: var(--color-content-primary);
+}
+
+.minhas-instrucoes__pag-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.minhas-instrucoes__pag-info {
+  font-size: var(--font-size-s);
+  color: var(--color-content-secondary);
+}
+
+.minhas-instrucoes__badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px var(--space-2);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-medium);
+  white-space: nowrap;
+}
+
+.minhas-instrucoes__badge--pendente {
+  background: var(--color-warning-soft, #fef3c7);
+  color: var(--color-warning, #d97706);
+}
+
+.minhas-instrucoes__badge--aprovado {
+  background: var(--color-success-soft, #d1fae5);
+  color: var(--color-success, #059669);
+}
+
+.minhas-instrucoes__badge--recusado {
+  background: var(--color-error-soft, #fee2e2);
+  color: var(--color-error, #dc2626);
+}
+
+.minhas-instrucoes__badge--finalizado {
+  background: var(--color-surface-secondary);
+  color: var(--color-content-secondary);
+}

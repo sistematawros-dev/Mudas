@@ -5,7 +5,7 @@ import { createPatioState, createPatioEntryForm, patioModalIds } from './patio.d
 import { renderPatioBoard } from './patio.templates.js';
 import { initPatioEntryDrawer } from './entry-drawer.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 const state = createPatioState();
 let cleanupInputs = null;
 let cleanupModal = null;
@@ -185,9 +185,11 @@ function buildCompletionModal(row, detail = {}) {
     const value = Number(item?.quantidade || 0);
     return sum + (Number.isFinite(value) ? value : 0);
   }, 0);
-  const plannedTotal = plannedTotalFromTransportes > 0
-    ? plannedTotalFromTransportes
-    : Number(row?.quantidade_total || 0);
+  // Usa a quantidade do agendamento ativo como "previsto" (vídeo reunião1: "35 mil, não 250 mil")
+  const agendamentoQtd = detail.agendamentoQuantidade != null ? Number(detail.agendamentoQuantidade) : null;
+  const plannedTotal = agendamentoQtd != null && agendamentoQtd > 0
+    ? agendamentoQtd
+    : (plannedTotalFromTransportes > 0 ? plannedTotalFromTransportes : Number(row?.quantidade_total || 0));
   const unidadeKg = formatUnidadePtBr(
     transportes.find((item) => String(item?.unidade || '').trim())?.unidade || 'quilogramas',
   );
@@ -380,6 +382,11 @@ function mapColumns(rows, lookups) {
 
   rows.forEach((row) => {
     if (row.status === 'recusado') return;
+
+    // Só aparece no pátio se tiver agendamento aprovado (patio_fase != 'pendente_aprovacao')
+    const rawFase = String(row.patio_fase || '');
+    if (rawFase === 'pendente_aprovacao') return;
+
     const instructionId = String(row.id);
     const producer = lookups.pessoas[String(row.produtor_id)] || row.nome_vendedor_produtor || '-';
     const buyer = lookups.pessoas[String(row.comprador_id)] || '-';
@@ -390,15 +397,15 @@ function mapColumns(rows, lookups) {
     const scheduleInfo = row.data_agendamento
       ? `Agendado: ${formatApiDate(row.data_agendamento)}`
       : 'Sem data de agendamento';
-    const patioFase = String(row.patio_fase || (row.status === 'finalizado' ? 'finalizado' : 'aguardando_chegada'));
+    const patioFase = rawFase || 'aguardando_chegada';
 
     const baseCard = {
       id: `instrucao-${instructionId}`,
       type: 'card',
       product,
       productLabel: product,
-      code: row.numero_instrucao || `INS-${instructionId}`,
-      secondaryCode: row.numero_contrato || '-',
+      code: `#${instructionId}`,
+      secondaryCode: row.numero_instrucao || row.numero_contrato || '-',
       driver: row.nome_motorista || '-',
       transporter: buyer,
       quantity: row._completionModal?.summary?.plannedValue
@@ -479,12 +486,13 @@ function mapColumns(rows, lookups) {
 }
 
 async function loadPatioData(page) {
-  const [instrucoesRes, pessoasRes, transportesRes, blocosRes, fardosRes] = await Promise.all([
+  const [instrucoesRes, pessoasRes, transportesRes, blocosRes, fardosRes, agendamentosRes] = await Promise.all([
     apiRequest('/instrucoes', { query: { page: 1, limit: 400, sort: 'created_at', order: 'desc' } }),
     apiRequest('/lookups/pessoas-empresas', { query: { limit: 500 } }),
     apiRequest('/instrucoes-transportes', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
     apiRequest('/instrucoes-blocos', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
     apiRequest('/instrucoes-fardos', { query: { page: 1, limit: 10000 } }).catch(() => ({ data: [] })),
+    apiRequest('/instrucoes-agendamentos', { query: { page: 1, limit: 2000, 'filter[status_aprovacao][eq]': 'aprovado' } }).catch(() => ({ data: [] })),
   ]);
 
   const pessoas = parseApiResponse(pessoasRes).reduce((acc, row) => {
@@ -497,16 +505,35 @@ async function loadPatioData(page) {
   const fardosByBloco = mapFardosByBlocoId(parseApiResponse(fardosRes));
   const transportesByInstrucao = mapByInstrucaoId(parseApiResponse(transportesRes));
 
-  const rows = parseApiResponse(instrucoesRes).map((row = {}) => ({
-    ...row,
-    _completionModal: buildCompletionModal(row, {
-      transportes: transportesByInstrucao[String(row.id)] || [],
-      blocos: (blocosByInstrucao[String(row.id)] || []).map((item) => ({
-        ...item,
-        fardos: fardosByBloco[String(item?.id)] || [],
-      })),
-    }),
-  }));
+  // Mapa do agendamento ativo (aprovado, não finalizado) por instrucao_id
+  const agendamentoAtivoByInstrucao = parseApiResponse(agendamentosRes)
+    .filter((a) => !a.deleted_at)
+    .reduce((acc, a) => {
+      const key = String(a.instrucao_id);
+      const existing = acc[key];
+      // Prefere o mais recente sem quantidade_carregada (não finalizado ainda)
+      const semCarregar = !a.quantidade_carregada || Number(a.quantidade_carregada) === 0;
+      if (!existing || (semCarregar && !(!existing.quantidade_carregada || Number(existing.quantidade_carregada) === 0))) {
+        acc[key] = a;
+      }
+      return acc;
+    }, {});
+
+  const rows = parseApiResponse(instrucoesRes).map((row = {}) => {
+    const agendamentoAtivo = agendamentoAtivoByInstrucao[String(row.id)];
+    return {
+      ...row,
+      _agendamento_quantidade: agendamentoAtivo ? Number(agendamentoAtivo.quantidade || 0) : null,
+      _completionModal: buildCompletionModal(row, {
+        transportes: transportesByInstrucao[String(row.id)] || [],
+        blocos: (blocosByInstrucao[String(row.id)] || []).map((item) => ({
+          ...item,
+          fardos: fardosByBloco[String(item?.id)] || [],
+        })),
+        agendamentoQuantidade: agendamentoAtivo ? Number(agendamentoAtivo.quantidade || 0) : null,
+      }),
+    };
+  });
   state.columns = mapColumns(rows, { pessoas });
   renderPage(page);
 }
@@ -569,6 +596,8 @@ function handleModalConfirm(modalId) {
     ? Number.parseFloat(String(modalData?.item?.loadedValue || '').replace(/\./g, '').replace(',', '.'))
     : null;
 
+  const instrucaoId = Number(String(selectedCardId || '').replace('instrucao-', ''));
+
   patchInstructionFromCard(selectedCardId, {
     status: 'finalizado',
     patio_fase: 'finalizado',
@@ -576,6 +605,24 @@ function handleModalConfirm(modalId) {
     ordem_fila: null,
     quantidade_real: Number.isFinite(quantidadeReal) ? quantidadeReal : undefined,
   }, page)
+    .then(async () => {
+      if (!Number.isFinite(instrucaoId) || instrucaoId <= 0 || !Number.isFinite(quantidadeReal)) return;
+      try {
+        const agendamentosRes = await apiRequest('/instrucoes-agendamentos', {
+          query: { 'filter[instrucao_id][eq]': instrucaoId, limit: 100 },
+        });
+        const agendamentos = parseApiResponse(agendamentosRes).filter((a) => !a.deleted_at);
+        const active = agendamentos.find((a) => !a.quantidade_carregada || Number(a.quantidade_carregada) === 0);
+        if (active?.id) {
+          await apiRequest(`/instrucoes-agendamentos/${active.id}`, {
+            method: 'PATCH',
+            body: { quantidade_carregada: quantidadeReal },
+          });
+        }
+      } catch (err) {
+        console.warn('[controle-patio/patio] falha ao atualizar quantidade_carregada', err);
+      }
+    })
     .catch((error) => {
       console.error('[controle-patio/patio] falha ao finalizar carregamento', error);
       renderPage(page);

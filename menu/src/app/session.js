@@ -1,4 +1,4 @@
-﻿const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
+﻿const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
 const HEARTBEAT_MS = 10 * 60 * 1000; // 10 minutos
 const SESSION_KEY = 'sessionKey';
 
@@ -8,8 +8,8 @@ let popstateBlocker = null;
 // ─── Helpers ────────────────────────────────────────────────────────────────
 
 function getSessionKey() { return sessionStorage.getItem(SESSION_KEY) || ''; }
-function getToken()      { return sessionStorage.getItem('authToken') || ''; }
-function getRefresh()    { return sessionStorage.getItem('refreshToken') || ''; }
+function getToken() { return sessionStorage.getItem('authToken') || ''; }
+function getRefresh() { return sessionStorage.getItem('refreshToken') || ''; }
 
 export function generateSessionKey() {
   if (typeof crypto !== 'undefined' && crypto.randomUUID) return crypto.randomUUID();

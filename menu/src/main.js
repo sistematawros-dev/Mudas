@@ -10,7 +10,7 @@ function normalizeApiBase(value) {
   return String(value).replace(/\/+$/, '');
 }
 
-const apiFixa = normalizeApiBase('https://api.sistema.tawros.com.br/api/v1');
+const apiFixa = normalizeApiBase('https://api.sistemas.tawros.com.br:3000/api/v1');
 window.localStorage.setItem('TAWROS_API_URL', apiFixa);
 window.TAWROS_API_URL = apiFixa;
 
