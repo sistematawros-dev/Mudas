@@ -100,8 +100,8 @@ npm run test:integracao
 
 ### Como validar que os serviços estão no ar
 ```powershell
-curl https://api.sistemas.tawros.com.br:3000/api/v1/health
-curl https://api.sistemas.tawros.com.br:3000/api/v1/readiness
+curl https://api.sistema.tawros.com.br/api/v1/health
+curl https://api.sistema.tawros.com.br/api/v1/readiness
 ```
 Esperado: HTTP `200` e `data.status = "ok"` (health).
 
@@ -138,7 +138,7 @@ psql -h localhost -p 5432 -U postgres -d tawros
 
 ### Exemplo de login (curl)
 ```bash
-curl -X POST "https://api.sistemas.tawros.com.br:3000/api/v1/auth/login" \
+curl -X POST "https://api.sistema.tawros.com.br/api/v1/auth/login" \
   -H "Content-Type: application/json" \
   -d "{\"email\":\"admin@tawros.local\",\"password\":\"Admin@123\"}"
 ```
@@ -637,12 +637,12 @@ Exibir indicadores visuais e componentes analíticos.
 #### Listagem
 ```bash
 curl -H "Authorization: Bearer <TOKEN>" \
-  "https://api.sistemas.tawros.com.br:3000/api/v1/pessoas-empresas?page=1&limit=20&q=empresa"
+  "https://api.sistema.tawros.com.br/api/v1/pessoas-empresas?page=1&limit=20&q=empresa"
 ```
 
 #### Criação
 ```bash
-curl -X POST "https://api.sistemas.tawros.com.br:3000/api/v1/embalagens" \
+curl -X POST "https://api.sistema.tawros.com.br/api/v1/embalagens" \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d "{\"codigo\":\"EMB-900\",\"unidade_equivalencia_id\":1,\"valor_conversao\":1.5,\"descricao\":\"Embalagem Teste\",\"sigla\":\"CX\",\"ativo\":true}"
@@ -650,7 +650,7 @@ curl -X POST "https://api.sistemas.tawros.com.br:3000/api/v1/embalagens" \
 
 #### Restore (atenção ao Content-Type)
 ```bash
-curl -X POST "https://api.sistemas.tawros.com.br:3000/api/v1/pessoas-empresas/10/restore" \
+curl -X POST "https://api.sistema.tawros.com.br/api/v1/pessoas-empresas/10/restore" \
   -H "Authorization: Bearer <TOKEN>" \
   -H "Content-Type: application/json" \
   -d "{}"

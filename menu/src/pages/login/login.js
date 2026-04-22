@@ -5,7 +5,7 @@ let isSubmitting = false;
 let activeController = null;
 let loginPhase = 'form'; // 'form' | 'filial'
 let authData = null; // { token, refreshToken, user }
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
 
 // DOM Elements (initialized in init())
 let loginForm;

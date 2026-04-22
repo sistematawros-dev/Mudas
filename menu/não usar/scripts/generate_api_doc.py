@@ -467,10 +467,10 @@ API REST em Fastify/TypeScript para operações de cadastros, autenticação, in
 
 Exemplos:
 ```bash
-curl "https://api.sistemas.tawros.com.br:3000/api/v1/pessoas-empresas?page=1&limit=20&sort=id&order=desc&q=acme"
+curl "https://api.sistema.tawros.com.br/api/v1/pessoas-empresas?page=1&limit=20&sort=id&order=desc&q=acme"
 ```
 ```bash
-curl "https://api.sistemas.tawros.com.br:3000/api/v1/produtos-servicos?withDeleted=false&externalSource=erp&externalId=A-100"
+curl "https://api.sistema.tawros.com.br/api/v1/produtos-servicos?withDeleted=false&externalSource=erp&externalId=A-100"
 ```
 
 ## 8. Documentação Endpoint por Endpoint

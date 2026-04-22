@@ -14,7 +14,11 @@
       "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -f \"C:/Users/desen/AppData/Local/Temp/seed_test.sql\")",
       "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT id, produtor_id, comprador_id FROM app.instrucoes;\")",
       "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT instrucao_id, nome_transportadora FROM app.instrucoes_transportes WHERE deleted_at IS NULL;\")",
-      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT app.usuario_pode_ver_instrucao\\(1, 4, 'Transportadora 1'\\) AS pode_ver_ins1, app.usuario_pode_ver_instrucao\\(2, 4, 'Transportadora 1'\\) AS pode_ver_ins2;\")"
+      "Bash(psql \"postgresql://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT app.usuario_pode_ver_instrucao\\(1, 4, 'Transportadora 1'\\) AS pode_ver_ins1, app.usuario_pode_ver_instrucao\\(2, 4, 'Transportadora 1'\\) AS pode_ver_ins2;\")",
+      "Bash(pg_dump --version)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\desen\\OneDrive\\Documentos\\Projeto\\backups"
     ]
   }
 }

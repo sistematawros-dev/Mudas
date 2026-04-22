@@ -1,6 +1,6 @@
 import * as Badge from '../../../components/badge/badge.js';
 
-const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistemas.tawros.com.br:3000/api/v1';
+const API_BASE_URL = window?.TAWROS_API_URL || 'https://api.sistema.tawros.com.br/api/v1';
 let statusChart = null;
 let apexChartsLoader = null;
 let activeController = null;
