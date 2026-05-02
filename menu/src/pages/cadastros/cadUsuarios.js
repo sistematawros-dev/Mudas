@@ -104,7 +104,7 @@ async function apiRequest(path, { method = 'GET', query, body, retryOnUnauthoriz
   return payload;
 }
 
-import { normalizeDigits, formatCpf, formatPhone, isValidEmail, isValidCpf, isValidPhone } from '../../utils/validators.js';
+import { normalizeDigits, formatCpfCnpj, formatPhone, isValidEmail, isValidCpfCnpj, isValidPhone } from '../../utils/validators.js';
 
 function escapeHtml(value) {
   return String(value ?? '')
@@ -138,7 +138,7 @@ function mapRowToForm(row = {}) {
     nome: String(row.nome || ''),
     email: String(row.email || ''),
     telefone: String(row.telefone || ''),
-    cpf: formatCpf(String(row.cpf || '')),
+    cpf: formatCpfCnpj(String(row.cpf || '')),
     senha: '',
     confirmeSenha: '',
     ativo: row.ativo !== false,
@@ -172,7 +172,7 @@ function validateForm(form = {}) {
   if (String(form.nome || '').trim().length < 3) return 'Informe o nome com pelo menos 3 caracteres.';
   if (!isValidEmail(form.email)) return 'Informe um e-mail válido.';
   const cpfDigits = normalizeDigits(form.cpf);
-  if (cpfDigits && !isValidCpf(form.cpf)) return 'CPF inválido.';
+  if (cpfDigits && !isValidCpfCnpj(form.cpf)) return 'CPF/CNPJ inválido.';
   if (form.telefone && !isValidPhone(form.telefone)) return 'Telefone inválido. Informe DDD + número.';
   const senha = String(form.senha || '').trim();
   const confirmeSenha = String(form.confirmeSenha || '').trim();
@@ -297,8 +297,8 @@ function renderForm() {
         </label>
 
         <label class="cad-usuarios-field">
-          <span>CPF</span>
-          <input class="cadastro-pessoa-empresa__input" id="usuario-cpf" type="text" maxlength="14" value="${escapeHtml(state.form.cpf)}" ${state.saving ? 'disabled' : ''} />
+          <span>CPF/CNPJ</span>
+          <input class="cadastro-pessoa-empresa__input" id="usuario-cpf" type="text" maxlength="18" value="${escapeHtml(state.form.cpf)}" ${state.saving ? 'disabled' : ''} />
         </label>
 
         <label class="cad-usuarios-field">
@@ -487,7 +487,7 @@ function bindFormFromDom() {
     nome: nome instanceof HTMLInputElement ? nome.value : state.form.nome,
     email: email instanceof HTMLInputElement ? email.value : state.form.email,
     telefone: telefone instanceof HTMLInputElement ? telefone.value : state.form.telefone,
-    cpf: cpf instanceof HTMLInputElement ? formatCpf(cpf.value) : state.form.cpf,
+    cpf: cpf instanceof HTMLInputElement ? formatCpfCnpj(cpf.value) : state.form.cpf,
     senha: senha instanceof HTMLInputElement ? senha.value : state.form.senha,
     confirmeSenha: confirmeSenha instanceof HTMLInputElement ? confirmeSenha.value : state.form.confirmeSenha,
     administrador: admin instanceof HTMLInputElement ? admin.checked : state.form.administrador,
@@ -625,7 +625,7 @@ function handleInput(event) {
 
   const cpfInput = event.target?.closest?.('#usuario-cpf');
   if (cpfInput && cpfInput instanceof HTMLInputElement) {
-    cpfInput.value = formatCpf(cpfInput.value);
+    cpfInput.value = formatCpfCnpj(cpfInput.value);
   }
 
   const telefoneInput = event.target?.closest?.('#usuario-telefone');

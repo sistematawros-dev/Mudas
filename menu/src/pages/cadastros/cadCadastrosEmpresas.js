@@ -166,6 +166,7 @@ export function init() {
     bairro: '',
     cidade: '',
     uf: '',
+    codibge: null,
     nomeResponsavel: '',
     celular: '',
     telefoneFixo: '',
@@ -1318,6 +1319,7 @@ export function init() {
         bairro: item.bairro || '',
         cidade: item.cidade || '',
         uf: item.uf || '',
+        codibge: item.codibge || null,
         nomeResponsavel: item.nome_responsavel || '',
         celular: item.celular || '',
         telefoneFixo: item.telefone_fixo || '',
@@ -1520,8 +1522,7 @@ export function init() {
       numero: String(form.numero || '').trim() || null,
       complemento: String(form.complemento || '').trim() || null,
       bairro: String(form.bairro || '').trim() || null,
-      cidade: String(form.cidade || '').trim() || null,
-      uf: String(form.uf || '').trim() || null,
+      codibge: form.codibge ? Number(form.codibge) : null,
       nome_responsavel: String(form.nomeResponsavel || '').trim() || null,
       celular: String(form.celular || '').trim() || null,
       telefone_fixo: String(form.telefoneFixo || '').trim() || null,
@@ -2057,6 +2058,63 @@ export function init() {
     if (badge) badge.remove();
   };
 
+  const buscarCep = async (cepRaw) => {
+    const digits = cepRaw.replace(/\D/g, '');
+    if (digits.length !== 8) return;
+
+    const cepInput = document.querySelector('[data-cpe-field="cep"]');
+    const logradouro = document.querySelector('[data-cpe-field="logradouro"]');
+    const bairroEl = document.querySelector('[data-cpe-field="bairro"]');
+    const cidadeEl = document.querySelector('[data-cpe-field="cidade"]');
+    const ufEl = document.querySelector('[data-cpe-field="uf"]');
+
+    if (cepInput) {
+      cepInput.classList.add('is-loading');
+      cepInput.disabled = true;
+    }
+
+    try {
+      const res = await fetch(`https://viacep.com.br/ws/${digits}/json/`, { signal: AbortSignal.timeout(5000) });
+      if (!res.ok) throw new Error('ViaCEP indisponível');
+      const data = await res.json();
+      if (data.erro) {
+        cepInput?.classList.add('is-error');
+        return;
+      }
+
+      const patch = {
+        logradouro: data.logradouro || '',
+        bairro: data.bairro || '',
+        cidade: data.localidade || '',
+        uf: data.uf || '',
+        codibge: data.ibge ? Number(data.ibge) : null,
+      };
+
+      cadastroState = {
+        ...cadastroState,
+        form: { ...(cadastroState.form || {}), ...patch },
+        saveError: '',
+      };
+
+      if (logradouro) logradouro.value = patch.logradouro;
+      if (bairroEl) bairroEl.value = patch.bairro;
+      if (cidadeEl) cidadeEl.value = patch.cidade;
+      if (ufEl) ufEl.value = patch.uf;
+
+      if (patch.logradouro) {
+        const numeroEl = document.querySelector('[data-cpe-field="numero"]');
+        if (numeroEl) numeroEl.focus();
+      }
+    } catch {
+      // falha silenciosa — usuário preenche manualmente
+    } finally {
+      if (cepInput) {
+        cepInput.classList.remove('is-loading', 'is-error');
+        cepInput.disabled = false;
+      }
+    }
+  };
+
   const handleCadastroFieldUpdate = (target) => {
     if (!(target instanceof HTMLInputElement || target instanceof HTMLSelectElement || target instanceof HTMLTextAreaElement)) return;
     const fieldName = target.dataset.cpeField;
@@ -2079,6 +2137,8 @@ export function init() {
       } else if (fieldName === 'cep') {
         target.value = formatCep(fieldValue);
         fieldValue = target.value;
+        const digits = fieldValue.replace(/\D/g, '');
+        if (digits.length === 8) void buscarCep(digits);
       } else if (fieldName === 'celular' || fieldName === 'telefoneFixo') {
         target.value = formatPhone(fieldValue);
         fieldValue = target.value;

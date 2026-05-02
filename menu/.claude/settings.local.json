@@ -43,7 +43,30 @@
       "Bash(psql \"postgres://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT column_name FROM information_schema.columns WHERE table_schema = 'auth' AND table_name = 'user_filiais' AND column_name = 'codigo_filial_cadastro'\")",
       "Bash(psql \"postgres://postgres:masterkey@localhost:5432/tawros\" -f \"C:/Users/desen/OneDrive/Documentos/Projeto/BackEnd/Api/sql/migrations/20260415_012_codigo_filial_cadastro.sql\")",
       "Bash(psql \"postgres://postgres:masterkey@localhost:5432/tawros\" -f \"C:/Users/desen/OneDrive/Documentos/Projeto/BackEnd/Api/sql/migrations/20260415_013_log_edicao.sql\")",
-      "Bash(psql \"postgres://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT id, nome, codigo FROM app.licencas_modulos WHERE lower\\(nome\\) LIKE '%mudas%' OR lower\\(codigo\\) LIKE '%mudas%'\")"
+      "Bash(psql \"postgres://postgres:masterkey@localhost:5432/tawros\" -c \"SELECT id, nome, codigo FROM app.licencas_modulos WHERE lower\\(nome\\) LIKE '%mudas%' OR lower\\(codigo\\) LIKE '%mudas%'\")",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -c \"SELECT schemaname, tablename FROM pg_tables WHERE tablename ILIKE '%instruc%' ORDER BY tablename;\")",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -c \"SELECT 'instrucoes' t, count\\(*\\) FROM app.instrucoes UNION ALL SELECT 'instrucoes_agendamentos', count\\(*\\) FROM app.instrucoes_agendamentos UNION ALL SELECT 'instrucoes_transportes', count\\(*\\) FROM app.instrucoes_transportes UNION ALL SELECT 'instrucoes_blocos', count\\(*\\) FROM app.instrucoes_blocos UNION ALL SELECT 'instrucoes_fardos', count\\(*\\) FROM app.instrucoes_fardos;\")",
+      "Read(//c/Users/desen/OneDOne/OneDrive/Documentos/Projeto/BackEnd/Api/sql/migrations/**)",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -f \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\BackEnd\\\\Api\\\\sql\\\\migrations\\\\20260501_002_agenda_disponivel_delete_guard.sql\")",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -c \"SELECT EXISTS \\(SELECT 1 FROM information_schema.tables WHERE table_schema='migrations' OR table_name='migrations' OR table_name='schema_migrations'\\) as has_migration_table;\")",
+      "Bash(psql 'host=localhost port=5432 dbname=tawros user=postgres password=masterkey' -t -A -c ' *)",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -f \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\BackEnd\\\\Api\\\\sql\\\\migrations\\\\20260419_001_licencas_modulos_estufa.sql\")",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -t -A -c \"SELECT modulo, quantidade_licencas, ativo FROM app.licencas_modulos WHERE deleted_at IS NULL ORDER BY modulo;\")",
+      "Bash(psql \"host=localhost port=5432 dbname=tawros user=postgres password=masterkey\" -f \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\BackEnd\\\\Api\\\\sql\\\\migrations\\\\20260501_003_agendamentos_finalizado_em.sql\")",
+      "Bash(psql -U postgres -d tawros -c ' *)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"SET search_path = app; DELETE FROM instrucoes_agendamentos; DELETE FROM instrucoes_transportes; DELETE FROM instrucoes_blocos CASCADE; DELETE FROM instrucoes_fardos; DELETE FROM instrucoes;\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"SELECT id, vagas_disponiveis, vagas_ocupadas FROM app.agenda_disponibilidade;\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"\\\\d app.agenda_disponibilidade\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"SELECT id, vagas_total, vagas_ocupadas FROM app.agenda_disponibilidade WHERE deleted_at IS NULL;\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"\\\\d app.instrucoes_agendamentos\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -f \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\BackEnd\\\\Api\\\\sql\\\\migrations\\\\20260501_004_vagas_ocupadas_trigger.sql\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"SELECT id, tipo_produto, status FROM app.instrucoes WHERE deleted_at IS NULL;\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; psql -U postgres -d tawros -c \"SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_name LIKE '%migration%';\" 2>&1)",
+      "PowerShell($env:PGPASSWORD = \"masterkey\"; pg_dump -U postgres -d tawros -F c -f \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\backups\\\\tawros_$\\(Get-Date -Format 'yyyyMMdd_HHmmss'\\).dump\" 2>&1; Write-Host \"Exit: $LASTEXITCODE\")",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\backups\\\\\" | Select-Object Name, @{N='Tamanho';E={\"{0:N2} MB\" -f \\($_.Length/1MB\\)}}, LastWriteTime)",
+      "Read(//mnt/c/Users/desen/OneDrive/Documentos/Projeto/**)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\backups\\\\\" | Sort-Object LastWriteTime | Format-Table Name, @{N='MB';E={\"{0:N2}\" -f \\($_.Length/1MB\\)}}, LastWriteTime -AutoSize)",
+      "PowerShell(Get-ChildItem \"C:\\\\Users\\\\desen\\\\OneDrive\\\\Documentos\\\\Projeto\\\\backups\\\\\" | Sort-Object LastWriteTime -Descending | Select-Object -First 3 | Format-Table Name, @{N='MB';E={\"{0:N2}\" -f \\($_.Length/1MB\\)}}, LastWriteTime -AutoSize)"
     ]
   }
 }

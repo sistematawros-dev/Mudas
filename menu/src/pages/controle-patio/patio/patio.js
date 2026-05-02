@@ -195,15 +195,18 @@ function buildCompletionModal(row, detail = {}) {
   );
 
   if (tipoProduto !== 'pluma') {
+    const loadedInitial = Number(row?.quantidade_real || plannedTotal || 0);
     return {
       title: 'Finalizar Carregamento',
       subtitle: `${row?.numero_instrucao || `INS-${row?.id}`}  ${row?.nome_vendedor_produtor || '-'}`,
       quantificationType: 'kg',
+      plannedTotal,
+      unit: unidadeKg,
       summary: {
         plannedLabel: 'Previsto:',
         plannedValue: `${plannedTotal.toLocaleString('pt-BR')} ${unidadeKg}`,
         loadedLabel: 'Carregado:',
-        loadedValue: `${Number(row?.quantidade_real || plannedTotal || 0).toLocaleString('pt-BR')} ${unidadeKg}`,
+        loadedValue: `${loadedInitial.toLocaleString('pt-BR')} ${unidadeKg}`,
       },
       controls: { quantityPlanned: false },
       item: {
@@ -213,7 +216,7 @@ function buildCompletionModal(row, detail = {}) {
         availableLabel: `${plannedTotal.toLocaleString('pt-BR')} ${unidadeKg}`,
         selected: true,
         loadedLabel: 'Carregado',
-        loadedValue: `${Number(row?.quantidade_real || plannedTotal || 0).toLocaleString('pt-BR')} ${unidadeKg}`,
+        loadedValue: `${loadedInitial.toLocaleString('pt-BR')} ${unidadeKg}`,
       },
     };
   }
@@ -360,7 +363,7 @@ function toggleExpandedRow(rowId, page) {
   renderPage(page, { keepModalOpen: true });
 }
 
-function mapColumns(rows, lookups) {
+function mapColumns(rows, lookups = {}) {
   const future = [];
   const waiting = [];
   const queue = [
@@ -416,8 +419,15 @@ function mapColumns(rows, lookups) {
     };
 
     if (row.status === 'finalizado' || patioFase === 'finalizado') {
+      const finishedQuantity = (() => {
+        if (row.quantidade_real == null) return baseCard.quantity;
+        const modal = row._completionModal;
+        const unit = modal?.unit || (modal?.quantificationType === 'bales' ? 'Fardos' : 'Quilogramas');
+        return `${Number(row.quantidade_real).toLocaleString('pt-BR')} ${unit}`;
+      })();
       finished.push({
         ...baseCard,
+        quantity: finishedQuantity,
         scheduleInfo: row.finalizado_em ? `Finalizado as ${formatApiTime(row.finalizado_em)}` : 'Finalizado',
         actions: [{ id: 'details', label: 'Ver detalhes', variant: 'dark', style: 'outline' }],
       });
@@ -469,6 +479,38 @@ function mapColumns(rows, lookups) {
     });
   });
 
+  // Adiciona cards Finalizados a partir de ciclos de agendamento concluídos
+  const { completedAgendamentos = [], instrucoesById = {} } = lookups;
+  completedAgendamentos.forEach((ag) => {
+    const row = instrucoesById[String(ag.instrucao_id)];
+    if (!row) return;
+    if (row.status === 'recusado') return;
+    const instructionId = String(row.id);
+    const producer = lookups.pessoas[String(row.produtor_id)] || row.nome_vendedor_produtor || '-';
+    const buyer = lookups.pessoas[String(row.comprador_id)] || '-';
+    const produto = normalizeProduto(row.tipo_produto);
+    const product = produto === 'caroco' ? 'Caroco' : produto === 'fibrilha' ? 'Fibrilha' : produto === 'capulho' ? 'Capulho' : 'Pluma';
+    const modal = row._completionModal;
+    const unit = modal?.unit || (modal?.quantificationType === 'bales' ? 'Fardos' : 'Quilogramas');
+    const qtdCarregada = Number(ag.quantidade_carregada || 0);
+    const finishedQuantity = `${qtdCarregada.toLocaleString('pt-BR')} ${unit}`;
+    finished.push({
+      id: `agendamento-${ag.id}`,
+      type: 'card',
+      product,
+      productLabel: product,
+      code: `#${instructionId}`,
+      secondaryCode: row.numero_instrucao || row.numero_contrato || '-',
+      driver: row.nome_motorista || '-',
+      transporter: buyer,
+      quantity: finishedQuantity,
+      scheduleInfo: ag.finalizado_em ? `Finalizado as ${formatApiTime(ag.finalizado_em)}` : 'Finalizado',
+      isFuture: false,
+      completionModal: null,
+      actions: [{ id: 'details', label: 'Ver detalhes', variant: 'dark', style: 'outline' }],
+    });
+  });
+
   queue.splice(1, queue.length - 1, ...queue.slice(1).sort((a, b) => {
     const aOrder = Number(String(a.scheduleInfo || '').match(/#(\d+)/)?.[1] || 0);
     const bOrder = Number(String(b.scheduleInfo || '').match(/#(\d+)/)?.[1] || 0);
@@ -505,9 +547,14 @@ async function loadPatioData(page) {
   const fardosByBloco = mapFardosByBlocoId(parseApiResponse(fardosRes));
   const transportesByInstrucao = mapByInstrucaoId(parseApiResponse(transportesRes));
 
+  const allAgendamentos = parseApiResponse(agendamentosRes).filter((a) => !a.deleted_at);
+
+  // Agendamentos já finalizados (ciclos completos)
+  const completedAgendamentos = allAgendamentos.filter((a) => a.finalizado_em);
+
   // Mapa do agendamento ativo (aprovado, não finalizado) por instrucao_id
-  const agendamentoAtivoByInstrucao = parseApiResponse(agendamentosRes)
-    .filter((a) => !a.deleted_at)
+  const agendamentoAtivoByInstrucao = allAgendamentos
+    .filter((a) => !a.finalizado_em)
     .reduce((acc, a) => {
       const key = String(a.instrucao_id);
       const existing = acc[key];
@@ -534,7 +581,10 @@ async function loadPatioData(page) {
       }),
     };
   });
-  state.columns = mapColumns(rows, { pessoas });
+
+  const instrucoesById = rows.reduce((acc, r) => { acc[String(r.id)] = r; return acc; }, {});
+
+  state.columns = mapColumns(rows, { pessoas, completedAgendamentos, instrucoesById });
   renderPage(page);
 }
 
@@ -588,7 +638,6 @@ function handleModalConfirm(modalId) {
   if (modalId !== patioModalIds.finishLoading) return;
   const selectedCardId = state.modal.selectedCardId;
   const modalData = state.modal.data;
-  resetModalState();
   const page = document.querySelector('.patio-board-page');
   if (!page) return;
 
@@ -596,35 +645,26 @@ function handleModalConfirm(modalId) {
     ? Number.parseFloat(String(modalData?.item?.loadedValue || '').replace(/\./g, '').replace(',', '.'))
     : null;
 
-  const instrucaoId = Number(String(selectedCardId || '').replace('instrucao-', ''));
+  if (Number.isFinite(quantidadeReal) && modalData?.plannedTotal != null && quantidadeReal > modalData.plannedTotal) {
+    alert(`A quantidade carregada não pode ultrapassar o previsto (${modalData.plannedTotal.toLocaleString('pt-BR')} ${modalData.unit || ''}).`);
+    return;
+  }
 
-  patchInstructionFromCard(selectedCardId, {
-    status: 'finalizado',
-    patio_fase: 'finalizado',
-    finalizado_em: new Date().toISOString(),
-    ordem_fila: null,
-    quantidade_real: Number.isFinite(quantidadeReal) ? quantidadeReal : undefined,
-  }, page)
-    .then(async () => {
-      if (!Number.isFinite(instrucaoId) || instrucaoId <= 0 || !Number.isFinite(quantidadeReal)) return;
-      try {
-        const agendamentosRes = await apiRequest('/instrucoes-agendamentos', {
-          query: { 'filter[instrucao_id][eq]': instrucaoId, limit: 100 },
-        });
-        const agendamentos = parseApiResponse(agendamentosRes).filter((a) => !a.deleted_at);
-        const active = agendamentos.find((a) => !a.quantidade_carregada || Number(a.quantidade_carregada) === 0);
-        if (active?.id) {
-          await apiRequest(`/instrucoes-agendamentos/${active.id}`, {
-            method: 'PATCH',
-            body: { quantidade_carregada: quantidadeReal },
-          });
-        }
-      } catch (err) {
-        console.warn('[controle-patio/patio] falha ao atualizar quantidade_carregada', err);
-      }
-    })
+  resetModalState();
+
+  const instrucaoId = Number(String(selectedCardId || '').replace('instrucao-', ''));
+  if (!Number.isFinite(instrucaoId) || instrucaoId <= 0) return;
+
+  const qtdCarregada = Number.isFinite(quantidadeReal) ? quantidadeReal : 0;
+
+  apiRequest(`/instrucoes/${instrucaoId}/finalizar-carregamento`, {
+    method: 'POST',
+    body: { quantidade_carregada: qtdCarregada },
+  })
+    .then(() => loadPatioData(page))
     .catch((error) => {
       console.error('[controle-patio/patio] falha ao finalizar carregamento', error);
+      alert(error instanceof Error ? error.message : 'Falha ao finalizar carregamento.');
       renderPage(page);
     });
 }
@@ -801,6 +841,13 @@ function handleInput(event) {
   if (target.id.startsWith('completion-loaded-')) {
     const itemId = target.id.replace('completion-loaded-', '');
     if (state.modal.data.quantificationType === 'kg' && state.modal.data.item.id === itemId) {
+      const plannedTotal = state.modal.data.plannedTotal;
+      if (plannedTotal != null) {
+        const typed = Number.parseFloat(String(target.value || '').replace(/\./g, '').replace(',', '.'));
+        if (Number.isFinite(typed) && typed > plannedTotal) {
+          target.value = plannedTotal.toLocaleString('pt-BR') + ' ' + (state.modal.data.unit || '');
+        }
+      }
       state.modal.data.item.loadedValue = target.value;
       state.modal.data.summary.loadedValue = target.value;
       return;

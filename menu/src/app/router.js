@@ -218,7 +218,17 @@ function resolveAllowedPath(path) {
 }
 
 function isAdminUser() {
-  return getCurrentUserTawros() === 1;
+  if (getCurrentUserTawros() === 1) return true;
+  try {
+    const rawUser = sessionStorage.getItem("user");
+    if (rawUser) {
+      const parsed = JSON.parse(rawUser);
+      if (Array.isArray(parsed?.roles) && parsed.roles.some((r) => String(r).toLowerCase() === 'admin')) return true;
+    }
+  } catch {
+    // ignore
+  }
+  return false;
 }
 
 function getCurrentUserTawros() {

@@ -190,7 +190,7 @@ function renderTable() {
   const podeAprovar = getPodeAprovarRejeitar();
 
   if (!pageRows.length) {
-    tbody.innerHTML = '<tr class="aprovacoes__empty-row"><td colspan="9">Nenhum agendamento encontrado.</td></tr>';
+    tbody.innerHTML = '<tr class="aprovacoes__empty-row"><td colspan="10">Nenhum agendamento encontrado.</td></tr>';
     return;
   }
 
@@ -200,6 +200,7 @@ function renderTable() {
     const rejectDisabled = !podeAprovar || !isPendente ? 'disabled' : '';
     return `
       <tr>
+        <td><span class="aprovacoes__instrucao-id">#${row.instrucaoId}</span></td>
         <td><span class="aprovacoes__code">${row.code}</span></td>
         <td>${row.tipoProduto}</td>
         <td>${row.transportadora}</td>
@@ -442,7 +443,7 @@ export function init() {
   }
 
   const tbody = document.getElementById('aprovacoes-tbody');
-  if (tbody) tbody.innerHTML = '<tr class="aprovacoes__loading-row"><td colspan="9">Carregando...</td></tr>';
+  if (tbody) tbody.innerHTML = '<tr class="aprovacoes__loading-row"><td colspan="10">Carregando...</td></tr>';
 
   page.addEventListener('click', handleClick);
   page.addEventListener('input', handleInput);
@@ -450,7 +451,7 @@ export function init() {
   loadData().catch((err) => {
     console.error('[aprovacoes] falha ao carregar', err);
     const tbody2 = document.getElementById('aprovacoes-tbody');
-    if (tbody2) tbody2.innerHTML = '<tr class="aprovacoes__empty-row"><td colspan="9">Erro ao carregar dados.</td></tr>';
+    if (tbody2) tbody2.innerHTML = '<tr class="aprovacoes__empty-row"><td colspan="10">Erro ao carregar dados.</td></tr>';
   });
 
   return () => {

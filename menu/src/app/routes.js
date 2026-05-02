@@ -280,17 +280,6 @@ export const routes = {
     components: ["button", "button-icon", "file-upload", "input"],
     layout: "app",
   },
-  "/controle-patio/minhas-instrucoes": {
-    title: "Minhas Instruções",
-    pageTitle: "Controle de Pátio",
-    breadcrumb: ["Painel", "Controle de Pátio", "Minhas Instruções"],
-    headerBreadcrumb: ["Painel", "Controle de Pátio", "Minhas Instruções"],
-    html: () => import("../pages/controle-patio/minhas-instrucoes/minhas-instrucoes.html?raw"),
-    css: () => import("../pages/controle-patio/minhas-instrucoes/minhas-instrucoes.css"),
-    js: () => import("../pages/controle-patio/minhas-instrucoes/minhas-instrucoes.js"),
-    components: [],
-    layout: "app",
-  },
   "/controle-patio/aprovacoes": {
     title: "Aprovações de Carregamento",
     pageTitle: "Controle de Pátio",

@@ -224,13 +224,17 @@ function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstru
 
     let blocks = [];
     if (quantificationType === 'block') {
-      const blocos = blocosByInstrucao[id] || [];
+      const todosOsBlocos = blocosByInstrucao[id] || [];
+      const blocos = selectedCarrier
+        ? todosOsBlocos.filter((b) => normalizeText(b?.nome_transportadora || '') === normalizeText(selectedCarrier))
+        : todosOsBlocos;
       blocks = blocos.map((bloco) => {
         const fardos = fardosByBloco[String(bloco?.id)] || [];
         return createPlumaBlockFromApi(bloco, fardos);
       });
     } else {
       const quantidadeAgendada = Math.max(0, Number(row?.quantidade_agendada || 0));
+      const quantidadeReal = Math.max(0, Number(row?.quantidade_real || 0));
       let remaining;
       let quantidadeTotal;
 
@@ -240,10 +244,10 @@ function buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstru
           (t) => normalizeText(t?.nome_transportadora || '') === normalizeText(selectedCarrier),
         );
         quantidadeTotal = Math.max(0, Number(carrierTransporte?.quantidade || 0));
-        remaining = Math.max(0, quantidadeTotal - quantidadeAgendada);
+        remaining = Math.max(0, quantidadeTotal - quantidadeAgendada - quantidadeReal);
       } else {
         quantidadeTotal = Math.max(0, Number(row?.quantidade_total || 0));
-        remaining = Math.max(0, quantidadeTotal - quantidadeAgendada);
+        remaining = Math.max(0, quantidadeTotal - quantidadeAgendada - quantidadeReal);
       }
 
       blocks = [createKgBlockFromApi({
@@ -277,6 +281,11 @@ function mapAvailableContracts(rows, lookups, contractDetails, transportesByInst
           if (!hasAllocation) return false;
         }
         return (details.remaining ?? 0) > 0;
+      }
+      // pluma: só exibe se há blocos após filtro por transportadora
+      if (details?.quantificationType === 'block') {
+        if (selectedCarrier && (details.blocks ?? []).length === 0) return false;
+        return true;
       }
       return !row.data_agendamento;
     })
@@ -374,9 +383,10 @@ async function loadSchedulingData(page) {
   state.fardosByBloco = fardosByBloco;
   state.lookupsCache = lookups;
 
-  const selectedCarrier = String(state.driverFields.find((f) => f.id === 'carrierName')?.value || '').trim();
-  state.contractDetails = buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstrucao, fardosByBloco, selectedCarrier || null);
-  state.allContracts = mapAvailableContracts(instrucoes, lookups, state.contractDetails, transportesByInstrucao, selectedCarrier || null);
+  const formCarrier = String(state.driverFields.find((f) => f.id === 'carrierName')?.value || '').trim();
+  const effectiveCarrier = getCarrierAutoFill() || formCarrier || null;
+  state.contractDetails = buildContractDetails(instrucoes, transportesByInstrucao, blocosByInstrucao, fardosByBloco, effectiveCarrier);
+  state.allContracts = mapAvailableContracts(instrucoes, lookups, state.contractDetails, transportesByInstrucao, effectiveCarrier);
   state.scheduleRows = mapScheduledRows(agendamentos, instrucoesMap, lookups);
   state.pagination.totalPages = Math.max(1, Math.ceil(Math.max(1, state.scheduleRows.length) / Math.max(1, state.pagination.itemsPerPage)));
   state.pagination.currentPage = Math.min(state.pagination.currentPage, state.pagination.totalPages);
@@ -396,19 +406,6 @@ function findAgendaDisponibilidade(dataAgendamentoIso, tipoProduto) {
   )) || null;
 }
 
-async function atualizarOcupacaoAgenda(agendaId, delta) {
-  const id = Number(agendaId);
-  if (!Number.isFinite(id) || id <= 0) return;
-  const atual = await apiRequest(`/agenda-disponibilidade/${id}`);
-  const row = atual?.data || atual;
-  const vagasTotal = Number(row?.vagas_total || 0);
-  const ocupadas = Number(row?.vagas_ocupadas || 0);
-  const novaOcupacao = Math.max(0, Math.min(vagasTotal, ocupadas + Number(delta || 0)));
-  await apiRequest(`/agenda-disponibilidade/${id}`, {
-    method: 'PATCH',
-    body: { vagas_ocupadas: novaOcupacao },
-  });
-}
 
 async function ensureMotoristaCategoryId() {
   if (state.motoristaCategoryId) return state.motoristaCategoryId;
@@ -655,7 +652,8 @@ function applyCarrierSelection(page, value) {
 }
 
 function recomputeContractsByCarrier(page) {
-  const selectedCarrier = String(state.driverFields.find((f) => f.id === 'carrierName')?.value || '').trim();
+  const formCarrier = String(state.driverFields.find((f) => f.id === 'carrierName')?.value || '').trim();
+  const effectiveCarrier = getCarrierAutoFill() || formCarrier || null;
   if (!state.instrucoesRaw.length || !state.lookupsCache) {
     renderPage(page);
     return;
@@ -665,14 +663,14 @@ function recomputeContractsByCarrier(page) {
     state.transportesByInstrucao,
     state.blocosByInstrucao,
     state.fardosByBloco,
-    selectedCarrier || null,
+    effectiveCarrier,
   );
   state.allContracts = mapAvailableContracts(
     state.instrucoesRaw,
     state.lookupsCache,
     state.contractDetails,
     state.transportesByInstrucao,
-    selectedCarrier || null,
+    effectiveCarrier,
   );
   applyProductTypeFilter();
   renderPage(page);
@@ -964,6 +962,7 @@ async function persistScheduling(page) {
         method: 'POST',
         body: {
           instrucao_id: id,
+          agenda_disponibilidade_id: agenda.id,
           data_agendamento: apiDate,
           nome_motorista: driver,
           placa_veiculo: truck,
@@ -986,7 +985,6 @@ async function persistScheduling(page) {
 
   if (!updates.length) return;
   await Promise.all(updates);
-  await atualizarOcupacaoAgenda(agenda.id, state.cargoContracts.length);
 
   state.driverFields.forEach((field) => {
     field.value = '';
@@ -1023,10 +1021,6 @@ async function cancelScheduling(agendamentoId, page) {
       body: { quantidade_agendada: novaAgendada },
     });
 
-    const agenda = findAgendaDisponibilidade(agendamento?.data_agendamento, instrucao?.tipo_produto);
-    if (agenda?.id) {
-      await atualizarOcupacaoAgenda(agenda.id, -1);
-    }
   }
 
   await loadSchedulingData(page);

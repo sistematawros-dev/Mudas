@@ -319,11 +319,11 @@ function getPessoasEmpresasContent(state = {}) {
             </div>
             <div class="cadastro-pessoa-empresa__field">
               <label class="cadastro-pessoa-empresa__label" for="cpe-cidade">Cidade</label>
-              <input id="cpe-cidade" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="cidade" value="${form.cidade || ''}"  ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-cidade" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="cidade" value="${form.cidade || ''}" readonly tabindex="-1" />
             </div>
             <div class="cadastro-pessoa-empresa__field cadastro-pessoa-empresa__field--uf">
               <label class="cadastro-pessoa-empresa__label" for="cpe-uf">UF</label>
-              <input id="cpe-uf" class="cadastro-pessoa-empresa__input" type="text" placeholder="SP" maxlength="2" data-cpe-field="uf" value="${form.uf || ''}"  ${isSaving ? 'disabled' : ''} />
+              <input id="cpe-uf" class="cadastro-pessoa-empresa__input" type="text" data-cpe-field="uf" value="${form.uf || ''}" readonly tabindex="-1" />
             </div>
           </div>
         </div>

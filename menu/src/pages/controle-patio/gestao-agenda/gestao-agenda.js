@@ -318,9 +318,7 @@ function mapCards(rows, occupancyMap = {}) {
     const dateIso = normalizeDateKey(row?.data_carregamento);
     const produto = normalizeProduto(row?.tipo_produto);
     const capacity = Math.max(0, Number(row?.vagas_total || 0));
-    const occupiedFromDb = Math.max(0, Number(row?.vagas_ocupadas || 0));
-    const occupiedFromInstrucao = Math.max(0, Number(occupancyMap[`${dateIso}|${produto}`] || 0));
-    const occupied = Math.max(occupiedFromDb, occupiedFromInstrucao);
+    const occupied = Math.max(0, Number(row?.vagas_ocupadas || 0));
     const blocked = normalizeText(row?.status) === 'blocked';
     const free = Math.max(capacity - occupied, 0);
     return {
@@ -449,7 +447,6 @@ async function releaseSlots(page) {
       data_carregamento: dateIso,
       tipo_produto: tipoProduto,
       vagas_total: vagasTotal,
-      vagas_ocupadas: Number(row?.vagas_ocupadas || 0),
       limite_transportadora: limiteTransportadora,
       status: normalizeText(row?.status) === 'blocked' ? 'blocked' : 'open',
       mensagem_bloqueio: row?.mensagem_bloqueio || null,
@@ -535,6 +532,14 @@ async function confirmBlockCard(page) {
 async function confirmCancelCard(page) {
   const card = getCard(state.modal.selectedCardId);
   if (!card) return;
+  if (card.occupied > 0) {
+    window.alert('Não é possível excluir uma agenda que possui vagas ocupadas.');
+    return;
+  }
+  if (card.status === 'blocked') {
+    window.alert('Não é possível excluir uma agenda bloqueada.');
+    return;
+  }
   const shouldDelete = window.confirm('Confirma a exclusão deste card de agenda?');
   if (!shouldDelete) return;
   await apiRequest(`/agenda-disponibilidade/${card.id}`, { method: 'DELETE' });

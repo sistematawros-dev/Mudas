@@ -243,41 +243,71 @@ function isTransportadoraUser() {
   } catch { return false; }
 }
 
-function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}) {
+function mapInstructionRow(row, lookups = {}, transportesByInstrucao = {}, blocosByInstrucao = {}) {
   const buyer = lookups.pessoas?.[String(row.comprador_id)] || '-';
   const producer = lookups.pessoas?.[String(row.produtor_id)] || row.nome_vendedor_produtor || '-';
   const branch = lookups.filiais?.[String(row.filial_id)] || '-';
   const uiStatus = statusToUi(row.status);
   const transportes = transportesByInstrucao[String(row.id)] || [];
+  const blocos = blocosByInstrucao[String(row.id)] || [];
   const isPlumaRow = String(row.tipo_produto || '').toLowerCase() === 'pluma';
   const unidade = isPlumaRow ? 'Fardos' : 'Quilogramas';
 
-  // Para transportadora: mostrar somente a quantidade alocada para ela
   const pessoaNome = getCurrentUserPessoaNome();
   const isTransportadora = isTransportadoraUser();
+  const normalizedPessoaNome = pessoaNome ? pessoaNome.toLowerCase().trim() : null;
+
   let quantidadeFinal;
-  if (isTransportadora && pessoaNome && transportes.length) {
-    const meuTransporte = transportes.find((t) => String(t.nome_transportadora || '').toLowerCase().trim() === pessoaNome.toLowerCase().trim());
-    quantidadeFinal = meuTransporte ? Number(meuTransporte.quantidade || 0) : 0;
-  } else if (isPlumaRow) {
-    quantidadeFinal = Number(row.quantidade_total || 0);
+  let transportesMapped;
+
+  if (isPlumaRow) {
+    // Para pluma: blocos agrupados por transportadora
+    const mesBlocos = isTransportadora && normalizedPessoaNome
+      ? blocos.filter((b) => String(b.nome_transportadora || '').toLowerCase().trim() === normalizedPessoaNome)
+      : blocos;
+    const qtdFardos = mesBlocos.reduce((sum, b) => sum + Math.max(0, Number(b.quantidade_fardos || 0)), 0);
+    quantidadeFinal = qtdFardos || Number(row.quantidade_total || 0);
+
+    // Agrupa por transportadora para o drawer
+    const gruposTransp = {};
+    (isTransportadora && normalizedPessoaNome ? mesBlocos : blocos).forEach((b) => {
+      const nome = b.nome_transportadora || 'Transportadora';
+      if (!gruposTransp[nome]) gruposTransp[nome] = 0;
+      gruposTransp[nome] += Math.max(0, Number(b.quantidade_fardos || 0));
+    });
+    transportesMapped = Object.entries(gruposTransp).map(([nome, qtd]) => ({
+      name: nome,
+      quantidade: qtd,
+      unidade: 'Fardos',
+      quantityLabel: `${qtd.toLocaleString('pt-BR')} Fardos`,
+    }));
   } else {
-    quantidadeFinal = transportes.length
-      ? transportes.reduce((sum, t) => sum + toKg(t.quantidade, t.unidade), 0)
-      : Number(row.quantidade_total || 0);
+    // Para kg: filtrar por transportadora
+    const meusTransportes = isTransportadora && normalizedPessoaNome
+      ? transportes.filter((t) => String(t.nome_transportadora || '').toLowerCase().trim() === normalizedPessoaNome)
+      : transportes;
+
+    if (isTransportadora && normalizedPessoaNome) {
+      const meuTransporte = meusTransportes[0];
+      quantidadeFinal = meuTransporte ? Math.max(0, Number(meuTransporte.quantidade || 0)) : 0;
+    } else {
+      quantidadeFinal = meusTransportes.length
+        ? meusTransportes.reduce((sum, t) => sum + toKg(t.quantidade, t.unidade), 0)
+        : Number(row.quantidade_total || 0);
+    }
+
+    transportesMapped = meusTransportes.map((t) => ({
+      name: t.nome_transportadora || 'Transportadora',
+      quantidade: Number(t.quantidade || 0),
+      unidade: formatInstructionUnit(row.tipo_produto, t.unidade),
+      quantityLabel: `${Number(t.quantidade || 0).toLocaleString('pt-BR')} ${formatInstructionUnit(row.tipo_produto, t.unidade)}`,
+    }));
   }
 
   // Saldos
   const qtdAgendada = Math.max(0, Number(row.quantidade_agendada || 0));
   const qtdCarregada = Math.max(0, Number(row.quantidade_real || 0));
   const qtdPendente = Math.max(0, quantidadeFinal - qtdAgendada - qtdCarregada);
-
-  const transportesMapped = transportes.map((t) => ({
-    name: t.nome_transportadora || 'Transportadora',
-    quantidade: Number(t.quantidade || 0),
-    unidade: formatInstructionUnit(row.tipo_produto, t.unidade),
-    quantityLabel: `${Number(t.quantidade || 0).toLocaleString('pt-BR')} ${formatInstructionUnit(row.tipo_produto, t.unidade)}`,
-  }));
 
   const saldosLabel = !isPlumaRow ? [
     `Total: ${quantidadeFinal.toLocaleString('pt-BR')} ${unidade}`,
@@ -322,11 +352,12 @@ function buildInstrucoesQuery() {
 }
 
 async function loadInstructions() {
-  const [instructionsRes, pessoasRes, filiaisRes, transportesRes] = await Promise.all([
+  const [instructionsRes, pessoasRes, filiaisRes, transportesRes, blocosRes] = await Promise.all([
     apiRequest('/instrucoes', { query: buildInstrucoesQuery() }),
     apiRequest('/lookups/pessoas-empresas', { query: { limit: 500 } }),
     apiRequest('/lookups/filiais', { query: { limit: 200 } }),
     apiRequest('/instrucoes-transportes', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
+    apiRequest('/instrucoes-blocos', { query: { page: 1, limit: 5000 } }).catch(() => ({ data: [] })),
   ]);
 
   const pessoas = parseApiResponse(pessoasRes).reduce((acc, row) => {
@@ -348,7 +379,14 @@ async function loadInstructions() {
     acc[instrucaoId].push(row);
     return acc;
   }, {});
-  state.instructions = rows.map((row) => mapInstructionRow(row, { pessoas, filiais }, transportesByInstrucao));
+  const blocosByInstrucao = parseApiResponse(blocosRes).reduce((acc, row) => {
+    const instrucaoId = String(row?.instrucao_id || '');
+    if (!instrucaoId) return acc;
+    if (!acc[instrucaoId]) acc[instrucaoId] = [];
+    acc[instrucaoId].push(row);
+    return acc;
+  }, {});
+  state.instructions = rows.map((row) => mapInstructionRow(row, { pessoas, filiais }, transportesByInstrucao, blocosByInstrucao));
 }
 
 async function updateInstructionStatus(id, action) {
@@ -421,7 +459,7 @@ function renderFilters() {
     <div class="patio-instructions__filter patio-instructions__filter--search">
       ${Input.createSearch({
     id: 'instructions-search',
-    placeholder: 'Buscar Comprador, Produto, Produtor, Blocos',
+    placeholder: 'Buscar Comprador, Produto, Produtor',
     value: state.filters.search,
   })}
     </div>
@@ -515,7 +553,6 @@ function renderListView(items) {
                   <dt>${itemIcons.product}<span>Produto:</span></dt>
                   <dd>${item.product}</dd>
                 </div>
-                ${!item.isPlumaRow ? `
                 <div class="patio-instruction-card__meta-item">
                   <dt>Agendado:</dt><dd>${item.qtdAgendada.toLocaleString('pt-BR')} ${item.unidade}</dd>
                 </div>
@@ -524,10 +561,6 @@ function renderListView(items) {
                 </div>
                 <div class="patio-instruction-card__meta-item">
                   <dt>Carregado:</dt><dd>${item.qtdCarregada.toLocaleString('pt-BR')} ${item.unidade}</dd>
-                </div>` : ''}
-                <div class="patio-instruction-card__meta-item patio-instruction-card__meta-item--icon">
-                  <dt>${itemIcons.block}<span>Blocos:</span></dt>
-                  <dd>${item.blocks}</dd>
                 </div>
               </dl>
             </div>
@@ -570,13 +603,8 @@ function renderKanbanCard(item) {
           <span class="patio-instruction-kanban-card__icon">${itemIcons.product}</span>
           <span>${item.productCompact}</span>
         </div>
-        ${!item.isPlumaRow ? `
         <div class="patio-instruction-kanban-card__line" style="font-size:0.75rem;color:var(--color-content-secondary);flex-direction:column;align-items:flex-start;gap:2px;">
           <span>Agendado: <b>${item.qtdAgendada.toLocaleString('pt-BR')}</b> | Pendente: <b>${item.qtdPendente.toLocaleString('pt-BR')}</b> | Carregado: <b>${item.qtdCarregada.toLocaleString('pt-BR')}</b> ${item.unidade}</span>
-        </div>` : ''}
-        <div class="patio-instruction-kanban-card__line">
-          <span class="patio-instruction-kanban-card__icon">${itemIcons.block}</span>
-          <span>Bloco: ${item.blocks}</span>
         </div>
       </div>
 

@@ -70,9 +70,21 @@ function isTawrosUser() {
   }
 }
 
+function isAdminOrTawros() {
+  try {
+    const raw = sessionStorage.getItem('user');
+    if (!raw) return false;
+    const parsed = JSON.parse(raw);
+    const isAdmin = Array.isArray(parsed?.roles) && parsed.roles.some((r) => String(r).toLowerCase() === 'admin');
+    return isAdmin || Number(parsed?.tawros) === 1;
+  } catch {
+    return false;
+  }
+}
+
 function applyLicencaMenuVisibility() {
   // Usuário tawros=1 tem acesso irrestrito a todos os menus
-  if (isTawrosUser()) return;
+  if (isAdminOrTawros()) return;
 
   const licencas = getUserLicencas();
 
@@ -109,7 +121,7 @@ function hideControlePatioMenus() {
     if (text === 'Veículos') item.style.display = 'none';
   });
 
-  if (isTawrosUser()) return;
+  if (isAdminOrTawros()) return;
 
   const perms = getUserPermissions();
   const podeNovaInstrucao = Boolean(perms?.podeNovaInstrucao);
@@ -126,8 +138,8 @@ function hideControlePatioMenus() {
   // Labels que cada perfil NÃO pode ver no submenu controle-patio
   const hiddenForProdutor = new Set(['Gestão Agenda', 'Agendamentos', 'Pátio', 'Minhas Instruções', 'Veículos']);
   const hiddenForComprador = new Set(['Gestão Agenda', 'Agendamentos', 'Pátio', 'Aprovações', 'Minhas Instruções', 'Veículos']);
-  const hiddenForTransportadora = new Set(['Gestão Agenda', 'Pátio', 'Aprovações', 'Veículos']);
-  const hiddenForOperadorPatio = new Set(['Aprovações', 'Minhas Instruções', 'Veículos']);
+  const hiddenForTransportadora = new Set(['Gestão Agenda', 'Pátio', 'Veículos']);
+  const hiddenForOperadorPatio = new Set(['Instruções', 'Agendamentos', 'Aprovações', 'Minhas Instruções', 'Veículos']);
   const hiddenDefault = new Set(['Veículos', 'Minhas Instruções', 'Aprovações']);
 
   let hiddenSet;

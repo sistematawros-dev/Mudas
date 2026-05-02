@@ -253,6 +253,12 @@
   background: var(--color-surface-hover);
 }
 
+.aprovacoes__instrucao-id {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-content-primary);
+  font-size: var(--font-size-sm);
+}
+
 .aprovacoes__code {
   font-weight: var(--font-weight-medium);
   color: var(--color-primary);

@@ -137,6 +137,7 @@ function setupUserMenu() {
   const newInput = document.getElementById('hum-new');
   const confirmInput = document.getElementById('hum-confirm');
   const errorEl = document.getElementById('hum-error');
+  const usernameEl = document.getElementById('hum-username');
   const cancelBtn = document.getElementById('hum-cancel');
   const confirmBtn = document.getElementById('hum-confirm-btn');
 
@@ -159,6 +160,14 @@ function setupUserMenu() {
   }
   function openModal() {
     resetForm();
+    if (usernameEl) {
+      try {
+        const user = JSON.parse(sessionStorage.getItem('user') || '{}');
+        usernameEl.textContent = user.nome || user.name || '';
+      } catch {
+        usernameEl.textContent = '';
+      }
+    }
     userModal.hidden = false;
     userBtn.setAttribute('aria-expanded', 'true');
     setTimeout(() => currentInput?.focus(), 50);

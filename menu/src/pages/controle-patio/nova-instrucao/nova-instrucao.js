@@ -1131,11 +1131,23 @@ function readFormValues() {
 
 function clearStandardLogisticsBuilder() {
   state.formValues.carrierName = '';
+  state.formValues.carrierId = '';
   state.formValues.unit = 'quilogramas';
   state.formValues.quantity = '0';
   state.editingLogisticsId = null;
   renderStandardLogisticsFields();
   updateHydratedFields();
+  bindCarrierAutocompleteSearch();
+  // Garante que o campo DOM seja zerado após re-render
+  const carrierEl = document.getElementById('carrierName');
+  if (carrierEl instanceof HTMLInputElement) {
+    carrierEl.value = '';
+    delete carrierEl.dataset.confirmedValue;
+    delete carrierEl.dataset.selectedCarrierId;
+    delete carrierEl.dataset.selectedCarrierLabel;
+    const suggestions = carrierEl.closest('.input-wrapper')?.querySelector('[data-suggestions]');
+    if (suggestions) { suggestions.classList.remove('is-visible'); suggestions.innerHTML = ''; }
+  }
 }
 
 
@@ -2228,6 +2240,13 @@ async function persistInstruction() {
 
   if (!state.formValues.productType) throw new Error('Tipo de Produto é obrigatório. Selecione um tipo antes de salvar.');
   if (!state.formValues.branch) throw new Error('Unidade de Retirada (Filial) é obrigatória. Selecione uma filial antes de salvar.');
+
+  if (isPlumaProduct()) {
+    const totalBlocos = (state.plumaCarriers || []).reduce((sum, c) => sum + (c.blocks?.length || 0), 0);
+    if (totalBlocos === 0) throw new Error('Adicione ao menos um bloco à lista antes de salvar a instrução.');
+  } else {
+    if (!state.standardLogisticsItems?.length) throw new Error('Adicione ao menos um item à lista antes de salvar a instrução.');
+  }
 
   const compradorId = await resolvePessoaId(state.formValues.buyer, { onlyCompradores: true });
   if (!compradorId) throw new Error('Comprador inválido. Selecione um comprador cadastrado.');
